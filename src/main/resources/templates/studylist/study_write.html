@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoBeBest</title>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/study_write.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- 상단 메뉴바 & 로고 -->
+    <div id=main class="main">
+        <header class="page-header">
+            <h1><a href="main.html">
+                <img class="logo" src="../img/logo.png" width="300px" alt="HOME">
+            </a></h1>
+        <nav>
+            <ul class="menuBar">
+                <li><a href="notice.html">공지사항</a></li>
+                <li>스터디 찾기</li>
+                <li>커뮤니티</li>
+            </ul>
+        </nav>
+        <nav>
+            <ul class="userBar">
+                <li><a href="login.html">로그인</a></li>
+                <li>회원가입</li>
+            </ul>
+        </nav>
+        </header>
+    </div>
+
+    <!-- 타이틀 -->
+    <div id=study_write_title class="study_write_title"> 
+        <h1>스터디 그룹 모집하기</h1>
+    </div>
+
+    <div class="list_insert">
+        <table align="center">
+            <tr>
+                <td class="insert_title">
+                    <span>스터디 명</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <input class="big_input" class="title" type="text" placeholder="스터디 그룹 명을 입력하세요.">
+                </td>
+            </tr>
+            <tr>
+                <td class="insert_title">
+                    <span>카테고리</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <select class="select01">
+                        <option>카테고리</option>
+                        <option>어학</option>
+                        <option>IT</option>
+                        <option>자격증</option>
+                        <option>운동</option>
+                        <option>취미</option>
+                        <option>기타</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="insert_title">
+                    <span>카테고리2</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <select class="select02">
+                        <option>카테고리</option>
+                        <option>어학</option>
+                        <option>IT</option>
+                        <option>자격증</option>
+                        <option>운동</option>
+                        <option>취미</option>
+                        <option>기타</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="insert_title">
+                    <span>태그</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <input class="big_input" class="title" type="text">
+                </td>
+            </tr>
+            <tr>
+                <th width="130px" class="title"> 모집 마감일자 </th>
+                <td>
+                <input class="calender" type="date">
+                </td>
+            </tr>
+            <tr>
+                <td class="insert_title">
+                    <span>목표 진행일수</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <input class="big_input" class="title" type="text" placeholder="목표진행 일수를 입력하세요.">
+                </td>
+            </tr>
+            <tr>
+                <td class="insert_title">
+                    <span>모집인원</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <input class="big_input" class="title" type="text" placeholder="스터디 그룹 인원을 입력하세요.">
+                </td>
+            </tr>
+            <tr>
+                <td class="insert_title">
+                    <span>장소</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <input class="big_input" class="title" type="text" placeholder="스터디 진행 장소를 입력하세요.">
+                </td>
+            </tr>
+            <tr>
+                <td class="info_title">
+                    <span>스터디 소개글</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="insert_write" colspan="5">
+                    <textarea name ="" cols="130" rows="20" placeholder="내용을 입력하세요."></textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="write_btn">
+            <button class="w_btn">글쓰기</button>
+            <button class="c_btn">취소</button>
+        </div>
+    </div>
+</body>
+</html>
