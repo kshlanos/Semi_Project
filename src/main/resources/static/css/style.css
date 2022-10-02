@@ -1,0 +1,84 @@
+html{
+    font-size: 100%;
+    
+}
+
+.main{
+    display: flex;
+     /*너비 체크용. 확인만 하시고 작업시 지워주세요*/
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.page-header{
+    display: flex;
+    
+}
+
+.HOME{
+
+}
+
+.logo{
+    display: flex;
+    position:absolute;
+    
+}
+
+.menuBar{
+    width:1200px;
+    list-style: none;
+    align-content: center;
+    display: flex;
+    font-size: 1em;
+    font-style: arial;
+    font-weight: bold;
+    margin-left: 300px;
+    margin-top: 100px;
+    position: fixed;
+
+    
+
+}
+
+.menuBar li{
+    margin-left: 100px;
+    color :darkgray;
+}
+
+.menuBar a{
+    color :darkgray;
+    text-decoration-line: none;
+}
+
+.menuBar a:hover{
+    color : black;
+}
+
+
+.userBar{
+    list-style: none;
+    margin: auto;
+    display: flex;
+    font-size: 1em;
+    font-style: arial;
+    font-weight: bold;
+    margin-left : 850px;
+    margin-top : 10px;
+
+
+}
+
+.userBar li{
+    margin-left: 50px;
+    color :darkgray;
+}
+
+.userBar a{
+    color :darkgray;
+    text-decoration-line: none;
+}
+
+.userBar a:hover{
+    color : black;
+}
