@@ -25,6 +25,25 @@ public class MainController {
 		return "/login/login";
 	}
 	
+	@GetMapping(value = {"/register"})
+	public String register() {
+		
+		return "/login/register";
+	}
+	
+	@GetMapping(value = {"/forgotId"})
+	public String forgotId() {
+		
+		return "/login/forgotId";
+	}
+	
+	@GetMapping(value = {"/forgotPassword"})
+	public String forgotPassword() {
+		
+		return "/login/forgotPassword";
+	}
+	
+	
 }
 
 

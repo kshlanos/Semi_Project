@@ -8,9 +8,9 @@ spring:
 #    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     driver-class-name : oracle.jdbc.driver.OracleDriver
 #    url: jdbc:log4jdbc:oracle:thin:@localhost:1521:xe
-    url: jdbc:oracle:thin:@192.168.219.100:1521:xe
-    username : C##PRACTICE
-    password : PRACTICE
+    url: jdbc:log4jdbc:oracle:thin:@localhost:1521:xe
+    username : C##LOGIN_AUTH
+    password : LOGIN_AUTH
     hikari:
       auto-commit: false
       
