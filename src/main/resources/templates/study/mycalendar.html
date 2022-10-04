@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>mycalendar</title>
-<link rel="stylesheet" href="../../static/css/hjy/mycalendar.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/mycalendar.css}">
 </head>
 <body>
+	<a onclick="location.href='/study/confirm'">인증 게시판</a>
+    <a onclick="location.href='/study/studycalendar'">스터디 일정</a>
+    <a onclick="location.href='/study/mycalendar'">나의 출석체크</a>
+
     <div>
         <table>
           <thead>
@@ -35,6 +39,6 @@
         <div onclick="changeMonth('next')">next</div> 
         </div>
       </div>
-      <script src="../../static/js/hjy/mycalendar.js"></script>
+      <script src="/js/mycalendar.js"></script>
 </body>
 </html>

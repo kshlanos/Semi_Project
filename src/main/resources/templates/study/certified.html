@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>certified</title>
-    <link rel="stylesheet" href="../../static/css/hjy/certified.css">
+<meta charset="UTF-8">
+<title>certified</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/certified.css}">
 </head>
 <body>
+    <a onclick="location.href='/study/confirm'">인증 게시판</a>
+    <a onclick="location.href='/study/studycalendar'">스터디 일정</a>
+    <a onclick="location.href='/study/mycalendar'">나의 출석체크</a>
 
         <div class="certified">
             <span>인증하기</span>
@@ -21,6 +24,6 @@
             </div>
         </form>
 
-    <script src="../../static/js/hjy/certified.js"></script>
+    <script src="/js/certified.js"></script>
 </body>
 </html>
