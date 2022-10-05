@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoBeBest</title>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/study_detail.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- 상단 메뉴바 & 로고 -->
+    <div id=main class="main">
+        <header class="page-header">
+            <h1><a href="main.html">
+                <img class="logo" src="../images/logo.png" width="300px" alt="HOME">
+            </a></h1>
+        <nav>
+            <ul class="menuBar">
+                <li><a href="notice.html">공지사항</a></li>
+                <li>스터디 찾기</li>
+                <li>커뮤니티</li>
+            </ul>
+        </nav>
+        <nav>
+            <ul class="userBar">
+                <li><a href="login.html">로그인</a></li>
+                <li>회원가입</li>
+            </ul>
+        </nav>
+        </header>
+    </div>
+
+    <!-- 게시판 타이틀 -->
+    <div id=study_title class="study_title"> 
+    <h3>스터디 목록</h3>
+    </div>
+
+    <!-- 스터디 목록 내용 -->
+    <div>
+        <table class="detail_table">
+            <tr>
+                <td class="detail_category">어학</td>
+                <td colspan="3" rowspan="3">프로필사진</td>
+                <td colspan="3" rowspan="3">바보다바보</td>
+            </tr>
+            <tr>
+                <td class="detail_title">
+                    [영등포] 영어로 대화하는 모임 😎 즐겁게 공부해요!
+                </td>
+            </tr>
+            <tr>
+                <td class="detail_info">
+                    2022.09.17  / 조회수 110
+                </td>
+            </tr>
+        </table>
+        <table class="contents_category">
+            <tr>
+                <td class="con_info1">스터디명</td>
+                <td class="con_info2">영어대화 모임</td>
+            </tr>
+            <tr>
+                <td class="con_info1">카테고리1</td>
+                <td class="con_info2">어학</td>
+            </tr>
+            <tr>
+                <td class="con_info1">카테고리2</td>
+                <td class="con_info2">영어</td>
+            </tr>
+            <tr>
+                <td class="con_info1">태그</td>
+                <td class="con_info2">#영어로말해요 #회화 #오프라인</td>
+            </tr>
+            <tr>
+                <td class="con_info1">모집 마감일자</td>
+                <td class="con_info2">2022.10.15</td>
+            </tr>
+            <tr>
+                <td class="con_info1">목표 진행일수</td>
+                <td class="con_info3">6개월</td>
+            </tr>
+            <tr>
+                <td class="con_info1">모집 인원</td>
+                <td class="con_info3">6명</td>
+            </tr>
+            <tr>
+                <td class="con_info1">장소</td>
+                <td class="con_info3">영등포</td>
+            </tr>
+        </table>
+        <table class="contents">
+            <tr>
+                <td class="con_info4">
+                    야 너두 할수있어!! 😎😎 <br><br>
+                    영어로 말하는 스터디를 진행하려고 합니다 :) <br><br>
+                    영어만 하려고 하면 떨리는 분들! 영어 말하기 연습이 필요하신 분들! <br><br>
+                    누구나 환영! 퇴근하고 저녁에 모여서 편안하게 영어로 말하기 연습하면서 공부해요~!
+                </td>
+            </tr>
+        </table>
+
+        <!-- 스터디 신청자 타이틀 -->
+        <div id=study_title2 class="study_title2"> 
+            <h3>스터디 신청자</h3>
+        </div>
+
+        <!-- 스터디 신청자 리스트-->
+        <table class="req_list">
+            <tr>
+                <td class="profile_pt" colspan="3" rowspan="3">프로필사진</td>
+            </tr>
+            <tr>
+                <td class="profile_nick">바보다바보1</td>
+                <td class="profile_id">바보다바보2</td>
+                <td class="but_td"><button class="leader_ok">수락</button></td>
+                <td class="but_td"><button class="leader_no">거절</button></td>
+            </tr>
+            <tr>
+                <td class="profile_grade">★★★★☆</td>
+            </tr>
+        </table>
+        <table class="req_list">
+            <tr>
+                <td class="profile_pt" colspan="3" rowspan="3">프로필사진</td>
+            </tr>
+            <tr>
+                <td class="profile_nick">자바의신</td>
+                <td class="profile_id">javaS2JAVA</td>
+                <td class="but_td"><button class="leader_ok">수락</button></td>
+                <td class="but_td"><button class="leader_no">거절</button></td>
+            </tr>
+            <tr>
+                <td class="profile_grade">★★★★☆</td>
+            </tr>
+        </table>
+
+        <div class="leader_btn">
+            <button class="invite_btn"> 스터디 초대하기 </button>
+        </div>
+        <div class="con_write_btn">
+            <button class="cw_update">수정하기</button>
+            <button class="cw_delete">삭제하기</button>            
+            <button class="cw_list">글목록</button>
+        </div>
+    </div>
+</body>
+</html>
