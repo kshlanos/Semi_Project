@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/* 회원관리 리스트 */
+
+
+
+.user_list_admin {
+    width: 1200px;
+    text-align: center;
+    
+}
+.user_list_head {
+    background-color: #E97486;
+
+}
+
+.userLookUpAdmin{
+    width: 1200px;
+    text-align: center;
+    margin: 0 auto; /*1200 픽셀에 맞춰 중앙정렬 / display:flex 굳이필요없었음*/
+    margin-top:12%;
+    font-size: 1.2em;
+    font-style: arial;
+    font-weight: bold;
+    color:#E97486
+}
+
+.searchUser{
+    padding:10px;
+}
+
+.user_list_head{
+    color:#eeeeee;
+}
+
+.user_list_body td{
+    padding:10px;
+    border-bottom: #eeeeee 2px solid;
+
+}
+
+#userScore{
+    color:goldenrod;
+}
