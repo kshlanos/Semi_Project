@@ -8,18 +8,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mypage")
 public class MypageController {
 	
+	/* 마이페이지 메인 이동*/
+	@GetMapping("/")
+	public String getmypageMain() {
+		
+		return "mypage/infomodify";
+	}
+	
+	/* 회원정보 페이지로 이동*/
 	@GetMapping("/infomodify")
 	public String getinfoModify() {
 		
 		return "mypage/infomodify";
 	}
 	
+	/* 비밀번호변경 페이지로 이동*/
 	@GetMapping("/passwordchange")
 	public String getpasswordChange() {
 		
 		return "mypage/passwordchange";
 	}
 	
+	/* */
 	@GetMapping("/passwordcheck")
 	public String getpasswordCheck() {
 		
