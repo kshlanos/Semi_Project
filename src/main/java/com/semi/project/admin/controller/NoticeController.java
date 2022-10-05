@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class noticeController {
+public class NoticeController {
 	
 	@GetMapping("noticeMain")
 	public String getNoticeMain() {
