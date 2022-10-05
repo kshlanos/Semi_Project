@@ -6,7 +6,6 @@ html{
 
 .main{
     display: flex;
-    background-color:#E97486; /*너비 체크용. 확인만 하시고 작업시 지워주세요*/
     width: 1200px;
     margin: 0 auto;
 }

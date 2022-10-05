@@ -42,7 +42,7 @@ var monthdays = (checkYear) => {
 }
 
 const setTopDate=(setMonth,setYear)=>{
-  document.querySelector('[data-selected="full-date"]').innerHTML = months[setMonth] + " " + setYear;
+  document.querySelector('[data-selected="full-date"]').innerHTML = `${setYear}년 ${months[setMonth]}`;
 }
 
 setTopDate(month,year);
@@ -142,10 +142,10 @@ const showMonth = e.view.month*1 + 1;
 const showDay = e.target.innerText*1;
 
 let showYear;
-if(!e.path[8]) {
-  showYear = (e.path[6].all[14].firstChild.data).slice(-4)*1;
+if(!e.path[9]) {
+  showYear = (e.path[7].all[40].innerText).slice(0, 4)*1;
 } else {
-  showYear = (e.path[7].all[14].firstChild.data).slice(-4)*1;
+  showYear = (e.path[8].all[40].innerText).slice(0, 4)*1;
 };
 
 let clickDate;
