@@ -135,3 +135,26 @@ const changeMonth = (operation) =>{
   count = 1;
   row = "undefined";
 }
+
+function showWhere(e) {
+
+const showMonth = e.view.month*1 + 1;
+const showDay = e.target.innerText*1;
+
+let showYear;
+if(!e.path[8]) {
+  showYear = (e.path[6].all[14].firstChild.data).slice(-4)*1;
+} else {
+  showYear = (e.path[7].all[14].firstChild.data).slice(-4)*1;
+};
+
+let clickDate;
+
+if(isNaN(showDay) || showDay == 0) {
+  clickDate = null;
+} else {
+  clickDate = `${showYear}-${showMonth}-${showDay}`;
+}
+
+console.log(clickDate);
+}
