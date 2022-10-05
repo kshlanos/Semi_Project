@@ -41,6 +41,7 @@ public class MainController {
 	public String forgotPassword() {
 		
 		return "/login/forgotPassword";
+		//e
 	}
 	
 	
