@@ -29,7 +29,7 @@ public class MypageController {
 		return "mypage/passwordchange";
 	}
 	
-	/* */
+	/* 비밀번호 확인페이지 이동 */
 	@GetMapping("/passwordcheck")
 	public String getpasswordCheck() {
 		
