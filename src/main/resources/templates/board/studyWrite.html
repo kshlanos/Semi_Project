@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,12 +13,12 @@
     <div id=main class="main">
         <header class="page-header">
             <h1><a href="main.html">
-                <img class="logo" src="../img/logo.png" width="300px" alt="HOME">
+                <img class="logo" src="../images/logo.png" width="300px" alt="HOME">
             </a></h1>
         <nav>
             <ul class="menuBar">
                 <li><a href="notice.html">공지사항</a></li>
-                <li>스터디 찾기</li>
+                <li><a href="studylist.html">스터디 찾기</a></li>
                 <li>커뮤니티</li>
             </ul>
         </nav>
@@ -43,7 +43,7 @@
                     <span>스터디 명</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="big_input" class="title" type="text" placeholder="스터디 그룹 명을 입력하세요.">
+                    <input class="title" type="text" placeholder="스터디 그룹 명을 입력하세요.">
                 </td>
             </tr>
             <tr>
@@ -83,7 +83,7 @@
                     <span>태그</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="big_input" class="title" type="text">
+                    <input class="title" type="text">
                 </td>
             </tr>
             <tr>
@@ -97,7 +97,7 @@
                     <span>목표 진행일수</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="big_input" class="title" type="text" placeholder="목표진행 일수를 입력하세요.">
+                    <input class="title" type="text" placeholder="목표진행 일수를 입력하세요.">
                 </td>
             </tr>
             <tr>
@@ -105,7 +105,7 @@
                     <span>모집인원</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="big_input" class="title" type="text" placeholder="스터디 그룹 인원을 입력하세요.">
+                    <input class="title" type="text" placeholder="스터디 그룹 인원을 입력하세요.">
                 </td>
             </tr>
             <tr>
@@ -113,7 +113,7 @@
                     <span>장소</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="big_input" class="title" type="text" placeholder="스터디 진행 장소를 입력하세요.">
+                    <input class="title" type="text" placeholder="스터디 진행 장소를 입력하세요.">
                 </td>
             </tr>
             <tr>

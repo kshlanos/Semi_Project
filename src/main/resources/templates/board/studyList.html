@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,12 +13,12 @@
     <div id=main class="main">
         <header class="page-header">
             <h1><a href="main.html">
-                <img class="logo" src="../img/logo.png" width="300px" alt="HOME">
+                <img class="logo" src="../images/logo.png" width="300px" alt="HOME">
             </a></h1>
         <nav>
             <ul class="menuBar">
                 <li><a href="notice.html">공지사항</a></li>
-                <li>스터디 찾기</li>
+                <li><a href="studylist.html">스터디 찾기</a></li>
                 <li>커뮤니티</li>
             </ul>
         </nav>
@@ -186,7 +186,8 @@
                         <span class="arrow radius-left">≫</span>
                     </td>
                     <td>     
-                        <button class="list_write_btn">모집하기</button>
+                        <button class="list_write_btn"
+                        th:onclick="'location.href=\'/studyWrite\''">모집하기</button>
                     </td>
                 </tr>    
             </tfoot>
@@ -195,6 +196,6 @@
             <input type="search" class="searchbar">
             <button class="search_btn">검색</button>
         </div>
-    </div>
+
 </body>
 </html>
