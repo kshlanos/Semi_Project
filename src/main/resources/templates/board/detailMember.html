@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,28 +10,8 @@
     <link href="../css/study_detail.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <!-- 상단 메뉴바 & 로고 -->
-    <div id=main class="main">
-        <header class="page-header">
-            <h1><a href="main.html">
-                <img class="logo" src="../images/logo.png" width="300px" alt="HOME">
-            </a></h1>
-        <nav>
-            <ul class="menuBar">
-                <li><a href="notice.html">공지사항</a></li>
-                <li>스터디 찾기</li>
-                <li>커뮤니티</li>
-            </ul>
-        </nav>
-        <nav>
-            <ul class="userBar">
-                <li><a href="login.html">로그인</a></li>
-                <li>회원가입</li>
-            </ul>
-        </nav>
-        </header>
-    </div>
-
+   <div th:replace="common/header.html"></div> 
+   
     <!-- 게시판 타이틀 -->
     <div id=study_title class="study_title"> 
     <h3>스터디 목록</h3>
