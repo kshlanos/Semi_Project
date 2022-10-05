@@ -23,4 +23,5 @@ public class DetailController {
 	@GetMapping("/stopwatch")
 	public void stopwatch() {}
 	
+	
 }
