@@ -9,7 +9,7 @@ var months = ["1월" , "2월" , "3월" , "4월" , "5월" , "6월" , "7월" , "8�
 
 
 
-var checkLeapYear = (setYear) =>{
+var checkLeapYear = (setYear) =>{ 
   if( setYear%400 == 0){
     return true;
   }
@@ -42,7 +42,7 @@ var monthdays = (checkYear) => {
 }
 
 const setTopDate=(setMonth,setYear)=>{
-  document.querySelector('[data-selected="full-date"]').innerHTML = months[setMonth] + " " + setYear;
+  document.querySelector('[data-selected="full-date"]').innerHTML = `${setYear}년 ${months[setMonth]}`;
 }
 
 setTopDate(month,year);
@@ -134,4 +134,27 @@ const changeMonth = (operation) =>{
   setFirstDay(year , month)
   count = 1;
   row = "undefined";
+}
+
+function showWhere(e) {
+
+const showMonth = e.view.month*1 + 1;
+const showDay = e.target.innerText*1;
+
+let showYear;
+if(!e.path[9]) {
+  showYear = (e.path[7].all[40].innerText).slice(0, 4)*1;
+} else {
+  showYear = (e.path[8].all[40].innerText).slice(0, 4)*1;
+};
+
+let clickDate;
+
+if(isNaN(showDay) || showDay == 0) {
+  clickDate = null;
+} else {
+  clickDate = `${showYear}-${showMonth}-${showDay}`;
+}
+
+console.log(clickDate);
 }
