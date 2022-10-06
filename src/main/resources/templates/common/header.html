@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DoBeBest</title>
-    <link href="../css/style.css" rel="stylesheet" typ="text/css">
+    <link href="../css/header.css" rel="stylesheet" typ="text/css">
 </head>
 <body>
     <div id=main class="main">
@@ -16,15 +16,21 @@
             </a></h1>
         <nav>
             <ul class="menuBar">
-                <li><a href="noticeMain">공지사항</a></li>
+                <li><a href="/noticeMain">공지사항</a></li>
                 <li><a href="/studyList">스터디 찾기</a></li>
                 <li>커뮤니티</li>
             </ul>
         </nav>
         <nav>
             <ul class="userBar">
-                <li><a href="login/login">로그인</a></li>
-                <li><a href="login/register">회원가입</a></li>
+            	<th:block sec:authorize="isAnonymous()">
+                	<li><a href="login/login">로그인</a></li>
+                	<li><a href="login/register">회원가입</a></li>
+               	</th:block>
+               	<th:block sec:authorize="isAuthenticated()">
+               	<li><a href="login/logout">로그아웃</a></li>
+                <li><a href="/mypage/infomodify">마이페이지</a></li>
+                </th:block>
             </ul>
         </nav>
         </header>
