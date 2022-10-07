@@ -44,7 +44,7 @@ public class noticeController {
 		return "/admin/userQnaListAdmin";
 	}
 	
-	@PostMapping(value="/noticeMain")
+	@PostMapping(value="/noticeMain")  
 	public String redirectMain() {
 		
 		return "redirect:/admin";
