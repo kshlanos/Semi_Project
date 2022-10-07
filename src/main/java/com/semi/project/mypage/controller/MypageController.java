@@ -1,35 +1,30 @@
-package com.semi.project.member.controller;
+package com.semi.project.mypage.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
 	
-	/* 마이페이지 메인 이동*/
-	@GetMapping("/")
-	public String getmypageMain() {
-		
-		return "mypage/infomodify";
-	}
-	
-	/* 회원정보 페이지로 이동*/
 	@GetMapping("/infomodify")
 	public String getinfoModify() {
 		
 		return "mypage/infomodify";
 	}
 	
-	/* 비밀번호변경 페이지로 이동*/
 	@GetMapping("/passwordchange")
 	public String getpasswordChange() {
 		
 		return "mypage/passwordchange";
 	}
 	
-	/* 비밀번호 확인페이지 이동 */
 	@GetMapping("/passwordcheck")
 	public String getpasswordCheck() {
 		
@@ -82,6 +77,12 @@ public class MypageController {
 	public String infoRemove() {
 		
 		return "mypage/inforemove";
+	}
+	
+	@PostMapping(value="/studyList")
+	public String redirectMain() {
+		
+		return "redirect:/";
 	}
 	
 }
