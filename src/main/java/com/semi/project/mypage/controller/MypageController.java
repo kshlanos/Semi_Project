@@ -1,4 +1,4 @@
-package com.semi.project.member.controller;
+package com.semi.project.mypage.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
