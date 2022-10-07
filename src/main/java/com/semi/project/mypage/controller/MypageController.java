@@ -1,14 +1,18 @@
 package com.semi.project.mypage.controller;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.semi.project.mypage.dto.InquiryDTO;
 
 
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
@@ -58,6 +62,7 @@ public class MypageController {
 	@GetMapping("/inquirycheck")
 	public String getinquiryCheck() {
 		
+
 		return "mypage/inquirycheck";
 	}
 	

@@ -64,4 +64,7 @@ public class Inquiry {
 	@JoinColumn(name = "MEMBER_NO")
 	private Member member;
 	
+	@Column(name = "INQUIRY_STATUS")
+	private String inquiryStatus;
+	
 }
