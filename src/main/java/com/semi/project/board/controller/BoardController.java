@@ -5,10 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
-
 @Controller
+@RequestMapping("/board")
 public class BoardController {
 	
 	@GetMapping("studyList")
@@ -26,6 +24,6 @@ public class BoardController {
 	@PostMapping(value="/studyList")
 	public String redirectMain() {
 		
-		return "redirect:/";
+		return "redirect:/board";
 	}
 }
