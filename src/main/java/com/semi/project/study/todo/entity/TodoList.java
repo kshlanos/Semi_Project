@@ -4,32 +4,50 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
-@SequenceGenerator(name = "BOARD_SEQ_GENERATOR", sequenceName = "SEQ_TODOLIST_ID")
+@Table(name = "TBL_STUDY_DATE")
+@SequenceGenerator(name = "TODOLIST_SEQ_GENERATOR", sequenceName = "SEQ_TODOLIST_ID")
 public class TodoList {
 	
 	@Id
+	@Column(name="TODOLIST_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TODOLIST_SEQ_GENERATOR")
 	private String todoListId;
 	
-	@Column
+	@Column(name="TODOLIST_START_DATE")
 	private Date todoListStartDate;
 	
-	@Column
+	@Column(name="STUDY_ID")
+	private String studyId;
+	
+	@Column(name="TODOLIST_END_DATE")
 	private Date todoListEndDate;
 	
-	@Column
-	private String todoListRegDate;
+	@Column(name="TODOLIST_SORT")
+	private String todoListSort;
 	
-	@Column
+	@Column(name="TODOLIST_CRE_DATE")
+	private Date todoListCreDate;
+	
+	@Column(name="TODOLIST_UPD_DATE")
 	private Date todoListUpdDate;
 	
-	@Column
-	private Date todoList_DEL_STATUS;
+	@Column(name="TODOLIST_DEL_STATUS")
+	private String todoListDelStatus;
 	
-	@Column
+	@Column(name="TODOLIS_REF_ID")
 	private String todoListRefId;
 	
 
