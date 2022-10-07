@@ -7,18 +7,14 @@
 
 </head>
 <body>
+  	<a onclick="location.href='/study/confirm'">인증 게시판</a>
+    <a onclick="location.href='/study/studycalendar'">스터디 일정</a>
+    <a onclick="location.href='/study/mycalendar'">나의 출석체크</a>
 
-    <div th:replace="common/header.html"></div>
-    <div class="studycalendar">
-    	<aside class="sidebar">
-  			<span onclick="location.href='/study/confirm'">인증 게시판</span><br>
-    		<span onclick="location.href='/study/studycalendar'">스터디 일정</span><br>
-    		<span onclick="location.href='/study/mycalendar'">나의 출석체크</span>
-		</aside>
-	<div id="calendar">
-        <table onclick="showWhere(event)">
+    <div>
+        <table>
           <thead>
-            <tr><th data-selected="full-date" colspan="7" ></th></tr>
+            <tr><th data-selected="full-date" colspan="7"></th></tr>
             <tr>
                <th>일</th>
                <th>월</th>
@@ -29,26 +25,21 @@
                <th>토</th>
             </tr>
           </thead>
-          <tdata >
-            <tr >
+          <tdata>
+            <tr>
             </tr>
            
           </tdata>
         </table>
         <div class="actions">
-        	<div class="next-button" onclick="changeMonth('prev')"><</div>
-        	<div class="prev-button" onclick="changeMonth('next')">></div>
+        <div class="next-button" onclick="changeMonth('prev')"><</div>
+        <div class="prev-button" onclick="changeMonth('next')">></div> 
         </div>
         <div class="actions-2">
-        	<div onclick="changeMonth('prev')">prev</div>
-        	<div onclick="changeMonth('next')">next</div> 
-       		</div>
-      	</div>
-   	</div>
-      	
-      	<div th:replace="common/footer.html"></div>
-      	
-      <!-- <script src="../../static/js/studycalendar.js"></script> -->
+        <div onclick="changeMonth('prev')">prev</div>
+        <div onclick="changeMonth('next')">next</div> 
+        </div>
+      </div>
       <script src="/js/studycalendar.js"></script>
 </body>
 </html>
