@@ -20,18 +20,17 @@
     <p id="name">이메일</p>
     <hr id="line">
     <br>
-    <form id="textarea1">
-        <input type="text" name="inqtitle" style="width:1200px; height: 30px;" placeholder="제목을 입력해주세요">
+    <form id="textarea1" th:action="@{/mypage/inquirywrite}" method="post">
+        <input type="text" name="inquiryTitle" style="width:1200px; height: 30px;" placeholder="제목을 입력해주세요">
         <br><br>
         <button class="filebtn">파일첨부</button>
         <br><br>
-       <textarea id="textarea1" name="textContent" rows="20" cols="118" style="resize:none;"  placeholder="내용을 입력해주세요" ></textarea>
+       <textarea id="textarea1" name="inquiryContent" rows="20" cols="118" style="resize:none;"  placeholder="내용을 입력해주세요" ></textarea>
+       <button type="submit" onclick="location.href='/mypage/inquirycheck';" class="inqbtn1">확인</button>
+       <button type="reset" onclick="location.href='/mypage/inquirycheck';" class="inqbtn2">취소</button>
     </form>
     <br>
-        <div class="inqmovebtn">
-            <button type="submit" onclick="location.href='/mypage/inquirycheck';" class="inqbtn1">확인</button>
-            <button type="reset" onclick="location.href='/mypage/inquirycheck';" class="inqbtn2">취소</button>
-        </div>
+
     </div> 
 </body>
 </html>

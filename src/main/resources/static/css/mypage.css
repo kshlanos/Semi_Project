@@ -185,25 +185,6 @@
 .inqname{
     margin-left: 300px;
 }
-
-.inqbtn3{
-    color: white;
-    float:right;
-    width:12%;
-    height:60px;
-    background-color:#FFC0CB;
-    /*테두리 검은선 모두 제거하기*/
-    border-style: none;
-    margin-right:10px;
-    text-align: center;
-    font-size: 20px;
-}
-
-.inqimg{
-    width: 25px;
-    height: 25px;
-    margin-right: 20px;
-}
 /*----1:1 문의하기 끝*/ 
 
 /*----알림----*/

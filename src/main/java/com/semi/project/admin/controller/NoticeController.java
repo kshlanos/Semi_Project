@@ -3,30 +3,53 @@ package com.semi.project.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("/admin")
 public class NoticeController {
 	
-	@GetMapping("noticeMain")
+	@GetMapping(value = {"/noticeMain"})
 	public String getNoticeMain() {
 		
-		return "admin/noticeMain";
+		return "/admin/noticeMain";
 	}
 	
-	@GetMapping("noticeEvent")
-	public String getNoticeEvent() {
-		return "admin/noticeEvent";
-	}
 	
-	@GetMapping("userListAdmin")
-	public String getUserListAdmin() {
-		return "admin/userListAdmin";
+	@GetMapping(value = {"/noticeMainDetail"})
+	public String getNoticeMainDetail() {
+		
+		return "/admin/noticeMainDetail";
 	}
 
-	@GetMapping("userQnaListAdmin")
-	public String getUserQnaAdmin() {
-		return "admin/userQnaListAdmin";
+	@GetMapping(value = {"/registNoticeMain"})
+	public String registNoticeMain() {
+		
+		return "/admin/registNoticeMain";
 	}
+	
+	@GetMapping(value = {"/noticeEvent"})
+	public String getNoticeEvent() {
+		return "/admin/noticeEvent";
+	}
+	
+	@GetMapping(value = {"/userListAdmin"})
+	public String getUserListAdmin() {
+		return "/admin/userListAdmin";
+	}
+
+	@GetMapping(value = {"/userQnaListAdmin"})
+	public String getUserQnaAdmin() {
+		return "/admin/userQnaListAdmin";
+	}
+	
+	@PostMapping(value="/admin")
+	public String redirectMain() {
+		
+		return "redirect:/";
+	}
+	
 	
 }

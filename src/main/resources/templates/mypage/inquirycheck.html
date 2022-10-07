@@ -49,82 +49,30 @@
                 <th>상태</th>
                 <th>작성자</th>
             </tr>
-<!--             <tr th:each="inquiry : ${ inquirycheck }" >
+            <tr>
+                <td>1</td>
+                <td>html, css 너무어려워요 도와주세요 ㅠㅠ</td>
+                <td>홍길동</td>
+                <td>답변완료</td>
+                <td>2022-10-01</td>
             </tr>
             <tr>
-                <td th:text="${ inquiry.inquiryNo }"></td>
-                <td th:text="${ inquiry.inquiryTitle }"></td>
-                <td th:text="${ inquiry.inquiryRegDate }"></td>
-                <td th:text="${ inquiry.inquiryStatus }"></td>
-                <td th:text="${ inquiry.memberNo }" ></td>
-            </tr> -->
+                <td>2</td>
+                <td>html, css 꿀팁</td>
+                <td>유관순</td>
+                <td>답변대기</td>
+                <td>2022-10-01</td>
+            </tr>
         </table>
-			<!-- 페이징 바 -->
-		<div id="paging" align="center" style="margin-top:20px;">
-
-			<th:block th:if="${ searchValue != null }">
-				<!-- 맨 앞으로 이동 -->
-				<button
-					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
-
-				<!-- 이전 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
-					th:disabled="${ boardList.first }">&lt;</button>
-
-				<!-- 숫자 버튼 -->
-				<th:block
-					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
-					<button
-						th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
-						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
-					</button>
-				</th:block>
-
-				<!-- 다음 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
-					th:disabled="${ boardList.last }">></button>
-
-				<!-- 맨 끝으로 이동 -->
-				<button
-					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
-
-			</th:block>
-			
-			<th:block th:if="${ param.searchValue == null || param.searchValue.isEmpty() }">
-				<!-- 맨 앞으로 이동 -->
-				<button
-					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
-
-				<!-- 이전 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.currentPage - 1}} + '\''"
-					th:disabled="${ boardList.first }">&lt;</button>
-
-				<!-- 숫자 버튼 -->
-				<th:block
-					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
-					<button
-						th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${page}} + '\''"
-						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
-					</button>
-				</th:block>
-
-				<!-- 다음 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/board/list?page=' + @{${paging.currentPage + 1}} + '\''"
-					th:disabled="${ boardList.last }">></button>
-
-				<!-- 맨 끝으로 이동 -->
-				<button
-					th:onclick="'location.href=\'/board/list?page=' + @{${paging.endPage}} + '\''">>></button>
-			</th:block>
-			
-		</div>
-		
-	</div>
-	<div th:replace="common/footer.html"></div>
-		
+        <div class="page-wrap">
+            <ul class="page-nation">
+                <li><a href="/board/list?p=1">1</a></li>
+                <li><a href="/board/list?p=2">2</a></li>
+                <li><a href="/board/list?p=3">3</a></li>
+                <li><a href="/board/list?p=4">4</a></li>
+                <li><a href="/board/list?p=5">5</a></li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
