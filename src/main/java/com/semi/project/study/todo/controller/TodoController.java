@@ -1,11 +1,14 @@
 package com.semi.project.study.todo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/todo")
+@RequestMapping("/study")
 public class TodoController {
-	// ㅡㅡ
+	
+	@GetMapping("/todoList")
+	public void todoList() {}
 	
 }

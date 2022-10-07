@@ -1,5 +1,5 @@
 
-.confirm {
+.confirm-btn {
     background-color: #E97486;
     border: none;
     border-radius: 5px;
@@ -10,4 +10,42 @@
     font-weight: 700;
     font-size: medium;
     color: white;
+    max-height: 40px;
+    margin-top : 50px;
+}
+
+.confirmBody{
+	margin-top : 150px;
+	border-top: 1px solid gray;
+	display: flex;
+}
+
+.sidebar {
+	border-right : 1px solid gray;
+	display:flex;
+	flex-direction: column;
+}
+
+.sidebar span {
+	font-size: 20px ;
+	line-height: 100px;
+	text-align:right;
+	padding-left: 20px;
+	padding-right : 30px;
+	width : 150px;
+	border-bottom : 1px solid gray;
+}
+
+.certified	 {
+	margin-left: 50px;
+}
+
+p {
+	font-size : 25px;
+	text-align:left;
+}
+
+.confirm-content {
+	display: flex;
+	justify-content: space-between;
 }

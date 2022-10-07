@@ -6,23 +6,32 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/certified.css}">
 </head>
 <body>
-    <a onclick="location.href='/study/confirm'">인증 게시판</a>
-    <a onclick="location.href='/study/studycalendar'">스터디 일정</a>
-    <a onclick="location.href='/study/mycalendar'">나의 출석체크</a>
 
+    <div th:replace="common/header.html"></div>
+    
+	<div class="certifiedBody">
+    	<aside class="sidebar">
+  			<span onclick="location.href='/study/confirm'">인증 게시판</span><br>
+    		<span onclick="location.href='/study/studycalendar'">스터디 일정</span><br>
+    		<span onclick="location.href='/study/mycalendar'">나의 출석체크</span>
+		</aside>
+	<div id="certifiedBody">
         <div class="certified">
             <span>인증하기</span>
         </div>
-        <form class="certified-form" action="confirm.html">
-            <hr>
-            <input class="real-upload" type="file" accept="image/*">
             <div class="upload">사진 첨부</div>
+        <form class="certified-form" >
+            <input class="real-upload" type="file" accept="image/*">
             <input id="cerified-content" type="text" placeholder="내용을 입력하세요">
             <div>
-                <button id="certified">글쓰기</button>
-                <button id="cancel">취소</button>
+                <button id="certified" type="button" onclick="location.href='/study/confirm'">작성 완료</button>
+                <button id="cancel" type="button" onclick="location.href='/study/confirm'">취소</button>
             </div>
         </form>
+        </div>
+      </div>
+      
+      <div th:replace="common/footer.html"></div>
 
     <script src="/js/certified.js"></script>
 </body>

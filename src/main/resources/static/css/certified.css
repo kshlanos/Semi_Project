@@ -1,6 +1,6 @@
 #cerified-content{
     width: 800px;
-    height: 600px;
+    height: 500px;
     
 }
 .real-upload {
@@ -18,9 +18,11 @@
     padding-bottom: 5px;
     border-radius: 5px;
     color: white;
+    font-size: medium;
+	float: right;
 }
 
-span {
+.certified span {
     color: #E97486;
     margin: auto 6px;
 }
@@ -57,7 +59,8 @@ button {
 
 .certified {
     display: block;
-    width: 80px;
+    font-size: 20px;
+    width: 200px;
     color: #E97486;
     border-bottom: 2px solid #E97486;
 }
@@ -65,3 +68,31 @@ button {
 #cerified-content::placeholder{
     text-align:center;
 }
+
+.certifiedBody{
+	margin-top : 150px;
+	border-top: 1px solid gray;
+	display: flex;
+}
+
+#certifiedBody{
+	display:flex;
+	flex-direction: column;
+	margin-left: 60px;
+}
+
+
+.sidebar {
+	border-right : 1px solid gray;
+	display:flex;
+	flex-direction: column;
+}
+
+.sidebar span {
+	font-size: 20px ;
+	line-height: 100px;
+	text-align:right;
+	padding-left: 20px;
+	padding-right : 30px;
+	width : 150px;
+	border-bottom : 1px solid gray;

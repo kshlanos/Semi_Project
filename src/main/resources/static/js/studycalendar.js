@@ -158,3 +158,14 @@ if(isNaN(showDay) || showDay == 0) {
 
 console.log(clickDate);
 }
+
+	$('.popUp').on("click", function(e){
+	
+		e.preventDefault();
+	
+		let popUrl = "todoList";
+		let popOption = "width = 800px, height=700px, top=300px, left=300px, scrollbars=yes";
+		
+		window.open(popUrl," TodoList ",popOption);
+	
+	});
