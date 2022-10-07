@@ -28,7 +28,7 @@ public class LoginController {
     private final MessageSourceAccessor messageSourceAccessor;
     private final MemberService memberService;
     private final AuthenticationService authenticationService;
-
+  
     public LoginController(MessageSourceAccessor messageSourceAccessor, MemberService memberService, PasswordEncoder passwordEncoder, AuthenticationService authenticationService) {
         this.messageSourceAccessor = messageSourceAccessor;
         this.memberService = memberService;
