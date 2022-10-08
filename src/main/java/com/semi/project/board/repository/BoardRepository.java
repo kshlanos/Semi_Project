@@ -11,5 +11,5 @@ public interface BoardRepository extends JpaRepository<Board, String>{
 	Page<Board> findByStudyStatus(char activeStatus, Pageable pageable);
 
 
-	
+
 }

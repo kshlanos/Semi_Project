@@ -9,3 +9,4 @@ public class CategoryDTO {
 	private String studyCaName;
 	private String studyRefId;
 }
+

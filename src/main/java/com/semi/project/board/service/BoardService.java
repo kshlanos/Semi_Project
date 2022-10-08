@@ -28,7 +28,7 @@ public class BoardService {
 		this.boardRepository = boardRepository;
 		this.modelMapper = modelMapper;
 	}
-	
+
 	public Page<BoardDTO> selectStudyList(int page, String searchValue) {
 
 		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY).descending());

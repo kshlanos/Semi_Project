@@ -28,3 +28,4 @@ public class BoardDTO {
 	private String studyCondition;
 	
 }
+

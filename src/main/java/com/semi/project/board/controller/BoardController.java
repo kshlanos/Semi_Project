@@ -23,7 +23,7 @@ public class BoardController {
 	public BoardController(BoardService boardService) {
 		this.boardService = boardService;
 	}
-	
+
 	@GetMapping("studyList")
 	public String studyList(@RequestParam(defaultValue="1") int page,
 			@RequestParam(required=false) String searchValue, Model model) {
