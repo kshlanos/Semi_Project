@@ -47,7 +47,7 @@ public class SpringSecurityConfiguration {
         return http
         		.csrf().disable()
                 .authorizeRequests()
-                .mvcMatchers("/board/**", "/thumbnail/**", "/member/update", "/member/delete").hasAnyAuthority("ROLE_MEMBER", "ROLE_ADMIN")
+                .mvcMatchers("/member/update", "/member/delete").hasAnyAuthority("ROLE_MEMBER", "ROLE_ADMIN")
                 .mvcMatchers("/**", "/login/**").permitAll()
                 .and()
                     .formLogin()

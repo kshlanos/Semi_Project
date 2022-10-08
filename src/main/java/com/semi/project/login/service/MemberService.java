@@ -32,14 +32,20 @@ public class MemberService {
 		memberRepository.save(modelMapper.map(member, Member.class));
 	}
 
-//	public void modifyMember(MemberDTO updateMember) {
-//		
-//		Member savedMember = memberRepository.findByMemberNo(updateMember.getMemberNo());
-//		savedMember.setNickname(updateMember.getNickname());
-//		savedMember.setPhone(updateMember.getPhone());
-//		savedMember.setEmail(updateMember.getEmail());
-//		savedMember.setAddress(updateMember.getAddress());
-//
-//	}
+	public void modifyMember(MemberDTO updateMember) {
+		
+		Member savedMember = memberRepository.findByMemberNo(updateMember.getMemberNo());
+		savedMember.setMemberNickname(updateMember.getMemberNickname());
+		savedMember.setMemberAddress(updateMember.getMemberAddress());
+		savedMember.setMemberEmail(updateMember.getMemberEmail());
+	
 
+	}
+	
+	public void removeMember(MemberDTO member) {
+    	
+    	Member savedMember = memberRepository.findByMemberNo(member.getMemberNo());
+    	savedMember.setMemberStatus("Y");
+
+    }
 }
