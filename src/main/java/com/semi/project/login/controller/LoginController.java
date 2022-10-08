@@ -86,33 +86,7 @@ public class LoginController {
 	        
 	  }
 	  
-	  @PostMapping("/mypage/modify")
-	    public String modifyMember(@ModelAttribute MemberDTO updateMember,
-	    		@RequestParam String zipCode, @RequestParam String address1, @RequestParam String address2,
-	    		@AuthenticationPrincipal MemberDTO loginMember,
-	    		RedirectAttributes rttr) {
-	    	
-	    	log.info("[MemberController] modifyMember ==============================");
-	    	
-	    	String address = zipCode + "$" + address1 + "$" + address2;
-	    	updateMember.setMemberAddress(address);
-	    	updateMember.setMemberNo(loginMember.getMemberNo());
-	    	
-	    	log.info("[MemberController] modifyMember request Member : {}", updateMember);
-	    	
-	    	memberService.modifyMember(updateMember);
-	    	
-	    	/* 세션에 저장 되어 있는 로그인 회원의 정보를 변경한다. */
-	    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    	SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication, loginMember.getMemberId()));
-	    	
-	    	
-	    	rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.modify"));
-	    	
-	    	log.info("[MemberController] modifyMember ==============================");
-	    	
-	    	return "redirect:/";
-	    }
+	 
 	  
 	  
 }

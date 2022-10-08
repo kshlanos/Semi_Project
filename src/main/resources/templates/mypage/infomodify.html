@@ -6,6 +6,10 @@
 <title>Insert title here</title>
  <link href="../css/mypage.css" rel="stylesheet" type="text/css">
  <link href="../css/header.css" rel="stylesheet" type="text/css">
+  <script>
+	    const message = '[[${message}]]';
+		message && alert(message);
+	</script>
 </head>
 <body>
      <div th:replace="common/header.html"></div> 
@@ -30,7 +34,7 @@
         <br><br><br>
         <p class="teamscore">팀스터디 평점 : ☆☆☆☆☆</p>
         <br>
-        <form class="userinfo">
+        <form class="userinfo" action="/mypage/infomodify" method="post">
             <p>아이디</p>
             <p th:text="${ #authentication.principal.memberId }"></p>
             <br>
@@ -44,27 +48,56 @@
             <input class="userinput" type="text" name="memberNickname" th:value="${ #authentication.principal.memberNickname }">
             <br><br>
             <p>우편번호</p>
-            <input class="userinput" type="text" name="memberAdress" >
-            <input type="button" value="검색" ></button>
+            <input class="userinput" type="text" name="zipCode" id="zipCode"
+             th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 0 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[0] : '' }"
+             readonly >
+            <input type="button" value="검색" id="searchZipCode">
             <br>
             <p>주소</p>
-            <input class="userinput" type="text" name="memberAdress" >
+            <input class="userinput" type="text" name="address1" id="address1"
+             th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 1 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[1] : '' }" 
+             readonly >
             <br>
             <p>상세 주소</p>
-            <input class="userinput" type="text" name="memberAdress" >
+            <input class="userinput" type="text" name="address2" id="address2" 
+             th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 2 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[2] : '' }" 
+             >
             <br><br>
             <p>e-mail</p>
             <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberEmail }">
             <div class="userbtn">
             <button type="submit" class="usersavebtn">수정하기</button>
             </div>
-        </form>
+        </form>    
         <div class="userbtn">
             <button onclick="location.href='/mypage/passwordcheck';" class="userdeletebtn">회원 탈퇴</button>
         </div>
-        
     </div>
     
     <div th:replace="common/footer.html"></div>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	
+	    const $searchZipCode = document.getElementById("searchZipCode");
+	    const $goMain = document.getElementById("goMain");
+	
+	    $searchZipCode.onclick = function() {
+	
+	        /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+	        new daum.Postcode({
+	            oncomplete: function(data){
+	                /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+	                document.getElementById("zipCode").value = data.zonecode;
+	                document.getElementById("address1").value = data.address;
+	                document.getElementById("address2").focus();
+	            }
+	        }).open();
+	    }
+	
+	    $goMain.onclick = function() {
+	        location.href = "/";
+	    }
+	
+	</script>
 </body>
 </html>
