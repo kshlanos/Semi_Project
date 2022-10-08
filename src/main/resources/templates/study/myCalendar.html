@@ -2,9 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
-<title>studycalendar</title>
-<link rel="stylesheet" th:href="@{/css/studycalendar.css}">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>mycalendar</title>
+<link rel="stylesheet" th:href="@{/css/myCalendar.css}">
 
 </head>
 <body>
@@ -13,8 +12,8 @@
     <div class="studycalendar">
     	<aside class="sidebar">
   			<span onclick="location.href='/study/confirm'">인증 게시판</span><br>
-    		<span onclick="location.href='/study/studycalendar'">스터디 일정</span><br>
-    		<span onclick="location.href='/study/mycalendar'">나의 출석체크</span>
+    		<span onclick="location.href='/study/studyCalendar'">스터디 일정</span><br>
+    		<span onclick="location.href='/study/myCalendar'">나의 출석체크</span>
 		</aside>
 	<div id="calendar">
         <table onclick="showWhere(event)">
@@ -37,21 +36,16 @@
           </tdata>
         </table>
         <div class="actions">
-        	<div class="next-button" onclick="changeMonth('prev')"><</div>
-        	<div class="prev-button" onclick="changeMonth('next')">></div>
+        	<div class="next-button" onclick="changeMonth('prev')">이전 달</div>
+        	<div class="prev-button" onclick="changeMonth('next')">다음 달</div>
         </div>
-        <div class="actions-2">
-        	<div onclick="changeMonth('prev')">prev</div>
-        	<div onclick="changeMonth('next')">next</div> 
-       		</div>
       	</div>
    	</div>
    	
-   	   	<div class="popUp" th:name="${10-10-2022}" th:value="todoListStartDate"> 팝업 </div>
       	
       	<div th:replace="common/footer.html"></div>
       	
-      <!-- <script src="../../static/js/studycalendar.js"></script> -->
-      <script src="/js/studycalendar.js"></script>
+      <!-- <script src="../../static/js/myCalendar.js"></script> -->
+      <script src="/js/myCalendar.js"></script>
 </body>
 </html>

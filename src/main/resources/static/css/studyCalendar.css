@@ -9,31 +9,36 @@ th,td{
   .actions{
     display : flex;
     justify-content : space-around;
-    width : 300px;
     text-align : center;
-    color : #ffffff;
-    font-size: 25px;
-    font-weight: 600;
-    margin-top : 20px;
+    color : white;
+    font-size: 15px;
+    font-weight: 300;
     cursor:pointer;
   }
-  .actions-2{
-    display : flex;
-    justify-content : space-around;
-    width : 300px;
-    cursor: pointer;
-  }
+  .upload {
+    background-color: #E97486;
+    margin-bottom: 30px;
+    margin-top:10px;
+    max-width: 70px;
+    padding: 30px 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: medium;
+	float: right;
+}
   .next-button{
-     height: 30px;
-     width: 30px;
-     border-radius : 50%;
-     background-color : #3d3d3d;
+     height: 20px;
+     width: 70px;
+     padding: 5px 30px;
+     border-radius : 5px;
+     background-color : #E97486;
   }
   .prev-button{
-     height: 30px;
-     width: 30px;
-     border-radius : 50%;
-     background-color : #3d3d3d;
+     height: 20px;
+     width: 70px;
+     padding: 5px 30px;
+     border-radius : 5px;
+     background-color : #E97486;
   }
   
   tr:first-child th {
@@ -41,6 +46,7 @@ th,td{
     border-top-left-radius : 20px;
     background-color : #E97486;
     border-color : transparent;
+    color : white;
   }
   td:hover{
     background-color: offwhite;

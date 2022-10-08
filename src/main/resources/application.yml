@@ -9,10 +9,12 @@ spring:
     driver-class-name: oracle.jdbc.driver.OracleDriver
 #    url: jdbc:log4jdbc:oracle:thin:@localhost:1521:xe
     url: jdbc:oracle:thin:@localhost:1521:xe
-    username : C##GREEDY
-    password : GREEDY
+    username : C##DOBEBEST
+    password : DOBEBEST
     hikari:
       auto-commit: false
 
 
-    
+logging:
+  level:
+    root: info

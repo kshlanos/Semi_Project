@@ -136,36 +136,47 @@ const changeMonth = (operation) =>{
   row = "undefined";
 }
 
-function showWhere(e) {
+// function showWhere(e) {
 
-const showMonth = e.view.month*1 + 1;
-const showDay = e.target.innerText*1;
+// const showMonth = (String(e.view.month*1+1).padStart(2, "0"));
+// const showDay = (String(e.target.innerText*1).padStart(2, "0"));
 
-let showYear;
-if(!e.path[9]) {
-  showYear = (e.path[7].all[40].innerText).slice(0, 4)*1;
-} else {
-  showYear = (e.path[8].all[40].innerText).slice(0, 4)*1;
-};
+// let showYear;
+// if(!e.path[9]) {
+//   showYear = (e.path[7].all[40].innerText).slice(0, 4)*1;
+// } else {
+//   showYear = (e.path[8].all[40].innerText).slice(0, 4)*1;
+// };
 
-let clickDate;
+// let clickDate;
 
-if(isNaN(showDay) || showDay == 0) {
-  clickDate = null;
-} else {
-  clickDate = `${showYear}-${showMonth}-${showDay}`;
-}
+// if(isNaN(showDay) || showDay == 0) {
+//   clickDate = null;
+// } else {
+//   clickDate = `${showYear}-${showMonth}-${showDay}`;
+// }
 
-console.log(clickDate);
-}
+// }
 
-	$('.popUp').on("click", function(e){
+	$('table').on("click", function(e){
 	
 		e.preventDefault();
-	
-		let popUrl = "todoList";
+
+    const showMonth = (String(e.view.month*1+1).padStart(2, "0"));
+    const showDay = (String(e.target.innerText*1).padStart(2, "0"));
+    const showYear = (e.currentTarget.innerText).slice(0, 4)*1;
+
+    let clickDate;
+
+    if(isNaN(e.target.innerText) || e.target.innerText == 0) {
+      clickDate = null;
+    } else {
+      clickDate = `${showYear}-${showMonth}-${showDay}`;
+    }
+
+		let popUrl = `todoList?todoListStartDate=${clickDate}`;
 		let popOption = "width = 800px, height=700px, top=300px, left=300px, scrollbars=yes";
 		
 		window.open(popUrl," TodoList ",popOption);
-	
+
 	});
