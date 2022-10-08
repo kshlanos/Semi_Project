@@ -2,26 +2,29 @@ package com.semi.project.board.dto;
 
 import java.util.Date;
 
+import com.semi.project.login.dto.MemberDTO;
+
 import lombok.Data;
 
 @Data
 public class BoardDTO {
 
-	private String StudyId;
-	private String StudyTag;
-	private Date ClosingDate;
-	private Date TargetDay;
-	private Long Recruits;
-	private String StudyPlace;
-	private String StudyContent;
-	private String StudyCategory;
-	private Date StudyStartDate;
-	private Date StudyEndDate;
-	private String MemberId;
-	private Date StudyRegDate;
-	private Date StudyUpdDate;
-	private char StudyStatus;
-	private String StudyRefId;
-	private String StudyBoardNo;
+	private String studyId;
+	private String studyTag;
+	private Date closingDate;
+	private Date targetDay;
+	private Long recruits;
+	private String studyPlace;
+	private String studyContent;
+	private CategoryDTO studyCategory;
+	private Date studyStartDate;
+	private Date studyEndDate;
+	private Date studyRegDate;
+	private Date studyUpdDate;
+	private char studyStatus;
+	private String studyRefId;
+	private String studyBoardNo;
+	private MemberDTO memberNo;
+	private String studyCondition;
 	
 }
