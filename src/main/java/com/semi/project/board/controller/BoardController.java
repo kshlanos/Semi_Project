@@ -42,6 +42,7 @@ public class BoardController {
 		model.addAttribute("paging", paging);
 		
 		log.info("[BoardController] ========================================= ");
+
 		
 		return "board/studyList";
 	}

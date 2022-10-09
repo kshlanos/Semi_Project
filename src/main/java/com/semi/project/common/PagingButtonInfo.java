@@ -1,7 +1,7 @@
 package com.semi.project.common;
 
 public class PagingButtonInfo {
-	
+
 	private int currentPage;
 	private int startPage;
 	private int endPage;
@@ -45,6 +45,5 @@ public class PagingButtonInfo {
 				+ "]";
 	}
 	
-
 
 }
