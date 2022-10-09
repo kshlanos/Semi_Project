@@ -1,6 +1,6 @@
 package com.semi.project.board.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import com.semi.project.login.dto.MemberDTO;
 

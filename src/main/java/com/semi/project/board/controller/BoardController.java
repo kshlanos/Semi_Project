@@ -45,6 +45,21 @@ public class BoardController {
 		
 		return "board/studyList";
 	}
+	
+	@GetMapping("/detail")
+	public String selectDetailMember(Model model, String studyBoardNo) {
+		
+		log.info("[BoardController] ========================================= ");
+		log.info("[BoardController] studyBoardNo : {}", studyBoardNo);
+		
+		BoardDTO board = boardService.selectDetailMember(studyBoardNo);
+		
+		model.addAttribute("board", board);
+		
+		log.info("[BoardController] ========================================= ");
+		
+		return "board/detailMember";
+	}
 
 	@GetMapping("studyWrite")
 	public String studyWrite() {

@@ -1,6 +1,9 @@
 package com.semi.project.board.entity;
 
-import java.util.Date;
+
+
+import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +26,7 @@ import lombok.Setter;
 @Table(name = "TBL_STUDY")
 @SequenceGenerator(name = "BOARD_SEQ_GENERATOR", sequenceName = "SEQ_STUDY_BOARD_NO", initialValue = 1, allocationSize = 1)
 @DynamicInsert
+
 public class Board {
 
 	@Id

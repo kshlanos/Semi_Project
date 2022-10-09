@@ -23,7 +23,9 @@ public class BoardService {
 
 	private final BoardRepository boardRepository;
 	private final ModelMapper modelMapper;
+
 	
+	/* 게시판 목록 조회 */
 	public BoardService(BoardRepository boardRepository, ModelMapper modelMapper) {
 		this.boardRepository = boardRepository;
 		this.modelMapper = modelMapper;
@@ -41,6 +43,14 @@ public class BoardService {
 		}
 		
 		return studyList.map(board -> modelMapper.map(board, BoardDTO.class));
+	}
+
+	/* 게시글 상세 조회 */
+	public BoardDTO selectDetailMember(String studyBoardNo) {
+		
+		Board board = boardRepository.findByStudyBoardNoAndStudyStatus(studyBoardNo, ACTIVE_STATUS);
+				
+		return modelMapper.map(board, BoardDTO.class);
 	}
 
 }
