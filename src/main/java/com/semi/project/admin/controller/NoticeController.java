@@ -38,6 +38,10 @@ public class NoticeController {
 	public String getNoticeMain(@RequestParam(defaultValue="1") int page, @RequestParam(required=false) String searchValue, Model model) {
 	
 		
+
+		return "/admin/noticeMain";
+	}  
+
 		Page<NoticeDTO> noticeMain = noticeService.selectNoticeList(page, searchValue);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(noticeMain);
 		
@@ -47,6 +51,7 @@ public class NoticeController {
 		
 		return "admin/noticeMain";
 	}
+
 	
 	/* 공지사항 게시글 상세 조회 controller */
 	@GetMapping(value = {"/noticeMainDetail"})
