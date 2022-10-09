@@ -9,34 +9,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
-public class noticeController {
+public class NoticeController {
 	
-	@GetMapping("/noticeMain")
+	@GetMapping(value = {"/noticeMain"})
 	public String getNoticeMain() {
 		
-		return "admin/noticeMain";
+		return "/admin/noticeMain";
 	}
 	
-	@GetMapping(value = "/noticeMainDetail")
+	
+	@GetMapping(value = {"/noticeMainDetail"})
 	public String getNoticeMainDetail() {
 		
-		return "admin/noticeMainDetail";
+		return "/admin/noticeMainDetail";
 	}
 
-	@GetMapping(value = "/registNoticeMain")
+	@GetMapping(value = {"/registNoticeMain"})
 	public String registNoticeMain() {
 		
-		return "admin/registNoticeMain";
+		return "/admin/registNoticeMain";
 	}
 	
 	@GetMapping(value = {"/noticeEvent"})
 	public String getNoticeEvent() {
-		return "admin/noticeEvent";
+		return "/admin/noticeEvent";
 	}
 	
 	@GetMapping(value = {"/userListAdmin"})
 	public String getUserListAdmin() {
-		return "admin/userListAdmin";
+		return "/admin/userListAdmin";
 	}
 
 	@GetMapping(value = {"/userQnaListAdmin"})
@@ -44,10 +45,11 @@ public class noticeController {
 		return "/admin/userQnaListAdmin";
 	}
 	
-	@PostMapping(value="/noticeMain")  
+	@PostMapping(value="/admin")
 	public String redirectMain() {
 		
-		return "redirect:/admin";
+		return "redirect:/";
 	}
+	
 	
 }

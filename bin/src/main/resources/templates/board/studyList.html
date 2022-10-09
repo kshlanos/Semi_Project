@@ -1,41 +1,22 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DoBeBest</title>
-    <link href="../css/style.css" rel="stylesheet" typ="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/study_list.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <!-- 상단 메뉴바 -->
-    <div id=main class="main">
-        <header class="page-header">
-            <h1><a href="main.html">
-                <img class="logo" src="../img/logo.png" width="300px" alt="HOME">
-            </a></h1>
-        <nav>
-            <ul class="menuBar">
-                <li><a href="notice.html">공지사항</a></li>
-                <li>스터디 찾기</li>
-                <li>커뮤니티</li>
-            </ul>
-        </nav>
-        <nav>
-            <ul class="userBar">
-                <li><a href="login.html">로그인</a></li>
-                <li>회원가입</li>
-            </ul>
-        </nav>
-        </header>
-    </div>
+    <div th:replace="common/header.html"></div> 
 
     <!-- 게시판 타이틀 -->
     <div id=study_title class="study_title"> 
     <h3>스터디 목록</h3>
     
         <!-- 카테고리 -->
-        <div class="category1">
+        <div class="category">
             <select class="select01">
                 <option>카테고리</option>
                 <option>어학</option>
@@ -45,8 +26,6 @@
                 <option>취미</option>
                 <option>기타</option>
             </select>
-        </div>
-        <div class="category2">
             <select class="select02">
                 <option>카테고리</option>
                 <option>어학</option>
@@ -187,12 +166,16 @@
                         <span class="arrow radius-left">≫</span>
                     </td>
                     <td>     
-                        <button class="list_write_btn">모집하기</button>
+                        <button class="list_write_btn"
+                        th:onclick="'location.href=\'studyWrite\''">모집하기</button>
                     </td>
                 </tr>    
             </tfoot>
         </table>  
+        <div class="search">
+            <input type="search" class="searchbar">
+            <button class="search_btn">검색</button>
+        </div>
 
-    </div>
 </body>
 </html>

@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 public class MemberDTO implements UserDetails{
-//
+
     private Long memberNo;
     private String memberId;
     private String memberPwd;
