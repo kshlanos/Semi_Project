@@ -2,11 +2,12 @@ package com.semi.project.common;
 
 import org.springframework.data.domain.Page;
 
-/* 페이징 처리 계산용 클래스 */
+
 public class Pagenation {
 	
 	public static PagingButtonInfo getPagingButtonInfo(Page page) {
 		
+
 		int currentPage = page.getNumber() + 1;
 		int defaultButtonCount = 10;
 		int startPage;
@@ -18,9 +19,11 @@ public class Pagenation {
 		if(page.getTotalPages() < endPage)
 			endPage = page.getTotalPages();
 
+
 		if(page.getTotalPages() == 0 && endPage == 0)
 			endPage = startPage;
 		
 		return new PagingButtonInfo(currentPage, startPage, endPage);
 	}
+
 }
