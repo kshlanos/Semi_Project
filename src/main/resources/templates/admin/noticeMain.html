@@ -10,15 +10,8 @@
     <link href="../css/headerAdmin.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<!-- 여기도 충돌수정 완료~~~~~~~~~~~~~~~~~! -->
     <div th:replace="common/header.html"></div> 
-    
-    <div th:replace="common/noticeheader.html"></div> 
-    
-    	<div id="notice_write_box">
-        	<button class="notice_write_button"
-        	th:onclick="'location.href=\'registNoticeMain\''">글쓰기</button> <hr>
-        </div>
+   <div th:replace="common/noticeheader.html"></div> 
 
         <!-- 공지사항 게시판 -->
         <table class="notice_list" align="center">
@@ -31,85 +24,48 @@
                 </tr>    
             </thead>
             <tbody class="notice_list_body">
-                <tr th:each="notice : ${ noticeMain }"
-                	th:onclick="|location.href='/admin/noticeMainDetail?noticeNo=${notice.noticeNo}'|"
-                	style="cursor:pointer;">
-                    <td th:text="${ notice.noticeNo }"></td>
-                    <td th:text="${ notice.noticeTitle }"></td>
-                    <td th:text="${ notice.noticeWriter.memberNickname }"></td>
-                    <td th:text="${ notice.noticeViews }"></td>
+                <tr>
+                    <td>26</td>
+                    <td>[NOTICE] 우수 회원에 대한 안내</td>
+                    <td>관리자</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>[NOTICE] 우수 회원에 대한 안내</td>
+                    <td>관리자</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>[NOTICE] 우수 회원에 대한 안내</td>
+                    <td>관리자</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>[NOTICE] 우수 회원에 대한 안내</td>
+                    <td>관리자</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>[NOTICE] 우수 회원에 대한 안내</td>
+                    <td>관리자</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>[NOTICE] 우수 회원에 대한 안내</td>
+                    <td>관리자</td>
+                    <td>48</td>
                 </tr>
             </tbody>
             <tfoot>
                 
 
             </tfoot>
-        </table>  
-        
-		<!-- 페이징 바 -->
-		<div id="paging" align="center" style="margin-top:20px;">
-
-			<th:block th:if="${ searchValue != null }">
-				<!-- 맨 앞으로 이동 -->
-				<button
-					th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
-
-				<!-- 이전 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
-					th:disabled="${ noticeMain.first }">&lt;</button>
-
-				<!-- 숫자 버튼 -->
-				<th:block
-					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
-					<button
-						th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
-						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
-					</button>
-				</th:block>
-
-				<!-- 다음 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
-					th:disabled="${ noticeMain.last }">></button>
-
-				<!-- 맨 끝으로 이동 -->
-				<button
-					th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
-
-			</th:block>
-			
-			<!-- 검색값이 없는 경우 -->
-			<th:block th:if="${ param.searchValue == null || param.searchValue.isEmpty() }">
-				<!-- 맨 앞으로 이동 -->
-				<button
-					th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
-
-				<!-- 이전 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${paging.currentPage - 1}} + '\''"
-					th:disabled="${ noticeMain.first }">&lt;</button>
-
-				<!-- 숫자 버튼 -->
-				<th:block
-					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
-					<button
-						th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${page}} + '\''"
-						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
-					</button>
-				</th:block>
-
-				<!-- 다음 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${paging.currentPage + 1}} + '\''"
-					th:disabled="${ noticeMain.last }">></button>
-
-				<!-- 맨 끝으로 이동 -->
-				<button
-					th:onclick="'location.href=\'/admin/noticeMain?page=' + @{${paging.endPage}} + '\''">>></button>
-			</th:block>
-			
-		</div>  
+        </table>    
 
     </div>
 </body>
