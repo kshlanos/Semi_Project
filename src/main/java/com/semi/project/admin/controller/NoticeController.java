@@ -15,7 +15,7 @@ public class NoticeController {
 	public String getNoticeMain() {
 		
 		return "/admin/noticeMain";
-	}
+	}  
 	
 	
 	@GetMapping(value = {"/noticeMainDetail"})

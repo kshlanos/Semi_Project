@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController {  
 	
 	private final PasswordEncoder passwordEncoder;
     private final MessageSourceAccessor messageSourceAccessor;
