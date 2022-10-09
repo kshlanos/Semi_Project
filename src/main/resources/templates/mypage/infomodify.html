@@ -6,25 +6,25 @@
 <title>Insert title here</title>
  <link href="../css/mypage.css" rel="stylesheet" type="text/css">
  <link href="../css/header.css" rel="stylesheet" type="text/css">
+  <script>
+	    const message = '[[${message}]]';
+		message && alert(message);
+	</script>
 </head>
 <body>
      <div th:replace="common/header.html"></div> 
-
     <br><br>  
  <div class="content">
-
-    <br><br>
-    <div class="content">
         <nav class="sidebar">
             <ul class="sidebar1">
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</a></li>
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</a></li>
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1문의하기</a></li>
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</a></li>
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
+     			<li class="liinfo"><a onclick="location.href='/mypage/infomodify'"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</a></li>
+                <li class="liinfo"><a onclick="location.href='/mypage/mystudy'"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</a></li>
+                <li class="liinfo"><a onclick="location.href='/mypage/inquirycheck'"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1문의하기</a></li>
+                <li class="liinfo"><a onclick="location.href='/mypage/myboard'"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</a></li>
+                <li class="liinfo"><a onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
             </ul>
         </nav>
-        <button class="pwdbtn"><img class="pwdchbtn" src="../images/free-icon-padlock-2575570.png">비밀번호 변경</button>
+         <button onclick="location.href='/mypage/passwordchange';" class="pwdbtn"><img class="pwdchbtn" src="../images/free-icon-padlock-2575570.png">비밀번호 변경</button>
         <p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-profile-3106773.png">회원정보</p>
         <img class="userImage" src="../images/free-icon-user-149071.png">    
         <div class="infomovebtn">
@@ -33,22 +33,27 @@
         </div>
         <br><br><br>
         <p class="teamscore">팀스터디 평점 : ☆☆☆☆☆</p>
-        <br><br>
-        <form class="userinfo">
+        <br>
+        <form class="userinfo" action="/mypage/infomodify" method="post">
             <p>아이디</p>
-            <input class="userinput" tpye="text" name="userId">
-            <br><br>
+            <p th:text="${ #authentication.principal.memberId }"></p>
+            <br>
             <p>이름</p>
-            <input class="userinput" tpye="text" name="username">
-            <br><br>
+            <p th:text="${ #authentication.principal.memberName }"></p>
+            <br>
             <p>생년월일</p>
-            <input class="userinput" tpye="text" name="userbirth">
-            <br><br>
+            <p th:text="${ #authentication.principal.memberBirth }"></p>
+            <br>
             <p>닉네임</p>
-            <input class="userinput" tpye="text" name="usernickname">
+            <input class="userinput" type="text" name="memberNickname" th:value="${ #authentication.principal.memberNickname }">
             <br><br>
+            <p>우편번호</p>
+            <input class="userinput" type="text" name="zipCode" id="zipCode"
+             th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 0 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[0] : '' }"
+             readonly >
+            <input type="button" value="검색" id="searchZipCode">
+            <br>
             <p>주소</p>
-
             <input class="userinput" type="text" name="address1" id="address1"
              th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 1 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[1] : '' }" 
              readonly >
@@ -57,29 +62,42 @@
             <input class="userinput" type="text" name="address2" id="address2" 
              th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 2 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[2] : '' }" 
              >
-
-            <input class="userinput" tpye="text" name="useradress">
-
             <br><br>
             <p>e-mail</p>
-            <input class="userinput" tpye="text" name="useremail">
+            <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberEmail }">
             <div class="userbtn">
-
             <button type="submit" class="usersavebtn">수정하기</button>
-            </div> 
-        </form>      
+            </div>
+        </form>    
         <div class="userbtn">
             <button onclick="location.href='/mypage/passwordcheck';" class="userdeletebtn">회원 탈퇴</button>
         </div>
-
-            <button class="usersavebtn">저장하기</button>
-            <button class="userdeletebtn">회원탈퇴</button>
-            </div>
-        </form>
-        
-
     </div>
     
     <div th:replace="common/footer.html"></div>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	
+	    const $searchZipCode = document.getElementById("searchZipCode");
+	    const $goMain = document.getElementById("goMain");
+	
+	    $searchZipCode.onclick = function() {
+	
+	        /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+	        new daum.Postcode({
+	            oncomplete: function(data){
+	                /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+	                document.getElementById("zipCode").value = data.zonecode;
+	                document.getElementById("address1").value = data.address;
+	                document.getElementById("address2").focus();
+	            }
+	        }).open();
+	    }
+	
+	    $goMain.onclick = function() {
+	        location.href = "/";
+	    }
+	
+	</script>
 </body>
 </html>

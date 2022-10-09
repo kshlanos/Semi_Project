@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +39,7 @@
     </div>
         <!-- 게시판 -->
         
-        <table class="study_list" >
+        <table class="study_list" align="center">
             <thead class="list_head">
                 <tr>
                     <th>no</th>
@@ -49,20 +48,100 @@
                     <th>스터디이름</th>
                     <th>모집인원</th>
                     <th>마감일자</th>
-                    <th>모집현황</th>
+                    <th>현황</th>
                 </tr>
             </thead>
             <tbody class="list_body">
-                <tr th:each="board : ${ studyList }">
-                    <td th:text="${ board.studyBoardNo }"></td>
-                    <td th:text="${ board.studyCategory.studyCaName }"></td>
-                    <td class="txt_pink" th:text="${ board.studyCategory.studyCaName }"></td>
-                    <td th:text="${ board.studyId }"></td>
-                    <td th:text="${ board.recruits }"></td>
-                    <td th:text="${ board.closingDate }"></td>
-                    <td th:text="${ board.studyCondition }"></td>
+                <tr>
+                    <td>10</td>
+                    <td>어학</td>
+                    <td class="txt_pink">영어</td>
+                    <td>[종로]퇴근하고 같이 영어 공부 하실분들! </td>
+                    <td>4</td>
+                    <td>22.09.19</td>
+                    <td class="recruitbtn"><span>모집중</span></a></td>
                 </tr>
-              
+                <tr>
+                    <td>9</td>
+                    <td>운동</td>
+                    <td class="txt_pink">달리기</td>
+                    <td>[강서구]평일 같이 런데이 하실분들 😎 </td>
+                    <td>5</td>
+                    <td>22.10.30</td>
+                    <td class="gobtn"><span>진행중</span></a></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>자격증</td>
+                    <td class="txt_pink">공인중개사</td>
+                    <td>[온라인] 매일매일 공부해요! 공인중개사 준비!!! </td>
+                    <td>4</td>
+                    <td>22.08.30</td>
+                    <td class="endbtn"><span>종료</span></a></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>어학</td>
+                    <td class="txt_pink">영어</td>
+                    <td>[종로]퇴근하고 같이 영어 공부 하실분들! </td>
+                    <td>4</td>
+                    <td>22.09.19</td>
+                    <td class="recruitbtn"><span>모집중</span></a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>운동</td>
+                    <td class="txt_pink">달리기</td>
+                    <td>[강서구]평일 같이 런데이 하실분들 😎 </td>
+                    <td>5</td>
+                    <td>22.10.30</td>
+                    <td class="gobtn"><span>진행중</span></a></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>자격증</td>
+                    <td class="txt_pink">공인중개사</td>
+                    <td>[온라인] 매일매일 공부해요! 공인중개사 준비!!! </td>
+                    <td>4</td>
+                    <td>22.08.30</td>
+                    <td class="endbtn"><span>종료</span></a></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>어학</td>
+                    <td class="txt_pink">영어</td>
+                    <td>[종로]퇴근하고 같이 영어 공부 하실분들! </td>
+                    <td>4</td>
+                    <td>22.09.19</td>
+                    <td class="recruitbtn"><span>모집중</span></a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>운동</td>
+                    <td class="txt_pink">달리기</td>
+                    <td>[강서구]평일 같이 런데이 하실분들 😎 </td>
+                    <td>5</td>
+                    <td>22.10.30</td>
+                    <td class="gobtn"><span>진행중</span></a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>자격증</td>
+                    <td class="txt_pink">공인중개사</td>
+                    <td>[온라인] 매일매일 공부해요! 공인중개사 준비!!! </td>
+                    <td>4</td>
+                    <td>22.08.30</td>
+                    <td class="endbtn"><span>종료</span></a></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>자격증</td>
+                    <td class="txt_pink">공인중개사</td>
+                    <td>[온라인] 매일매일 공부해요! 공인중개사 준비!!! </td>
+                    <td>4</td>
+                    <td>22.08.30</td>
+                    <td class="endbtn"><span>종료</span></a></td>
+                </tr>
             </tbody>
 
             <!-- 페이징처리 -->
