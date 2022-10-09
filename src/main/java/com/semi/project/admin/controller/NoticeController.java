@@ -25,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/admin")
 public class NoticeController {
 	
+	/* commit test */
 	private final NoticeService noticeService;
 //	private final UserService userService;
 	
@@ -46,6 +47,7 @@ public class NoticeController {
 		
 		return "admin/noticeMain";
 	}
+	
 	
 	/* 공지사항 게시글 상세 조회 controller */
 	@GetMapping(value = {"/noticeMainDetail"})
