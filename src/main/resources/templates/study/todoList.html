@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>todoList</title>
+<link rel="stylesheet" th:href="@{/css/todoList.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+    <!-- 팝업창으로 생성 -->
+
+    <h1 align="center">Todo List 조회</h1>
+
+    <h th:text="${ todoList.todoListStartDate }"></h>
+	<p>2022-22-22</p>
+    
+    <div class="todo-form">
+
+		<th:block th:if="${ todoList.todoListSort == 'C' || todoList.todoListSort == 'SC'}">
+		<div id="certified-form">
+			<p>인증 조건</p>
+			<p th:text="${ todoList.certified.certifiedExplain }"></p>
+		</div>
+		</th:block>
+		
+		<th:block th:if="${ todoList.todoListSort == 'S' || todoList.todoListSort == 'SC'}">
+		<div id="stopwatch-form">
+		<p th:text="${ todoList.stopwatch.stopwatchTime }"></p>
+		</div>
+		</th:block>		
+				
+
+		<button>스톱워치</button>
+		<button id="todoModify-btn">수정 하기</button>
+		<p id="startDate" th:text="${ todoList.todoListStartDate }"></p>
+		<p id="todoListId" th:text="${ todoList.todoListId }"></p>
+		
+	</div>
+
+    
+    <!-- 
+    <table>
+    	<tr th:each="todo : ${ todoList }">
+			<td th:text="${ todo.todoListId }"></td>
+			<td th:text="${ todo.todoListStartDate }"></td>
+			<td th:text="${ todo.studyId }"></td>
+			<td th:text="${ todo.todoListEndDate }"></td>
+			<td th:text="${ todo.todoListUpdDate }"></td>
+			<td th:text="${ todo.todoListDelStatus }"></td>
+		</tr>
+	</table>
+	 -->
+
+    <script src="/js/todoList.js"></script>
+    
+</body>
+</html>
