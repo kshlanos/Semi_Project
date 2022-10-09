@@ -19,6 +19,8 @@ import com.semi.project.login.controller.LoginController;
 import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.login.service.AuthenticationService;
 import com.semi.project.login.service.MemberService;
+import com.semi.project.mypage.dto.InquiryDTO;
+import com.semi.project.mypage.service.InquiryService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,12 +34,15 @@ public class MypageController {
     private final MessageSourceAccessor messageSourceAccessor;
     private final MemberService memberService;
     private final AuthenticationService authenticationService;
+    private final InquiryService inquiryService;
+
   
-    public MypageController(MessageSourceAccessor messageSourceAccessor, MemberService memberService, PasswordEncoder passwordEncoder, AuthenticationService authenticationService) {
+    public MypageController(MessageSourceAccessor messageSourceAccessor, MemberService memberService, PasswordEncoder passwordEncoder, AuthenticationService authenticationService, InquiryService inquiryService) {
         this.messageSourceAccessor = messageSourceAccessor;
         this.memberService = memberService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationService = authenticationService;
+        this.inquiryService = inquiryService;
     }
 	
 	@GetMapping("/infomodify")
@@ -111,6 +116,21 @@ public class MypageController {
 	public String getwriteInquiry() {
 		
 		return "mypage/inquirywrite";
+	}
+	
+	@PostMapping("/inquirywrite")
+	public String inquiryBoard(InquiryDTO inquiry, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
+		
+		log.info("[MypageController] ==========");
+		log.info("[MypageController] inquiryBoard request : {}", inquiry);
+		log.info("[MypageController] inquiryBoard request : {}", member);
+		
+		inquiry.setMember(member);
+		inquiryService.inquiryBoard(inquiry);
+		
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("mypage.inquirywrite"));
+		
+		return "redirect:/mypage/inquirycheck";
 	}
 	
 	@GetMapping("/inquirymodify")
