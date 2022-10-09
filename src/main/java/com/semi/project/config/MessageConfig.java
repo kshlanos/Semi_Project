@@ -10,7 +10,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 public class MessageConfig {
 
 	@Bean
-	public MessageSource messageSource() {
+	public MessageSource messageSource() {  
 		
 		ReloadableResourceBundleMessageSource messageSource 
 			= new ReloadableResourceBundleMessageSource();
@@ -21,7 +21,7 @@ public class MessageConfig {
 		return messageSource;
 	}
 	
-	@Bean
+	@Bean  
 	public MessageSourceAccessor messageSourceAccessor() {
 		return new MessageSourceAccessor(messageSource());
 	}
