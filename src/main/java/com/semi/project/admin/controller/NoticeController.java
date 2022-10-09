@@ -46,7 +46,7 @@ public class NoticeController {
 		
 		return "admin/noticeMain";
 	}
-	
+	/* 으아아으 아으아 ㅡㄴ뉴브렌치으아ㅣㅓㅏㅣ */
 	/* -------- */
 	/* 공지사항 게시글 상세 조회 controller */
 	@GetMapping(value = {"/noticeMainDetail"})
