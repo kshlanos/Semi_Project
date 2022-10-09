@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 
-@Data  
+@Data
 public class MemberDTO implements UserDetails{
- 
+
     private Long memberNo;
     private String memberId;
     private String memberPwd;
@@ -25,7 +25,7 @@ public class MemberDTO implements UserDetails{
     private String memberEmail;
     private String memberRating;
     private String memberStatus;
-    private Date memberDeletedate; 
+    private Date memberDeletedate;
     private String memberRole;
     
   
