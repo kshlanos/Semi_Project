@@ -25,7 +25,7 @@ public class MemberDTO implements UserDetails{
     private String memberEmail;
     private String memberRating;
     private String memberStatus;
-    private Date memberDeletedate;
+    private Date memberDeletedate; 
     private String memberRole;
     
   
