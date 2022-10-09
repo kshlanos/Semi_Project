@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+</head>
+<body>
+  <style>
+    * {
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+  
+}
+
+body {
+  margin:0;
+ 
+}
+    
+.login-img {
+  
+  width: 400px;
+  height: 150px;
+  object-fit: cover;
+  
+  
+}
+
+.form {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+  
+}
+
+.form  input:focus {
+
+    outline:1px solid #E97486;
+    border: none;
+}
+  
+
+.submitBtn {
+
+  font-size: 14px;
+  border: none;
+  padding: 10px;
+  width: 150px;
+  background-color: #E97486;
+  color: white;
+
+}
+
+.cancelBtn {
+
+  font-size: 14px;
+  border: none;
+  margin-left: 20px;
+  padding: 10px;
+  width: 150px;
+  background-color: #E97486;
+  margin-top: 30px;
+  color: white;
+
+}
+.id , .password, .user_name, .nickname, .email, .email-check ,.phone {
+  font-size: 12px;
+  padding: 10px;
+  border:1px solid #9B9B9B;
+  width: 220px;
+  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.year, .month, .day {
+  font-size: 12px;
+  padding: 10px;
+  border:1px solid #9B9B9B;
+  width: 120px;
+  margin-bottom: 10px;
+  
+}
+
+.id_btn, .email-dcheck {
+  border: none;
+  background-color: #E97486;
+  width: 100px;
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 14px;
+  color: white;
+}
+
+.password-check, .email-push{
+
+  border: none;
+  background-color: #E97486;
+  width: 120px;
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 14px;
+  color: white;
+
+}
+
+.adress {
+
+  font-size: 12px;
+  padding: 10px;
+  border:1px solid #9B9B9B;
+  width: 260px;
+  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+  </style>
+  
+    <div style="text-align : center">
+        <a href="/main">
+            <img class="login-img" src="../images/logo.png" alt="HOME" >
+        </a>
+    </div>
+    <form name="login" class="form" style="margin-top: 80px">
+      
+      아이디<br>
+      <input type="text" class="id" name="user_ID" placeholder="아이디 입력" >
+      <input type="button" class="id_btn" name="user_IDcheck" value="아이디 확인">
+      <br>
+      비밀번호<br> 
+      <input type="password" class="password" name="user_PW1" value="123456"><br>
+      비밀번호 재확인<br> 
+      <input style="margin-bottom: 0px" type="password" class="password" name="user_PW2" value="123456">
+      <input  type="button" name="user_PWcheck" class="password-check" value="비밀번호 재확인"><br>
+      <span class=""style="font-size: 10px;" >10-16자리</span><br>
+  
+      이름<br>  <input type="text" name="user_name" class="user_name" value="아무개">
+      <br>생년월일<br> 
+      <select name="year" class="year">
+        <option value="">-- 선택 --</option>
+        <option value="1995">1995</option>
+        <option value="1996">1996</option>
+        <option value="1997">1997</option>
+        <option value="1998">1998</option>
+        <option value="1999">1999</option>
+        <option value="2000">2000</option>
+      </select>
+      <select name="month" class="month">
+        <option value="">-- 선택 --</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      <select name="day" class="day">
+        <option value="">-- 선택 --</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+      </select>
+      <br>
+      성별<br>  
+      <label for="man">남자</label>
+      <input type="radio" name="gender" value="m" id="man" class="gender">
+      <label for="woman">여자</label>
+      <input style="margin-bottom : 15px;" type="radio" name="gender" value="m" id="woman" class="gender"><br>
+
+	  주소<br>  
+      <input type="text" class="adress" name="address" placeholder="서울시 은평구 구산동">
+      <input type="button" class="email-push" name="adressFind" value="주소 찾기"><br>
+	  
+      닉네임<br>  
+      <input type="text" class="nickname" name="user-nickname" placeholder="아무개"><br>
+
+      이메일<br><input type="email" class="email" name="user_email" placeholder="email@gmail.com">
+      <input type="button" class="email-push" name="certification" value="인증번호 받기"><br>
+      <input type="text" class="email-check" name="certification" placeholder="인증번호를 입력하세요">
+      <input type="button" class="email-dcheck" name="certification" value="확인"><br>
+      
+      휴대전화<br>  
+      <input type="text" class="phone" name="user_phone" placeholder="010-****-****"><br>
+      <br><br>
+      
+      <button type="submit" class="submitBtn">회원가입</button>
+      <button type="reset" class="cancelBtn">취소</button>
+      
+    </form>
+    
+   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	
+	    const $searchZipCode = document.getElementById("searchZipCode");
+	    const $goMain = document.getElementById("goMain");
+	
+	    $searchZipCode.onclick = function() {
+	
+	        /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+	        new daum.Postcode({
+	            oncomplete: function(data){
+	                /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+	                document.getElementById("zipCode").value = data.zonecode;
+	                document.getElementById("address1").value = data.address;
+	                document.getElementById("address2").focus();
+	            }
+	        }).open();
+	    }
+	
+	    $goMain.onclick = function() {
+	        location.href = "/";
+	    }
+	
+	</script>
+  
+  
+</body>
+</html>

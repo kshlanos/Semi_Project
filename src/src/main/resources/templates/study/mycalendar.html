@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>mycalendar</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/mycalendar.css}">
+</head>
+<body>
+	<a onclick="location.href='/study/confirm'">인증 게시판</a>
+    <a onclick="location.href='/study/studycalendar'">스터디 일정</a>
+    <a onclick="location.href='/study/mycalendar'">나의 출석체크</a>
+
+    <div>
+        <table>
+          <thead>
+            <tr><th data-selected="full-date" colspan="7"></th></tr>
+            <tr>
+               <th>일</th>
+               <th>월</th>
+               <th>화</th>
+               <th>수</th>
+               <th>목</th>
+               <th>금</th>
+               <th>토</th>
+            </tr>
+          </thead>
+          <tdata>
+            <tr>
+            </tr>
+           
+          </tdata>
+        </table>
+        <div class="actions">
+        <div class="next-button" onclick="changeMonth('prev')"><</div>
+        <div class="prev-button" onclick="changeMonth('next')">></div> 
+        </div>
+        <div class="actions-2">
+        <div onclick="changeMonth('prev')">prev</div>
+        <div onclick="changeMonth('next')">next</div> 
+        </div>
+      </div>
+      <script src="/js/mycalendar.js"></script>
+</body>
+</html>

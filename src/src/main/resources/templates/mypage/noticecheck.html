@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <link href="../css/mypage.css" rel="stylesheet" type="text/css">
+ <link href="../css/header.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div th:replace="common/header.html"></div> 
+    <br><br>
+    <div class="content">
+        <nav class="sidebar">
+            <ul class="sidebar1">
+                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</a></li>
+                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</a></li>
+                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1문의하기</a></li>
+                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</a></li>
+                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
+            </ul>
+        </nav>
+        <p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-school-bell-3471582.png">알림</p>
+        <table class="menutable">
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>등록일</th>
+                <th>작성자</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>html, css 너무어려워요 도와주세요 ㅠㅠ</td>
+                <td>2022-10-01</td>
+                <td>홍길동</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>html, css 꿀팁</td>
+                <td>2022-10-01</td>
+                <td>유관순</td>
+            </tr>
+        </table>
+        <div class="page-wrap">
+            <ul class="page-nation">
+                <li><a href="/board/list?p=1">1</a></li>
+                <li><a href="/board/list?p=2">2</a></li>
+                <li><a href="/board/list?p=3">3</a></li>
+                <li><a href="/board/list?p=4">4</a></li>
+                <li><a href="/board/list?p=5">5</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
