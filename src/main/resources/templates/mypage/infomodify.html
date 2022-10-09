@@ -57,7 +57,7 @@
             <input class="userinput" type="text" name="address1" id="address1"
              th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 1 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[1] : '' }" 
              readonly >
-            <br>
+            <br>  
             <p>상세 주소</p>
             <input class="userinput" type="text" name="address2" id="address2" 
              th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 2 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[2] : '' }" 
