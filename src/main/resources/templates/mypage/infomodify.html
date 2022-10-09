@@ -44,16 +44,36 @@
             <input class="userinput" tpye="text" name="usernickname">
             <br><br>
             <p>주소</p>
+
+            <input class="userinput" type="text" name="address1" id="address1"
+             th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 1 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[1] : '' }" 
+             readonly >
+            <br>  
+            <p>상세 주소</p>
+            <input class="userinput" type="text" name="address2" id="address2" 
+             th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 2 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[2] : '' }" 
+             >
+
             <input class="userinput" tpye="text" name="useradress">
+
             <br><br>
             <p>e-mail</p>
             <input class="userinput" tpye="text" name="useremail">
             <div class="userbtn">
+
+            <button type="submit" class="usersavebtn">수정하기</button>
+            </div> 
+        </form>      
+        <div class="userbtn">
+            <button onclick="location.href='/mypage/passwordcheck';" class="userdeletebtn">회원 탈퇴</button>
+        </div>
+
             <button class="usersavebtn">저장하기</button>
             <button class="userdeletebtn">회원탈퇴</button>
             </div>
         </form>
         
+
     </div>
     
     <div th:replace="common/footer.html"></div>
