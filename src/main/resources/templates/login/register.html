@@ -224,31 +224,7 @@ body {
       <button type="reset" class="cancelBtn">취소</button>
       
     </form>
-    
-   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
-	
-	    const $searchZipCode = document.getElementById("searchZipCode");
-	    const $goMain = document.getElementById("goMain");
-	
-	    $searchZipCode.onclick = function() {
-	
-	        /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
-	        new daum.Postcode({
-	            oncomplete: function(data){
-	                /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
-	                document.getElementById("zipCode").value = data.zonecode;
-	                document.getElementById("address1").value = data.address;
-	                document.getElementById("address2").focus();
-	            }
-	        }).open();
-	    }
-	
-	    $goMain.onclick = function() {
-	        location.href = "/";
-	    }
-	
-	</script>
+  
   
   
 </body>
