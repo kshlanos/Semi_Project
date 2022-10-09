@@ -7,7 +7,7 @@ spring:
   datasource:
 #    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@192.168.219.100:1521:xe
+    url: jdbc:oracle:thin:@localhost:1521:xe
     username : C##DOBEBEST
     password : DOBEBEST
     hikari:

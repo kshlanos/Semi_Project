@@ -12,18 +12,17 @@ public class DetailController {
 	@GetMapping("/confirm")
 	public void confirm() {}
 	
-	@GetMapping("/mycalendar")
-	public void mycalendar() {}
+	@GetMapping("/myCalendar")
+	public void myCalendar() {}
 	
-	@GetMapping("/studycalendar")
-	public void studycalendar() {}
+	@GetMapping("/studyCalendar")
+	public void studyCalendar() {}
 	
 	@GetMapping("/certified")
 	public void certified() {}
 	
 	@GetMapping("/stopwatch")
 	public void stopwatch() {}
-	
 	
 	
 }
