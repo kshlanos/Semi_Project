@@ -10,7 +10,7 @@ public class noticeController {
 	
 	@GetMapping("noticeMain")
 	public String getNoticeMain() {
-		
+		  
 		return "admin/noticeMain";
 	}
 	
