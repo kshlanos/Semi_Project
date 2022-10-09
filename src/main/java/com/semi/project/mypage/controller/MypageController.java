@@ -22,6 +22,7 @@ import com.semi.project.login.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
+/* 테스트 */
 @Controller
 @Slf4j
 @RequestMapping("/mypage")
