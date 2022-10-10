@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.semi.project.admin.dto.NoticeDTO;
 import com.semi.project.admin.service.NoticeService;
+import com.semi.project.admin.service.UserService;
 //import com.semi.project.admin.service.UserService;
 import com.semi.project.common.Pagenation;
 import com.semi.project.common.PagingButtonInfo;
+import com.semi.project.login.dto.MemberDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,11 +29,11 @@ public class NoticeController {
 	
 	/* commit test */
 	private final NoticeService noticeService;
-//	private final UserService userService;
+	private final UserService userService;
 	
-	public NoticeController(NoticeService noticeService/*, UserService userService*/) {
+	public NoticeController(NoticeService noticeService, UserService userService) {
 		this.noticeService = noticeService;
-//		this.userService = userService;
+		this.userService = userService;
 	}
 	
 	@GetMapping(value = {"/noticeMain"})
@@ -105,17 +107,25 @@ public class NoticeController {
 	/* 회원 관리 기능 구현 */
 	
 	@GetMapping(value = {"/userListAdmin"})
-	public String getUserListAdmin(/*@RequestParam(defaultValue="1") int page, @RequestParam(required=false) String searchValue, Model model*/) {
-//		Page<MemberDTO> userList = userService.selectUserList(page, searchValue);
-//		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(userList);
-//		
-//		model.addAttribute("userList", userList);
-//		model.addAttribute("paging", paging);
+	public String getUserListAdmin(@RequestParam(defaultValue="1") int page, @RequestParam(required=false) String searchValue, Model model) {
+		Page<MemberDTO> userList = userService.selectUserList(page, searchValue);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(userList);
+		
+		log.info("[UserController] ==============");
+		log.info("[UserController] param page : {}", page);
+		log.info("[UserController] param searchValue : {}", searchValue);
+		log.info("[UserController] ==============");
+		
+		
+		model.addAttribute("userList", userList);
+		model.addAttribute("paging", paging);
+		
+		log.info("[UserController] userList : {}", userList);
 //		
 //		if(searchValue != null && !searchValue.isEmpty()) {
 //			model.addAttribute("searchValue", searchValue);
 //		}
-
+		
 		return "/admin/userListAdmin";
 	}
 
