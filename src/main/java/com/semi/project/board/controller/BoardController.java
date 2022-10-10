@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.semi.project.board.dto.BoardDTO;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequestMapping("/board")
 public class BoardController {
 	
 	private final BoardService boardService;
@@ -47,7 +49,7 @@ public class BoardController {
 		return "board/studyList";
 	}
 	
-	@GetMapping("/detail")
+	@GetMapping("/detailMember")
 	public String selectDetailMember(Model model, String studyBoardNo) {
 		
 		log.info("[BoardController] ========================================= ");

@@ -26,6 +26,9 @@ public class BoardDTO {
 	private String studyBoardNo;
 	private MemberDTO memberNo;
 	private String studyCondition;
+	private String studyTitle;
+	private String studyName;
+	private int boardCount;
 	
 }
 

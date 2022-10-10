@@ -18,8 +18,8 @@ import com.semi.project.board.repository.BoardRepository;
 public class BoardService {
 	
 	public static final int TEXT_PAGE_SIZE = 10; 
-	public static final String SORT_BY = "StudyBoardNo";
-	public static final char ACTIVE_STATUS = 'Y';
+	public static final String SORT_BY = "studyBoardNo";
+	public static final char ACTIVE_STATUS = 'N';
 
 	private final BoardRepository boardRepository;
 	private final ModelMapper modelMapper;
@@ -49,7 +49,8 @@ public class BoardService {
 	public BoardDTO selectDetailMember(String studyBoardNo) {
 		
 		Board board = boardRepository.findByStudyBoardNoAndStudyStatus(studyBoardNo, ACTIVE_STATUS);
-				
+		board.setBoardCount(board.getBoardCount() + 1);
+		
 		return modelMapper.map(board, BoardDTO.class);
 	}
 
