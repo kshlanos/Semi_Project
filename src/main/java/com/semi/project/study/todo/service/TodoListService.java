@@ -34,11 +34,11 @@ public class TodoListService {
 
 	public List<TodoListDTO> selectTodoList(Date todoListStartDate) {
 
+		log.info("[TodoService] todoListStartDate : {}",todoListStartDate);
         
 		List<TodoList> todoList = todoListRepository.findAllBytodoListStartDate(todoListStartDate);
 		
-		log.info("[TodoService] todoListStartDate : {}",todoListStartDate);
-		log.info("[TodoService] todoListStartDate : {}",todoList);
+		log.info("[TodoService] todoList : {}",todoList);
 		
 		return todoList.stream().map(todo -> modelMapper.map(todo, TodoListDTO.class)).collect(Collectors.toList());
 	}
@@ -47,6 +47,21 @@ public class TodoListService {
 
 		TodoList todoList = todoListRepository.findBytodoListId(todoListId);
 		todoList.getCertified().setCertifiedExplain(certifiedExplain);
+		todoList.getStopwatch().setStopwatchTime(stopwatchTime);
+		
+	}
+
+	public List<TodoListDTO> selectStopwatch(String todoListId) {
+		
+		List<TodoList> todoList = todoListRepository.findStopwatchBytodoListId(todoListId);
+		
+		return todoList.stream().map(todo -> modelMapper.map(todo, TodoListDTO.class)).collect(Collectors.toList());
+		
+	}
+
+	public void playStopwatch(Long stopwatchTime, String todoListId) {
+
+		TodoList todoList = todoListRepository.findBytodoListId(todoListId);
 		todoList.getStopwatch().setStopwatchTime(stopwatchTime);
 		
 	}

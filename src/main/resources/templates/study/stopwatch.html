@@ -6,19 +6,25 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/stopwatch.css}">
 </head>
 <body>
-    <a onclick="location.href='/study/confirm'">인증 게시판</a>
-    <a onclick="location.href='/study/studyCalendar'">스터디 일정</a>
-    <a onclick="location.href='/study/myCalendar'">나의 출석체크</a>
 
         <h1 align="center">공부 타이머</h1>
     <div class="stopwatch">
         <h5>2022.02.22</h5>
+        <h1>
+            <span id="hour">00</span>:<span id="minute">00</span>:<span id="seconds">00</span>
+        </h1>
+        
+        <p id="originTime" th:text="${ todoList.stopwatch.stopwatchTime }"></p>
         <div id="stopwatch-button">
-            <button class="pause">일시정지</button>
-            <button class="cancel" oncl1ick="location.href='studyCalendar.html'">뒤로가기</button>
+            <button id="start-btn">재생하기</button>
+            <button id="pause-btn">일시정지</button>
         </div>
     </div>
+    <form method="POST" th:action>
+        <input id="result" name="stopwatchTime">
+        <button id="save" type="submit">저장하고 나가기</button>
+    </form>
 
-    <script src="/js/stopwath.js"></script>
+    <script src="/js/stopwatch.js"></script>
 </body>
 </html>

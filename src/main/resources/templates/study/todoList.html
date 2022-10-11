@@ -13,7 +13,6 @@
     <h1 align="center">Todo List 조회</h1>
 
     <h th:text="${ todoList.todoListStartDate }"></h>
-	<p>2022-22-22</p>
     
     <div class="todo-form">
 
@@ -31,10 +30,10 @@
 		</th:block>		
 				
 
-		<button>스톱워치</button>
+		<button id="stopwatch">스톱워치</button>
 		<button id="todoModify-btn">수정 하기</button>
-		<p id="startDate" th:text="${ todoList.todoListStartDate }"></p>
-		<p id="todoListId" th:text="${ todoList.todoListId }"></p>
+		<p id="startDate" th:text="${ todoList.todoListStartDate }" style="display:none;"></p>
+		<p id="todoListId" th:text="${ todoList.todoListId }" style="display:none;"></p>
 		
 	</div>
 
