@@ -21,17 +21,15 @@
     <div>
         <table class="detail_table">
             <tr>
-                <td class="detail_category">어학</td>
+                <td class="detail_category" th:text="${ board.category.studyCaName }"></td>
                 <td colspan="3" rowspan="3">프로필사진</td>
                 <td colspan="3" rowspan="3">바보다바보</td>
             </tr>
             <tr>
-                <td class="detail_title">
-                    [영등포] 영어로 대화하는 모임 😎 즐겁게 공부해요!
-                </td>
+                <td class="detail_title" th:text="${ board.studyTitle "></td>
             </tr>
             <tr>
-                <td class="detail_info">
+                <td class="detail_info" th:text="${ board.studyRegDate } + ' / 조회수 ' + ${ board.boardCount } + '회'">
                     2022.09.17  / 조회수 110
                 </td>
             </tr>
@@ -39,45 +37,40 @@
         <table class="contents_category">
             <tr>
                 <td class="con_info1">스터디명</td>
-                <td class="con_info2">영어대화 모임</td>
+                <td class="con_info2" th:text="${ board.studyName }"></td>
             </tr>
             <tr>
                 <td class="con_info1">카테고리1</td>
-                <td class="con_info2">어학</td>
+                <td class="con_info2"th:text="${ board.category.studyCaName }"></td>
             </tr>
             <tr>
                 <td class="con_info1">카테고리2</td>
-                <td class="con_info2">영어</td>
+                <td class="con_info2"th:text="${ board.category.studyCaName }"></td>
             </tr>
             <tr>
                 <td class="con_info1">태그</td>
-                <td class="con_info2">#영어로말해요 #회화 #오프라인</td>
+                <td class="con_info2" th:text="${ board.studyTag }"></td>
             </tr>
             <tr>
                 <td class="con_info1">모집 마감일자</td>
-                <td class="con_info2">2022.10.15</td>
+                <td class="con_info2" th:text="${ board.closingDate }"></td>
             </tr>
             <tr>
                 <td class="con_info1">목표 진행일수</td>
-                <td class="con_info3">6개월</td>
+                <td class="con_info3" th:text="${ board.targetDay }"></td>
             </tr>
             <tr>
                 <td class="con_info1">모집 인원</td>
-                <td class="con_info3">6명</td>
+                <td class="con_info3" th:text="${ board.recruits }"></td>
             </tr>
             <tr>
                 <td class="con_info1">장소</td>
-                <td class="con_info3">영등포</td>
+                <td class="con_info3" th:text="${ board.studyPlace }"></td>
             </tr>
         </table>
         <table class="contents">
             <tr>
-                <td class="con_info4">
-                    야 너두 할수있어!! 😎😎 <br><br>
-                    영어로 말하는 스터디를 진행하려고 합니다 :) <br><br>
-                    영어만 하려고 하면 떨리는 분들! 영어 말하기 연습이 필요하신 분들! <br><br>
-                    누구나 환영! 퇴근하고 저녁에 모여서 편안하게 영어로 말하기 연습하면서 공부해요~!
-                </td>
+                <td class="con_info4" th:text="${ board.studyContent }"></td>
             </tr>
         </table>
 
