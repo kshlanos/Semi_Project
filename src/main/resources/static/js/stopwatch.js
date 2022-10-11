@@ -50,10 +50,5 @@ function stopwatch() {
 document.querySelector('#save').addEventListener('click', function() {
 	
 	$('#save').submit();
-         setTimeout(function() { 
-			 self.opener = self;  
-             window.close();
-
-          }, 100);
 
 });

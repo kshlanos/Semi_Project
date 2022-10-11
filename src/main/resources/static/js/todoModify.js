@@ -43,11 +43,7 @@ document.querySelector('#todoModify-btn').addEventListener('click', function() {
 	(parseInt(document.querySelector('#stopwatch-minute').value)*60);
 	
 	$('#todoModify-btn').submit();
-         setTimeout(function() { 
-			 self.opener = self;  
-             window.close();
-
-          }, 100);
+       
 
 });				// 창이 안닫히는 문제 발생.. 보안상의 문제라고함
 

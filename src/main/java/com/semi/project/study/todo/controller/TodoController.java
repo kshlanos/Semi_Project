@@ -81,7 +81,7 @@ public class TodoController {
 		todoListService.modifyTodoList(certifiedExplain, stopwatchTime, todoListId);
 
 		
-		return "redirect:/study/studyCalendar";
+		return "/study/close";
 	}
 	
 	@GetMapping("/stopwatch")
@@ -104,7 +104,7 @@ public class TodoController {
 		
 		todoListService.playStopwatch(stopwatchTime, todoListId);
 		
-		return "redirect:/study/studyCalendar";
+		return "/study/close";
 	}
 	
 }
