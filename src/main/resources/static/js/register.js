@@ -89,7 +89,7 @@ window.onload = function() {
 				$("#passwordCheck").attr('color','red');
 		  
 		 	}else {
-				$("#passwordCheck").html("적정한 비밀번호입니다.");
+				$("#passwordCheck").html("적절한 비밀번호입니다.");
 				$("#passwordCheck").attr('color','green');
 				
 			if($password == $passwordConfirm) {
