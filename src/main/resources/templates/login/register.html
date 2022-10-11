@@ -10,7 +10,7 @@
      <script>
 	    const message = '[[${message}]]';
 		message && alert(message);
-	</script>
+	 </script>
 </head>
 <body>
   <style>
@@ -134,7 +134,7 @@ body {
     <form class="form" style="margin-top: 80px" action="/login/register" method="post">
    
       아이디<br>
-      <input style="margin-bottom: 0px" type="text" class="id" name="memberId" id="memberId" placeholder="아이디 입력" required >
+      <input style="margin-bottom: 0px" type="text" class="id" name="memberId" id="memberId" placeholder="아이디 입력" required autofocus>
       <input type="button" class="id_btn" value="아이디 확인" id="duplicationCheck" ><br>
       <font id ="memberIdCheck" size="2"></font><br>
       비밀번호<br> 
@@ -146,7 +146,7 @@ body {
       <input  type="button" name="memberPwdCheckBtn" id="memberPwdCheckBtn" class="password-check" value="비밀번호 재확인"  onchange="check_pw()"><br>
       <font id ="checkPw" size ="2"></font><br>
   
-      이름<br>  <input type="text" name="user_name" class="user_name" value="아무개" required>
+      이름<br>  <input type="text" name="memberName" class="user_name" value="아무개" required>
       
       <br>생년월일<br>
       <select name="year" id="year" class="year">
@@ -156,15 +156,14 @@ body {
       <select name="day" id="day" class="day">
       </select>
       <br>
-      
       휴대전화<br>  
-      <input type="text" class="phone" name="memberPhone" placeholder="010-****-****"><br>
+      <input type="text" class="phone" name="memberPhone" placeholder="010-****-****" required><br>
       
       성별<br>  
       <label for="man">남자</label>
-      <input type="radio" name="gender" value="m" id="man" class="gender">
+      <input type="radio" name="memberGender" value="남" id="man" class="gender">
       <label for="woman">여자</label>
-      <input style="margin-bottom : 15px;" type="radio" name="gender" value="m" id="woman" class="gender"><br>
+      <input style="margin-bottom : 15px;" type="radio" name="memberGender" value="여" id="woman" class="gender"><br>
 
 	  우편번호<br>  
       <input type="text" class="adress" name="zipCode" id="zipCode" placeholder="서울시 은평구 구산동">
@@ -177,10 +176,10 @@ body {
       닉네임<br>  
       <input type="text" class="nickname" name="memberNickname" placeholder="아무개"><br>
 
-      이메일<br><input type="email" class="email" name="memberEmail" placeholder="email@gmail.com">
-      <input type="button" class="email-push" name="certification" value="인증번호 받기"><br>
-      <input type="text" class="email-check" name="certification" placeholder="인증번호를 입력하세요">
-      <input type="button" class="email-dcheck" name="certification" value="확인"><br>
+      이메일<br><input type="email" class="email" name="memberEmail" id="memberEmail" placeholder="email@gmail.com">
+      <input type="button" class="email-push" name="checkEmail" id="checkEmail" value="인증번호 받기"><br>
+      <input type="text" class="email-check" name="memailconfirm" id="memailconfirm" placeholder="인증번호를 입력하세요"><br>
+      <font size="2" name="memailconfirmTxt" id="memailconfirmTxt"></font><br>
     
       
       <button type="submit" class="submitBtn" id="register">회원가입</button>
@@ -234,26 +233,27 @@ body {
 	        $('#day').append('<option value="' + dd + '">' + dd+ '</option>');    
 	    }
 	  
-	    const $year=document.getElementById("year").value
-	    const $month=document.getElementById("month").value
-	    const $day=document.getElementById("day").value
+	    const $year = document.getElementById("year").value;
+	    const $month = document.getElementById("month").value;
+	    const $day = document.getElementById("day").value;
+	    
 
 	})
 	</script>
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script>
-		// 이메일 인증번호
+	// 이메일 인증번호
 	$(document).ready(function(){    
-	var $memail = $("#memail");
+	var $memail = $("#memberEmail");
 	var $checkEmail = $("#checkEmail"); // 인증번호 발송 버튼
-	var $memailconfirm = $("#memailconfirm"); // 인증번호 확인input
+	var $memailconfirm = $("#memailconfirm"); // 인증번호 확인 input
 	var $memailconfirmTxt = $("#memailconfirmTxt"); // 인증번호 확인 txt
 	
 	$checkEmail.click(function() {
 
    $.ajax({
       type : "POST",
-      url : "/regist/mailConfirm",
+      url : "/login/mailConfirm",
       data : {
          "email" : $memail.val()
       },

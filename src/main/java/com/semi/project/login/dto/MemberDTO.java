@@ -29,6 +29,7 @@ public class MemberDTO implements UserDetails{
     private String memberRole;
     private Long memberRatingCount;
     private Long memberPhone;
+    private String memberGrade;
  
     @Override
     public String toString() {
@@ -48,6 +49,7 @@ public class MemberDTO implements UserDetails{
                 ", memberRole='" + memberRole + '\'' +
                 ", memberRatingCount='" + memberRatingCount + '\'' +
                 ", memberPhone='" + memberPhone + '\'' +
+                ", memberGrade='" + memberGrade + '\'' +
                 '}';
     }
 

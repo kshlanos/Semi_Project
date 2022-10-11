@@ -101,7 +101,7 @@ window.onload = function() {
 		    return true;
 		    
 		 }
-		 
+		 return true;
 	}
 		
 		

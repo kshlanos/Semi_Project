@@ -80,5 +80,8 @@ public class Member {
 	@Column(name = "MEMBER_PHONE")
 	private long memberPhone;		
 	
+	@Column(name = "MEMBER_GRADE")
+	private String memberGrade;
+	
 	
 }
