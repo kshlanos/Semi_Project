@@ -32,7 +32,7 @@ public class TodoController {
 //	@GetMapping("/todoList")
 //	public String todoList() {
 //		
-//		return "/study/todoList";
+//		return "/study/todoList";;;
 //	}
 	
 	@GetMapping("/todoList")
