@@ -57,4 +57,15 @@ public class MemberService {
 	            return null;
 	       return member.getMemberId();
 	    }
+	
+	public boolean userEmailCheck(String userEmail, String userName) {
+
+        Member member = memberRepository.findByMemberId(userEmail);
+        if(member!=null && member.getMemberName().equals(userName)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
