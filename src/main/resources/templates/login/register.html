@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
+     <script type="text/javascript" th:src="@{/js/event.js}"></script>
+     <script type="text/javascript" th:src="@{/js/register.js}"></script>
+     <script>
+	    const message = '[[${message}]]';
+		message && alert(message);
+	 </script>
 </head>
 <body>
   <style>
@@ -15,7 +21,7 @@
 }
 
 body {
-  margin:0;
+  margin-top:0px;
  
 }
     
@@ -29,9 +35,9 @@ body {
 }
 
 .form {
-
+	
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 16px;
@@ -117,114 +123,70 @@ body {
   margin-bottom: 20px;
   margin-bottom: 10px;
 }
-  </style>
+</style>
   
     <div style="text-align : center">
         <a href="/main">
             <img class="login-img" src="../images/logo.png" alt="HOME" >
         </a>
     </div>
-    <form name="login" class="form" style="margin-top: 80px">
-      
+    <div style="margin-top:150px;">
+    <form class="form" style="margin-top: 80px" action="/login/register" method="post">
+   
       아이디<br>
-      <input type="text" class="id" name="user_ID" placeholder="아이디 입력" >
-      <input type="button" class="id_btn" name="user_IDcheck" value="아이디 확인">
-      <br>
+      <input style="margin-bottom: 0px" type="text" class="id" name="memberId" id="memberId" placeholder="아이디 입력" required autofocus>
+      <input type="button" class="id_btn" value="아이디 확인" id="duplicationCheck" ><br>
+      <font id ="memberIdCheck" size="2"></font><br>
       비밀번호<br> 
-      <input type="password" class="password" name="user_PW1" value="123456"><br>
+      <input style="margin-bottom: 0px" type="password" class="password" name="memberPwd" id="memberPwd" value="123456" required><br>
+      <span class=""style="font-size: 10px;" >8~16자리 영문,숫자,특수문자를 혼합해주세요.</span><br>
+      <font id = "passwordCheck" size = "2"></font><br>
       비밀번호 재확인<br> 
-      <input style="margin-bottom: 0px" type="password" class="password" name="user_PW2" value="123456">
-      <input  type="button" name="user_PWcheck" class="password-check" value="비밀번호 재확인"><br>
-      <span class=""style="font-size: 10px;" >10-16자리</span><br>
+      <input style="margin-bottom: 0px" type="password" class="password" name="memberPwdCheck" id="memberPwdCheck" value="123456">
+      <input  type="button" name="memberPwdCheckBtn" id="memberPwdCheckBtn" class="password-check" value="비밀번호 재확인"  onchange="check_pw()"><br>
+      <font id ="checkPw" size ="2"></font><br>
   
-      이름<br>  <input type="text" name="user_name" class="user_name" value="아무개">
-      <br>생년월일<br> 
-      <select name="year" class="year">
-        <option value="">-- 선택 --</option>
-        <option value="1995">1995</option>
-        <option value="1996">1996</option>
-        <option value="1997">1997</option>
-        <option value="1998">1998</option>
-        <option value="1999">1999</option>
-        <option value="2000">2000</option>
+      이름<br>  <input type="text" name="memberName" class="user_name" value="아무개" required>
+      
+      <br>생년월일<br>
+      <select name="year" id="year" class="year">
       </select>
-      <select name="month" class="month">
-        <option value="">-- 선택 --</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
+      <select name="month" id="month" class="month">
       </select>
-      <select name="day" class="day">
-        <option value="">-- 선택 --</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-        <option value="24">24</option>
-        <option value="25">25</option>
-        <option value="26">26</option>
-        <option value="27">27</option>
-        <option value="28">28</option>
-        <option value="29">29</option>
-        <option value="30">30</option>
-        <option value="31">31</option>
+      <select name="day" id="day" class="day">
       </select>
       <br>
+      휴대전화<br>  
+      <input type="text" class="phone" name="memberPhone" placeholder="010-****-****" required><br>
+      
       성별<br>  
       <label for="man">남자</label>
-      <input type="radio" name="gender" value="m" id="man" class="gender">
+      <input type="radio" name="memberGender" value="남" id="man" class="gender">
       <label for="woman">여자</label>
-      <input style="margin-bottom : 15px;" type="radio" name="gender" value="m" id="woman" class="gender"><br>
+      <input style="margin-bottom : 15px;" type="radio" name="memberGender" value="여" id="woman" class="gender"><br>
 
-	  주소<br>  
-      <input type="text" class="adress" name="address" placeholder="서울시 은평구 구산동">
-      <input type="button" class="email-push" name="adressFind" value="주소 찾기"><br>
+	  우편번호<br>  
+      <input type="text" class="adress" name="zipCode" id="zipCode" placeholder="서울시 은평구 구산동">
+      <input type="button" class="email-push" name="adressFind" value="주소 찾기" id="searchZipCode"><br>
+      주소<br>
+      <input type="text" class="adress" name="address1" id="address1"><br>
+      상세주소<br>
+      <input type="text" class="adress" name="address2" id="address2"><br>
 	  
       닉네임<br>  
-      <input type="text" class="nickname" name="user-nickname" placeholder="아무개"><br>
+      <input type="text" class="nickname" name="memberNickname" placeholder="아무개"><br>
 
-      이메일<br><input type="email" class="email" name="user_email" placeholder="email@gmail.com">
-      <input type="button" class="email-push" name="certification" value="인증번호 받기"><br>
-      <input type="text" class="email-check" name="certification" placeholder="인증번호를 입력하세요">
-      <input type="button" class="email-dcheck" name="certification" value="확인"><br>
+      이메일<br><input type="email" class="email" name="memberEmail" id="memberEmail" placeholder="email@gmail.com">
+      <input type="button" class="email-push" name="checkEmail" id="checkEmail" value="인증번호 받기"><br>
+      <input type="text" class="email-check" name="memailconfirm" id="memailconfirm" placeholder="인증번호를 입력하세요"><br>
+      <font size="2" name="memailconfirmTxt" id="memailconfirmTxt"></font><br>
+    
       
-      휴대전화<br>  
-      <input type="text" class="phone" name="user_phone" placeholder="010-****-****"><br>
-      <br><br>
-      
-      <button type="submit" class="submitBtn">회원가입</button>
+      <button type="submit" class="submitBtn" id="register">회원가입</button>
       <button type="reset" class="cancelBtn">취소</button>
       
     </form>
-    
+    </div>
    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	
@@ -244,12 +206,93 @@ body {
 	        }).open();
 	    }
 	
-	    $goMain.onclick = function() {
-	        location.href = "/";
-	    }
-	
 	</script>
-  
-  
+  	<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script>
+	$(document).ready(function(){   
+		
+	    const now = new Date();
+	    const year = now.getFullYear();
+	    const mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
+	    const day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());           
+	   
+	    //년도 selectbox만들기               
+	    for(var i = 1900 ; i <= year ; i++) {
+	        $('#year').append('<option value="' + i + '">' + i + '</option>');    
+	    }
+
+	    // 월별 selectbox 만들기            
+	    for(var i=1; i <= 12; i++) {
+	        const mm = i > 9 ? i : "0"+i ;            
+	        $('#month').append('<option value="' + mm + '">' + mm + '</option>');   
+	    }
+	    
+	    // 일별 selectbox 만들기
+	    for(var i=1; i <= 31; i++) {
+	        const dd = i > 9 ? i : "0"+i ;            
+	        $('#day').append('<option value="' + dd + '">' + dd+ '</option>');    
+	    }
+	  
+	    const $year = document.getElementById("year").value;
+	    const $month = document.getElementById("month").value;
+	    const $day = document.getElementById("day").value;
+	    
+
+	})
+	</script>
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script>
+	// 이메일 인증번호
+	$(document).ready(function(){    
+	var $memail = $("#memberEmail");
+	var $checkEmail = $("#checkEmail"); // 인증번호 발송 버튼
+	var $memailconfirm = $("#memailconfirm"); // 인증번호 확인 input
+	var $memailconfirmTxt = $("#memailconfirmTxt"); // 인증번호 확인 txt
+	
+	$checkEmail.click(function() {
+
+   $.ajax({
+      type : "POST",
+      url : "/login/mailConfirm",
+      data : {
+         "email" : $memail.val()
+      },
+      success : function(data){
+         alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+         console.log("data : "+data);
+         chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt);
+      }
+   })
+})
+
+	// 이메일 인증번호 체크 함수
+	function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
+		$memailconfirm.on("keyup", function(){
+			if (data != $memailconfirm.val()) { //
+				emconfirmchk = false;
+				$memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+				
+				$("#emconfirmchk").css({
+					"color" : "#FA3E3E",
+					"font-weight" : "bold",
+					"font-size" : "20px"
+
+				})
+				//console.log("중복아이디");
+			} else { // 아니면 중복아님
+				emconfirmchk = true;
+				$memailconfirmTxt.html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+
+				$("#emconfirmchk").css({
+					"color" : "green",
+					"font-weight" : "bold",
+					"font-size" : "20px"
+
+				})
+			}
+		})
+	}
+})
+  </script>
 </body>
 </html>

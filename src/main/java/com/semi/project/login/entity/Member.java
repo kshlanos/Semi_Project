@@ -78,7 +78,7 @@ public class Member {
 	private long memberRatingCount;		
 	
 	@Column(name = "MEMBER_PHONE")
-	private long memberPhone;		
+	private String memberPhone;		
 	
 	@Column(name = "MEMBER_GRADE")
 	private String memberGrade;
