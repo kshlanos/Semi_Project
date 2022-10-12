@@ -1,3 +1,30 @@
+ function login(){
+	var frm = document.loginForm;
+	if (!frm.memberId.value) { //아이디를 입력하지 않으면.
+		swal({
+			  title: "아이디를 입력하세요.",
+			  //text: "15자리내의 영문,숫자",
+			  icon: "warning",
+			  button: "확인",
+			});
+
+		frm.memberId.focus();
+		return false;
+	}
+	if (!frm.memberPwd.value) { //패스워드를 입력하지 않으면.
+		swal({
+			  title: "비밀번호를 입력하세요.",
+			  //text: "16자리내의 영문,숫자,특수문자",
+			  icon: "warning",
+			  button: "확인",
+			});
+		frm.memberPwd.focus();
+		return false;
+	}
+	document.loginForm.submit(); //유효성 검사가 통과되면 서버로 전송.
+}
+
+
 window.onload = function() {
 
     /* 화면에 랜더링 된 태그들이 존재하지 않는 경우 에러 발생 가능성이 있어서 if문으로 태그가 존재하는지 부터 확인하고 이벤트를 연결한다. */
@@ -7,52 +34,13 @@ window.onload = function() {
             location.href = "/login/register";
         }
     }
-    
+}
+
+//아이디 비밀번호 유효성 검사 (공백일 경우 경고창 표시)
 
   
     
-  /*  if(document.getElementById("memberPwdCheckBtn")){
-		
-		const $password = document.getElementById("memberPwd");					//비밀번호 
-		const $passwordConfirm = document.getElementById("memberPwdCheck");		//비밀번호 확인 값
-		const $confrimMsg = document.getElementById("memberPwdCheckBtn");		//확인 메세지
-		const $SC = ["!","@","#","$","%"];
-        const $check_SC = 0;
-        
-        
-        
-	    
-		$confrimMsg.onclick = function() {
-			
-			if($password.value.length < 6 || $password.value.length >16){
-                window.alert("비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.");
-                document.getElementById("memberPwd").value='';
-                document.getElementById("memberPwdCheck").value='';
-            }
-            
-             for(var i=0;i<$SC.values.length;i++){
-                if($password.value.indexOf($SC.value[i]) != -1){
-                    $check_SC.valueOf= 1;
-                }
-            }
-           
-             if($check_SC.value == 0){
-                window.alert('!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
-                document.getElementById("memberPwd").value='';
-                document.getElementById("memberPwdCheck").value='';
-            }
-			
-	    		if($password.value == $passwordConfirm.value){
-	    			window.alert("비밀번호가 일치합니다");
-	    			
-	    		}else{
-	    			window.alert("비밀번호가 일치하지 않습니다");
-	    			document.getElementById("memberPwd").value='';
-                	document.getElementById("memberPwdCheck").value='';
-	    		}
-	    	}
-		
-	}*/
+ 
 
     if(document.getElementById("login")) {
         const $login = document.getElementById("login");
@@ -97,4 +85,3 @@ window.onload = function() {
             location.href = "/thumbnail/regist";
         }
     }
-}

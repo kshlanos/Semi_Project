@@ -48,4 +48,13 @@ public class MemberService {
     	savedMember.setMemberStatus("Y");
 
     }
+
+	public String findIdByMemberNameAndMemberPhone(String memberName, String memberPhone) {
+		
+		Member member = memberRepository.findIdByMemberNameAndMemberPhone(memberName, memberPhone);
+		
+		 if (member == null)
+	            return null;
+	       return member.getMemberId();
+	    }
 }

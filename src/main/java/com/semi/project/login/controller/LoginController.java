@@ -79,6 +79,7 @@ public class LoginController {
     	String address = zipCode + "$" + address1 + "$" + address2;
     	member.setMemberAddress(address);
     	member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
+    	member.setMemberPhone(member.getMemberPhone().replace("-", ""));
     	
     	String birth = year + "-"+ month + "-" + day;
     	log.info("[MemberController] registMember request birth : " + birth);
@@ -132,6 +133,17 @@ public class LoginController {
 	public String forgotId() {
 		
 		return "/login/forgotId";
+	}
+	
+	@ResponseBody
+	@PostMapping("/forgotId")
+	public String findIdByMemberNameAndMemberPhone(@RequestParam("memberName") String memberName, @RequestParam("memberPhone") String memberPhone) {
+		
+		String findId = memberService.findIdByMemberNameAndMemberPhone(memberName, memberPhone);
+		
+		log.info("findId : " + findId);
+		
+		return findId;
 	}
 	
 	@GetMapping(value = {"/forgotPassword"})
