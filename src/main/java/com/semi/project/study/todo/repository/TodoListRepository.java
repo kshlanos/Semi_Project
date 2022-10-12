@@ -17,5 +17,7 @@ public interface TodoListRepository extends JpaRepository<TodoList, Integer>{
 	List<TodoList> findAllBytodoListStartDate(@Param("todoDate") Date todoListStartDate);
 
 	TodoList findBytodoListId(String todoListId);
+
+	List<TodoList> findStopwatchBytodoListId(String todoListId);
 	
 }

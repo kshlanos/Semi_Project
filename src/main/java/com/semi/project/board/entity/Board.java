@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -83,10 +85,15 @@ public class Board {
 	@Column(name = "STUDY_CONDITION")
 	private String studyCondition;
 	
-
+	@Column(name = "STUDY_TITLE")
+	private String studyTitle;
 	
+	@Column(name = "STUDY_NAME")
+	private String studyName;
 	
+	@Column(name = "BOARD_COUNT")
+	private int boardCount;
 	
-	
+		
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.semi.project.study.todo.dto.TodoListDTO;
+import com.semi.project.study.todo.entity.Stopwatch;
 import com.semi.project.study.todo.service.TodoListService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class TodoController {
 //	@GetMapping("/todoList")
 //	public String todoList() {
 //		
-//		return "/study/todoList";
+//		return "/study/todoList";;;
 //	}
 	
 	@GetMapping("/todoList")
@@ -80,7 +81,30 @@ public class TodoController {
 		todoListService.modifyTodoList(certifiedExplain, stopwatchTime, todoListId);
 
 		
-		return "redirect:/study/studyCalendar";
+		return "/study/close";
+	}
+	
+	@GetMapping("/stopwatch")
+	public void stopwatch(Model model, String todoListId) {
+		
+		log.info("[TodoController Stopwatch] todoListId : {}", todoListId);
+		
+		List<TodoListDTO> todoList = todoListService.selectStopwatch(todoListId);
+		
+		TodoListDTO todoListStopwatch = todoList.get(0);
+		
+		model.addAttribute("todoList", todoListStopwatch);
+		
+		log.info("[TodoController Stopwatch] todoList : {}", todoListStopwatch);
+		
+	}
+	
+	@PostMapping("/stopwatch")
+	public String PlayStopwatch(Model model, Long stopwatchTime, String todoListId) {
+		
+		todoListService.playStopwatch(stopwatchTime, todoListId);
+		
+		return "/study/close";
 	}
 	
 }

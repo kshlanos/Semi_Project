@@ -21,8 +21,4 @@ public class DetailController {
 	@GetMapping("/certified")
 	public void certified() {}
 	
-	@GetMapping("/stopwatch")
-	public void stopwatch() {}
-	
-	
 }
