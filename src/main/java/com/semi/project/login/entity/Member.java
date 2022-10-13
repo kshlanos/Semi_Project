@@ -82,6 +82,5 @@ public class Member {
 	
 	@Column(name = "MEMBER_GRADE")
 	private String memberGrade;
-	
-	
+
 }
