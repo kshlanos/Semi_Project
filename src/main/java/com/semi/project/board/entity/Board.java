@@ -99,9 +99,11 @@ public class Board {
 	@Column(name = "STUDY_TITLE")
 	private String studyTitle;
 	
-	@ManyToOne
-	@JoinColumn(name="MEMBER_NO", insertable=false, updatable=false)
-	private Member member;
+	@Column(name="STUDY_NAME")
+	private String studyName;
+	
+	@Column(name="BOARD_COUNT")
+	private Long boardCount;
 	
 	
 }
