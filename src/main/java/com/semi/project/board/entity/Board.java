@@ -3,34 +3,40 @@ package com.semi.project.board.entity;
 
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.semi.project.login.entity.Member;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "TBL_STUDY")
-@SequenceGenerator(name = "BOARD_SEQ_GENERATOR", sequenceName = "SEQ_STUDY_BOARD_NO", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "STUDY_SEQ_GENERATOR", sequenceName = "SEQ_STUDY_ID", initialValue = 1, allocationSize = 1)
 @DynamicInsert
 
 public class Board {
 
 	@Id
 	@Column(name = "STUDY_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDY_SEQ_GENERATOR")
 	private String studyId;
 	
 	@Column(name = "STUDY_TAG")
@@ -67,26 +73,27 @@ public class Board {
 	private Date studyUpdDate;
 	
 	@Column(name = "STUDY_STATUS")
-	private char studyStatus;
+	private String studyStatus;
 	
 	@Column(name = "STUDY_REF_ID")
 	private String studyRefId;
 	
-	
 	@Column(name = "STUDY_BOARD_NO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOARD_SEQ_GENERATOR")
 	private String studyBoardNo;
 	
 	@Column(name = "MEMBER_NO")
-	private String memberNo;
+	private Long memberNo;
 	
 	@Column(name = "STUDY_CONDITION")
 	private String studyCondition;
 	
-
+	@Column(name = "STUDY_TITLE")
+	private String studyTitle;
 	
+	@ManyToOne
+	@JoinColumn(name="MEMBER_NO", insertable=false, updatable=false)
+	private Member member;
 	
-	
-	
+		
 	
 }

@@ -11,11 +11,25 @@
 		}
 	}
 
-	if(document.getElementById("deleteNotice")){
-		const $update = document.getElementById("deleteNotice");
+	if(document.getElementById("removeNotice")){
+		const $update = document.getElementById("removeNotice");
 		$update.onclick = function() {
-			location.href = "/admin/"
+			location.href = "/admin/noticeMain"
 		}
 	}
+	
+	    if(document.getElementById("updateUser")) {
+        const $update = document.getElementById("updateUser");
+        $update.onclick = function() {
+            location.href = "/admin/userListAdmin";
+        }
+    }
+    
+    if(document.getElementById("deleteUser")) {
+        const $update = document.getElementById("deleteUser");
+        $update.onclick = function() {
+            location.href = "/admin/userListAdmin";
+        }
+    }
 
  

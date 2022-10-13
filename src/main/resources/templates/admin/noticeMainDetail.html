@@ -14,8 +14,8 @@
     
     <div th:replace="common/noticeheaderDetail.html"></div> 
    
-
     <div>
+            <form th:action="@{/admin/updateNoticeMain}" method="post" class="userinfo">
         <table class="detail_table">
             <tr>
                 <td class="detail_category"></td>
@@ -24,7 +24,6 @@
             </tr>
             <tr>
                 <td class="detail_title" th:text="${ notice.noticeTitle }">
-                    우수 회원에 대한 안내
                 </td>
             </tr>
             <tr>
@@ -38,11 +37,16 @@
                 </td>
             </tr>
         </table>
+        </form>
         <div class="con_write_btn">
-            <!--  <button class="cw_update" id="updateNotice">수정하기</button>-->
-            <input type="button" class="cw_update" value="수정하기" id="updateNotice">
-            <!-- <button class="cw_delete">삭제하기</button>  -->
-            <input type="button" class="cw_delete" value="삭제하기" id="removeNotice">           
+            <input type="button" class="cw_update" value="수정하기" id="updateNoticeMain"
+            	   th:onclick="|location.href='/admin/updateNoticeMain?noticeNo=${notice.noticeNo}'|">
+        
+        <form th:action="@{/admin/deleteNoticeMain}" method="post">
+        	<input type="hidden" name="noticeNo" th:value="${ notice.noticeNo }">
+	        <td><p type="hidden" name="noticeDelete" th:value="${ notice.noticeDelete }"></p></td>
+            <input type="submit" class="cw_delete" value="삭제하기" id="removeNotice">   
+        </form>     
             <button class="cw_list"
             		th:onclick="|location.href='/admin/noticeMain'|">글목록</button>
         </div>

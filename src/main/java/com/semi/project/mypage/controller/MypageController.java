@@ -13,11 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.semi.project.common.Pagenation;
 import com.semi.project.common.PagingButtonInfo;
+
+import com.semi.project.board.dto.BoardDTO;
+import com.semi.project.board.service.BoardService;
+import com.semi.project.login.dto.CustomUser;
+
 import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.mypage.dto.InquiryDTO;
 import com.semi.project.mypage.service.InquiryService;
+import com.semi.project.study.detail.dto.StudyMemberDTO;
+import com.semi.project.study.detail.service.StudyMemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/mypage")
 public class MypageController {
 	
+
 	 private final InquiryService inquiryService;
 	 private final MessageSourceAccessor messageSourceAccesor;
 	 
@@ -39,7 +48,27 @@ public class MypageController {
 			
 		return "redirect:/login/login";
 	}
-	
+
+	private final PasswordEncoder passwordEncoder;
+    private final MessageSourceAccessor messageSourceAccessor;
+    private final MemberService memberService;
+    private final AuthenticationService authenticationService;
+    private final InquiryService inquiryService;
+    private final StudyMemberService studyMemberService;
+    private final BoardService boardService;
+
+  
+    public MypageController(MessageSourceAccessor messageSourceAccessor, MemberService memberService, PasswordEncoder passwordEncoder,
+    							AuthenticationService authenticationService, InquiryService inquiryService, StudyMemberService studyMemberService, BoardService boardService) {
+        this.messageSourceAccessor = messageSourceAccessor;
+        this.memberService = memberService;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationService = authenticationService;
+        this.inquiryService = inquiryService;
+        this.studyMemberService = studyMemberService;
+        this.boardService = boardService;
+    }
+
 	@GetMapping("/infomodify")
 	public String getinfoModify() {
 		
@@ -59,9 +88,17 @@ public class MypageController {
 	}
 	
 	@GetMapping("/mystudy")
-	public String getmyStudy() {
+	public String getmyStudy(Model model, @AuthenticationPrincipal CustomUser user) {
+
+		List<StudyMemberDTO> studyList = studyMemberService.selectAllStudy(user.getMemberNo());
+				
+		List<BoardDTO> study = boardService.selectBoard(studyList);
 		
-		return "mypage/mystudy";
+		model.addAttribute("studyList", study);
+		
+    	log.info("[MemberController] studyList : {}", study);
+		
+		return "/mypage/mystudy";
 	}
 	
 	@GetMapping("/myboard")
@@ -176,7 +213,5 @@ public class MypageController {
 		
 		return "mypage/inforemove";
 	}
-	
-	
 	
 }

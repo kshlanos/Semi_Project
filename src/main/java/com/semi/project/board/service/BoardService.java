@@ -1,5 +1,9 @@
 package com.semi.project.board.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -12,14 +16,15 @@ import org.springframework.stereotype.Service;
 import com.semi.project.board.dto.BoardDTO;
 import com.semi.project.board.entity.Board;
 import com.semi.project.board.repository.BoardRepository;
+import com.semi.project.study.detail.dto.StudyMemberDTO;
 
 @Service
 @Transactional
 public class BoardService {
 	
 	public static final int TEXT_PAGE_SIZE = 10; 
-	public static final String SORT_BY = "StudyBoardNo";
-	public static final char ACTIVE_STATUS = 'Y';
+	public static final String SORT_BY = "studyBoardNo";
+	public static final char ACTIVE_STATUS = 'N';
 
 	private final BoardRepository boardRepository;
 	private final ModelMapper modelMapper;
@@ -49,8 +54,31 @@ public class BoardService {
 	public BoardDTO selectDetailMember(String studyBoardNo) {
 		
 		Board board = boardRepository.findByStudyBoardNoAndStudyStatus(studyBoardNo, ACTIVE_STATUS);
-				
+		board.setBoardCount(board.getBoardCount() + 1);
+		
 		return modelMapper.map(board, BoardDTO.class);
+	}
+
+	public List<BoardDTO> selectBoard(List<StudyMemberDTO> studyList) {
+		
+//		List<List<Board>> List = new ArrayList<List<Board>>();
+//		
+//		for ( StudyMemberDTO memberDTO : studyList ) {
+//			
+//			List<Board> boardList = boardRepository.findByStudyId(memberDTO.getStudyId());
+//			List.add(boardList);
+//		}
+		
+		List<Board> boardList = new ArrayList<Board>();
+		
+		for ( StudyMemberDTO memberDTO : studyList ) {
+			
+			boardList.add(boardRepository.findByStudyId(memberDTO.getStudyId()));
+		}
+		
+		
+		return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
+		
 	}
 
 }

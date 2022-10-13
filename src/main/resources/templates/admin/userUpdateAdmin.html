@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head> 
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <link href="../css/userUpdateAdmin.css" rel="stylesheet" type="text/css">
+ <link href="../css/header.css" rel="stylesheet" type="text/css">
+ <link href="../css/headerAdmin.css" rel="stylesheet" type="text/css">
+ <script type="text/javascript" th:src="@{/js/noticeEvent.js}"></script>
+</head>
+<body>
+ 	<div th:replace="common/header.html"></div> 
+		<div class="allInfo">
+        <img class="userImage" src="../images/free-icon-user-149071.png">    
+        <br>
+        <form th:action="@{/admin/userUpdateAdmin}" method="post" class="userinfo">
+        <input type="hidden" name="memberNo" th:value="${ user.memberNo }">
+      
+	         	<p>아이디</p>
+	            <td><p th:text="${ user.memberId }"></p></td>
+	 
+  
+	          	<p>권한</p>
+	        	<td><p th:text="${ user.memberGrade }"></p></td>
+	
+	            <p>이름</p>
+	            <input class="userinput" type="text" name="memberName" th:value="${ user.memberName }" required>
+	  
+	 
+	            <p>생년월일</p>
+	            <input class="userinput" type="text" name="memberBirth" th:value="${ user.memberBirth }" required>
+	
+	    
+	            <p>닉네임</p>
+	            <input class="userinput" type="text" name="memberNickname" th:value="${ user.memberNickname }" required>
+	  
+	   
+	            <p>주소</p>
+	            <input class="userinput" type="text" name="memberAddress" th:value="${ user.memberAddress }" required>
+	      
+	    
+	            <p>e-mail</p>
+	            <input class="userinput" type="text" name="memberEmail" th:value="${ user.memberEmail }" required>
+	     
+	 
+	            <p>핸드폰 번호</p>
+	            <input class="userinput" type="text" name="memberPhone" th:value="${ user.memberPhone }" required>
+
+			<div class="userbtn">
+	            <input type="submit" value="회원수정" class="usersavebtn">
+            </div>
+        </form>
+        <form th:action="@{/admin/userDeleteAdmin}" method="post" class="userinfo">
+	        <input type="hidden" name="memberNo" th:value="${ user.memberNo }">
+	        <td><p type="hidden" name="memberStatus" th:value="${ user.memberStatus }"></p></td>
+        	<input type="submit" value="회원비활성" class="userdeletebtn">
+        </form>
+
+	            <button class="userdeletebtn"
+	            		th:onclick="|location.href='/admin/userListAdmin'|">뒤로가기</button>
+        	
+        </div>
+        
+        <script>
+        </script>
+
+</body>
+</html>

@@ -12,27 +12,29 @@
    <div th:replace="common/header.html"></div> 
    <div th:replace="common/noticeheaderDetail.html"></div> 
 
-    <div class="list_insert">
-        <table align="center">
-            <tr>
-                <td class="insert_title">
-                    <span>사진첨부</span>
-                </td>
-                <td class="cont" colspan="3">
-                    <input class="title" type="text" placeholder="  공지 제목을 입력하세요.">
-                </td>
-            </tr>
-            <tr>
-                <td class="insert_write" colspan="5">
-                    <textarea name ="" cols="130" rows="40" placeholder="내용을 입력하세요."></textarea>
-                </td>
-            </tr>
-        </table>
-        <div class="write_btn">
-            <button class="w_btn">글쓰기</button>
-            <button class="c_btn"
-            		th:onclick="|location.href='/admin/noticeMain'|">취소</button>
-        </div>
-    </div>
+	<form id="registNoticeMain" th:action="@{/admin/registNoticeMain}" th:method="post">
+	    <div class="list_insert">
+	        <table align="center">
+	            <tr>
+	                <td class="cont" colspan="5">
+	                    <input class="title" type="text" placeholder="  공지 제목을 입력하세요." name="noticeTitle">
+	                </td>
+	            </tr>
+	            <tr>
+	                <td class="insert_write" colspan="5">
+	                    <textarea cols="130" rows="40" placeholder="내용을 입력하세요." name="noticeContent"></textarea>
+	                </td>
+	            </tr>
+	        </table>
+	        <div class="write_btn">
+	            <button type="submit" class="w_btn">글쓰기</button>
+	        </div>
+	    </div>
+   	</form>
+	   		<div class="write_btn">
+	   			<button class="c_btn"
+		         		th:onclick="|location.href='/admin/noticeMain'|">취소</button>
+			</div>
 </body>
 </html>
+

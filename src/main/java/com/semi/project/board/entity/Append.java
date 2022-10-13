@@ -56,12 +56,21 @@ public class Append {
 //	private CertifiedDTO refcertified_Id;
 	
 	@ManyToOne
-	@JoinColumn(name = "NOTICE_NO")
+	@JoinColumn(name = "REF_NOTICE_NO")
 	private Notice refnoticeNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
 	private Member memberNo;
+	
+	@Column(name = "APPEND_STATUS")
+	private String appendStatus;
+	
+	@Column(name = "APPEND_PATH")
+	private String appendPath;
+	
+	@Column(name = "APPEND_THUMBNAIL_PATH")
+	private String appendThumbnailPath;
 	
 	
 }

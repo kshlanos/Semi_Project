@@ -17,21 +17,25 @@
     <div th:replace="common/noticeheader.html"></div> 
     
      	<div id="notice_write_box">
-        	<button class="notice_write_button">글쓰기</button> <hr>
+        	<button class="notice_write_button"
+        			th:onclick="'location.href=\'registNoticeEvent\''">글쓰기</button> <hr>
         </div>
 
         <!-- 이벤트 게시판 -->
         <table class="event_list">
+        <th:block th:each="append : ${ noticeAppendFileList }">
             <tr>
-                <td>영화 '코딩좋아'시사회 예매권</td>
+                <td th:text="${ notice.noticeTitle }"></td>
                 <td>30명(1인 2매, 총 60매)</td>
                 <td>2022.09.16~2022.09.30</td>            
                 <td>
                     <div class="event_image_box">
-                        <img class="event_image_thumbnail">
+                        <img class="event_image_thumbnail" th:if="${ append.appendType == 'TITLE' }"
+                        	 th:src="${ append.appendThumbnailPath }" width="380px" height="220px">
                     </div>
                 </td>
             </tr>
+          </th:block>
             <tr>
                 <td>영화 '코딩좋아'시사회 예매권</td>
                 <td>30명(1인 2매, 총 60매)</td>
