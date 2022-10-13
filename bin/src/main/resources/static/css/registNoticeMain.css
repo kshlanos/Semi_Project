@@ -1,0 +1,70 @@
+/* 스터디모집 글 작성하기 */
+
+
+
+
+.title{
+	width : 700px;
+	height : 40px;
+	font-size: 20px;
+}
+
+.list_insert th.title{
+    color:#E97486;
+    padding: 10px 30px;
+    background: #fff5f5;
+    text-align: center;
+}
+
+.list_insert td.insert_title{
+    width : 160px;
+    font-size: 20px;
+    color:white;
+    border-bottom:1px solid #ffffff;
+    padding: 10px 30px;
+    background: #E97486;
+    text-align: center;
+}
+
+
+.write_btn{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.w_btn{
+    border:1px solid #E97486;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    height:40px;
+    line-height:30px;
+    width:80px;
+    text-decoration:none;
+    text-align:center;
+    margin: 5px 5px 5px 5px;
+    background-color:#E97486;
+    border-radius: 5px;
+}
+
+.c_btn{
+    border:1px solid #cfcfcf;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    height:40px;
+    line-height:30px;
+    width:80px;
+    text-decoration:none;
+    text-align:center;
+    margin: 5px 5px 5px 5px;
+    background-color:#cfcfcf;
+    border-radius: 5px;
+}
