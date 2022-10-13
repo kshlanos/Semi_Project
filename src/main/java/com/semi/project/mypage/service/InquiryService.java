@@ -83,6 +83,7 @@ public class InquiryService {
 		deleteInquiry.setInquiryDelete("Y");
 		
 	}
+}
 
 //	public InquiryDTO inquirymodify(Long inquiryNo) {
 //	
@@ -93,4 +94,4 @@ public class InquiryService {
 //		//return inquiryList.stream().map(inquiry -> modelMapper.map(inquiry, InquiryDTO.class)).collect(Collectors.toList());
 //	}
 
-}
+
