@@ -88,7 +88,7 @@ public class MypageController {
 	}
 	
 	@GetMapping("/mystudy")
-	public String getmyStudy(Model model, @AuthenticationPrincipal CustomUser user) {
+	public String getmyStudy(Model model, @AuthenticationPrincipal MemberDTO user) {
 
 		List<StudyMemberDTO> studyList = studyMemberService.selectAllStudy(user.getMemberNo());
 				
