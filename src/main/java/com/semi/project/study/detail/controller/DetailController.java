@@ -1,9 +1,11 @@
 package com.semi.project.study.detail.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.semi.project.study.detail.dto.StudyDTO;
 
 @Controller
 @RequestMapping("/study")
@@ -20,9 +22,5 @@ public class DetailController {
 	
 	@GetMapping("/certified")
 	public void certified() {}
-	
-	@GetMapping("/stopwatch")
-	public void stopwatch() {}
-	
-	
+
 }

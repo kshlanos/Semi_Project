@@ -91,6 +91,7 @@ public class BoardController {
 		return "board/studyWrite";
 	}
 	
+
 	@PostMapping("studyWrite")
 	public String registBoard(BoardDTO board, @AuthenticationPrincipal MemberDTO member) {
 		
@@ -112,7 +113,11 @@ public class BoardController {
 	
 	@PostMapping(value="/studyList")
 	public String redirectMain() {
+
+	@GetMapping("/login/login")
+	public String loginForm() {
+
 		
-		return "redirect:/";
+		return "redirect:/login/login";
 	}
 }

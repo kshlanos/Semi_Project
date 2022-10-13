@@ -4,29 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <link href="../css/mypage.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/mypage.css}">
   <link href="../css/header.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div id=main class="main">
-        <header class="page-header">
-            <h1><a href="main.html">
-                <img class="logo" src="../images/logo.png" width="300px" alt="HOME">
-            </a></h1>
-        <nav>
-            <ul class="menuBar">
-                <li><a href="notice.html">공지사항</a></li>
-                <li>스터디 찾기</li>
-                <li>커뮤니티</li>
-            </ul>
-        </nav>
-        <nav>
-            <ul class="userBar">
-                <li>로그아웃</li>
-            </ul>
-        </nav>
-        </header>
-    </div>
+	<div th:replace="common/header.html"></div> 
     <br><br>
     <div class="content">
         <nav class="sidebar">
@@ -49,30 +31,53 @@
                 <th>상태</th>
                 <th>작성자</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>html, css 너무어려워요 도와주세요 ㅠㅠ</td>
-                <td>홍길동</td>
-                <td>답변완료</td>
-                <td>2022-10-01</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>html, css 꿀팁</td>
-                <td>유관순</td>
-                <td>답변대기</td>
-                <td>2022-10-01</td>
-            </tr>
+			<tr th:each="inquiry : ${ inquiryList }"
+				th:onclick="|location.href='/mypage/inquiryconfirm?inquiryNo=${inquiry.inquiryNo}'|"
+				style="cursor:pointer;">
+				<td th:text="${ inquiry.inquiryNo}"></td>
+				<td th:text="${ inquiry.inquiryTitle}"></td>
+				<td th:text="${ inquiry.inquiryRegDate}"></td>
+				<td th:text="${ inquiry.inquiryStatus}"></td>
+				<td th:text="${ inquiry.member.memberName}"></td>
         </table>
-        <div class="page-wrap">
-            <ul class="page-nation">
-                <li><a href="/board/list?p=1">1</a></li>
-                <li><a href="/board/list?p=2">2</a></li>
-                <li><a href="/board/list?p=3">3</a></li>
-                <li><a href="/board/list?p=4">4</a></li>
-                <li><a href="/board/list?p=5">5</a></li>
-            </ul>
-        </div>
+        
+		<!-- 페이징 바 -->
+		<div id="paging" align="center" style="margin-top:20px;">
+
+				<!-- 맨 앞으로 이동 -->
+				<!-- boart/list안에 page라는 파라미터가 있으면 계산해서 가져온 @{${paging.startPage}}를 이 버튼안에 넣겠다.-->
+				<button
+					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
+				
+				<!-- boart/list안에 page라는 파라미터가 있으면 계산해서 가져온 @{${paging.startPage}}의 -1한 값을 버튼안에 넣겠다.-->
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ inquiryList.first }">&lt;</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ inquiryList.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/inquiry/check?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+
+			
+		</div>
+		
+
+        
     </div>
 </body>
 </html>

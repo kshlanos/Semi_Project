@@ -1,19 +1,24 @@
 package com.semi.project.admin.entity;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.semi.project.board.entity.Append;
 import com.semi.project.login.entity.Member;
 
 import lombok.Getter;
@@ -50,6 +55,7 @@ public class Notice {
 	@Column(name = "NOTICE_CONTENT")	
 	private String noticeContent;
 	
+
 	@Column(name = "NOTICE_REG_DATE")	
 	private Date noticeRegDate;
 	
@@ -70,6 +76,7 @@ public class Notice {
 	@Column(name = "NOTICE_DIVISION")	
 	private String noticeDivision;
 	
+ 
 	@Column(name = "NOTICE_UPD_DATE")	
 	private Date noticeUpdDate;
 	
@@ -78,5 +85,10 @@ public class Notice {
 	
 	@Column(name = "NOTICE_VIEWS")	
 	private int noticeViews;
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "REF_NOTICE_NO")
+	private List<Append> noticeAppendFileList;
+	
 	
 }

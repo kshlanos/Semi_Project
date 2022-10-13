@@ -8,10 +8,6 @@ console.log(hour);
 document.querySelector('#stopwatch-hour').value = hour;
 document.querySelector('#stopwatch-minute').value = minutes;
 
-
-
-
-
 $(document).on("keyup", "input[name^=stopwatchHour]", function() {
     var val= $(this).val();
 
@@ -33,13 +29,13 @@ $(document).on("keyup", "input[name^=stopwatchMinute]", function() {
         alert("최소 0시간부터 최대 60분까지 입력가능합니다.");
         $(this).val('');
     }
-
+    
     if(val < 0 || val > 60) {
         alert("최소 0시간부터 최대 60분까지 입력가능합니다.");
         $(this).val('');
     }
 });
-
+    
 document.querySelector('#todoModify-btn').addEventListener('click', function() {
 	
 	document.querySelector('#resultTime').value = 
@@ -47,11 +43,7 @@ document.querySelector('#todoModify-btn').addEventListener('click', function() {
 	(parseInt(document.querySelector('#stopwatch-minute').value)*60);
 	
 	$('#todoModify-btn').submit();
-         setTimeout(function() { 
-			 self.opener = self;  
-             window.close();
-
-          }, 100);
+       
 
 });				// 창이 안닫히는 문제 발생.. 보안상의 문제라고함
 
@@ -71,5 +63,3 @@ document.querySelector('#todoModify-btn').addEventListener('click', function() {
 //           }, 100);
 
 //       });
-
-// });

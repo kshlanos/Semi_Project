@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -13,22 +14,31 @@
         <div class="inqbox">
             <p class="qu">질문></p>
             <div class="writername">
-            <p><img class="writerimg" src="../images/free-icon-user-149071.png">작성자이름</p>
+            <img class="writerimg" src="../images/free-icon-user-149071.png"><p th:text="${ inquiry[0].member.memberName}"/>
             </div>
-            <p>제목글</p> 
-            <p>날짜 / 조회수</p>
+            <p>제목</p><p th:text="${ inquiry[0].inquiryTitle}"/>  
+            <p>날짜</p><p th:text="${ inquiry[0].inquiryRegDate}"/>
             <hr>
+            <p th:text="${ inquiry[0].inquiryContent }">문의드립니다.</p>
         </div>
         <div class="inqubtn">
-            <button onclick="location.href='/mypage/inquirymodify';" class="inqchange">수정</button>
-            <button onclick="location.href='/mypage/inquirycheck';" class="inqdelete">삭제</button>
+            <button th:onclick="|location.href='/mypage/inquirymodify?inquiryNo=${inquiry[0].inquiryNo}'|" class="inqchange">수정</button>
+            <form th:action="@{/mypage/inquiryconfirm}" method="post">
+            <input type="hidden" name="inquiryNo" th:value="${inquiry[0].inquiryNo}"/>
+            <button class="inqdelete">삭제</button>
+            </form>
         </div>
         <div class="inqbox1">
             <div class="responseId">
             <p>관리자아이디</p>
             </div>
             <p class="qu">답변></p> 
+            <th:block th:if="${ inquiry.size() > 1 }">
+             <p>제목</p><p th:text="${ inquiry[1].inquiryTitle}"/>  
+            <p>날짜</p><p th:text="${ inquiry[1].inquiryRegDate}"/>
             <hr>
+           <p th:text="${ inquiry[1].inquiryContent }"></p>
+          </th:block>
         </div>
     </div>
 </body>
