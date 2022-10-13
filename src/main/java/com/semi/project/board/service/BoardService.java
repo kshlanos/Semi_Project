@@ -24,7 +24,7 @@ public class BoardService {
 	
 	public static final int TEXT_PAGE_SIZE = 10; 
 	public static final String SORT_BY = "studyBoardNo";
-	public static final char ACTIVE_STATUS = 'N';
+	public static final String ACTIVE_STATUS = "N";
 	public static final String STUDY_ID = "studyId";
 
 	private final BoardRepository boardRepository;
