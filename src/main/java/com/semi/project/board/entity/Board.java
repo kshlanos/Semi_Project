@@ -82,7 +82,6 @@ public class Board {
 	@Column(name = "STUDY_REF_ID")
 	private String studyRefId;
 	
-
 	@Id
 	@Column(name = "STUDY_BOARD_NO")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOARD_SEQ_GENERATOR")
@@ -91,7 +90,6 @@ public class Board {
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
 	private Member boardWriter;
-
 	
 	@Column(name = "STUDY_CONDITION")
 	private String studyCondition;
@@ -99,10 +97,9 @@ public class Board {
 	@Column(name = "STUDY_TITLE")
 	private String studyTitle;
 	
-	@ManyToOne
-	@JoinColumn(name="MEMBER_NO", insertable=false, updatable=false)
-	private Member member;
-
+	@Column(name = "STUDY_NAME")
+	private String studyName;
+	
 	@Column(name = "BOARD_COUNT")
 	private Long boardCount;
 	
