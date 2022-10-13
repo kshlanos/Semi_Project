@@ -10,6 +10,8 @@
 
     <!-- 팝업창으로 생성 -->
 
+	<th:block th:if="${#lists.size(todoList) >= 0}">
+	 <!-- <th:block th:if="${#lists.size(todoList) > 0}"> -->
     <h1 align="center">Todo List 조회</h1>
 
     <h th:text="${ todoList.todoListStartDate }"></h>
@@ -35,6 +37,10 @@
 		<p id="startDate" th:text="${ todoList.todoListStartDate }" style="display:none;"></p>
 		<p id="todoListId" th:text="${ todoList.todoListId }" style="display:none;"></p>		
 	</div>
+	</th:block>
+<th:block th:if="${ todoList == null }">
+	<h1>안녕하세요</h1>
+	</th:block>
 
 
     <script th:inline="javascript">

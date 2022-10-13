@@ -165,8 +165,8 @@ const changeMonth = (operation) =>{
 	$('table').on("click", function(e){
 	
 		e.preventDefault();
-
-    const showMonth = (String(e.view.month*1+1).padStart(2, "0"));
+		
+	const showMonth = (String(e.view.month*1+1).padStart(2, "0"));
     const showDay = (String(e.target.innerText*1).padStart(2, "0"));
     const showYear = (e.currentTarget.innerText).slice(0, 4)*1;
 
@@ -177,6 +177,12 @@ const changeMonth = (operation) =>{
     } else {
       clickDate = `${showYear}-${showMonth}-${showDay}`;
     }
+
+	console.log(clickDate);
+	
+	if(clickDate == null) {
+		return null;
+	}
 
 		let popUrl = `todoList?todoListStartDate=${clickDate}&studyNo=${studyNo}`;
 		let popOption = "width = 800px, height=700px, top=300px, left=300px, scrollbars=yes";

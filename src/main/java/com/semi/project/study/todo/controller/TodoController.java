@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.semi.project.login.dto.CustomUser;
 import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.study.detail.service.StudyMemberService;
 import com.semi.project.study.todo.dto.StopwatchCertifiedDTO;
