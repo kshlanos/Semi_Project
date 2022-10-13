@@ -23,8 +23,8 @@ public class BoardDTO {
 	private Date studyUpdDate;
 	private char studyStatus;
 	private String studyRefId;
-	private String studyBoardNo;
-	private MemberDTO memberNo;
+	private Long studyBoardNo;
+	private MemberDTO boardWriter;
 	private String studyCondition;
 	private String studyTitle;
 	private String studyName;

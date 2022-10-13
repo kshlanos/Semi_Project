@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.semi.project.login.entity.Member;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,11 +29,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "TBL_STUDY")
 @SequenceGenerator(name = "BOARD_SEQ_GENERATOR", sequenceName = "SEQ_STUDY_BOARD_NO", initialValue = 1, allocationSize = 1)
+
 @DynamicInsert
 
 public class Board {
 
-	@Id
+
+	
 	@Column(name = "STUDY_ID")
 	private String studyId;
 	
@@ -74,13 +78,14 @@ public class Board {
 	@Column(name = "STUDY_REF_ID")
 	private String studyRefId;
 	
-	
+	@Id
 	@Column(name = "STUDY_BOARD_NO")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOARD_SEQ_GENERATOR")
-	private String studyBoardNo;
+	private Long studyBoardNo;
 	
-	@Column(name = "MEMBER_NO")
-	private String memberNo;
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_NO")
+	private Member boardWriter;
 	
 	@Column(name = "STUDY_CONDITION")
 	private String studyCondition;
@@ -94,6 +99,5 @@ public class Board {
 	@Column(name = "BOARD_COUNT")
 	private int boardCount;
 	
-		
 	
 }
