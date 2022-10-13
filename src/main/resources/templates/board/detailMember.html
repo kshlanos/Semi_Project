@@ -21,16 +21,15 @@
     <div>
         <table class="detail_table">
             <tr>
-                <td class="detail_category" th:text="${ board.category.studyCaName }"></td>
+                <td class="detail_category" th:text="${ board.studyCategory.studyCategory }"></td>
                 <td colspan="3" rowspan="3">프로필사진</td>
-                <td colspan="3" rowspan="3">바보다바보</td>
+                <td colspan="3" rowspan="3" th:text="${ board.boardWriter.memberNickname }"></td>
             </tr>
             <tr>
-                <td class="detail_title" th:text="${ board.studyTitle "></td>
+                <td class="detail_title" th:text="${ board.studyTitle }"></td>
             </tr>
             <tr>
                 <td class="detail_info" th:text="${ board.studyRegDate } + ' / 조회수 ' + ${ board.boardCount } + '회'">
-                    2022.09.17  / 조회수 110
                 </td>
             </tr>
         </table>
@@ -41,11 +40,11 @@
             </tr>
             <tr>
                 <td class="con_info1">카테고리1</td>
-                <td class="con_info2"th:text="${ board.category.studyCaName }"></td>
+                <td class="con_info2" th:text="${ board.studyCategory.studyCategory }"></td>
             </tr>
             <tr>
                 <td class="con_info1">카테고리2</td>
-                <td class="con_info2"th:text="${ board.category.studyCaName }"></td>
+                <td class="con_info2" th:text="${ board.studyCategory.studyCategory }"></td>
             </tr>
             <tr>
                 <td class="con_info1">태그</td>
@@ -105,10 +104,42 @@
             </tr>
         </table>
 
-        <div class="detail_btn">
-        <button class="req_btn"> 스터디 신청하기 </button>
-        <button class="list_btn"> 글목록 </button>
+		<!-- 버튼용 테이블 -->
+		<div class="detail_btn">
+		<table id="boardWrite">
+		<input type="hidden" id="studyBoardNo" th:value="${board.studyBoardNo}"/>
+			<tr>
+            	<td><button class="invite_btn"> 스터디 초대하기 </button></td>
+			</tr>
+		</table>
+		
+		
+		<table id ="btns" style="margin:auto;">
+			<input type="hidden" id="studyBoardNo" th:value="${board.studyBoardNo}"/>
+			<tr>
+		        <td><button class="req_btn"> 스터디 신청하기 </button></td>
+		        <td><button class="list_btn"
+		        		style="cursor:pointer;"
+					    th:onclick="'location.href=\'/board/studyList\''"> 글목록 </button></td>
+
+          
+			</tr>
+		</table>
+		
+		<table id="boardWrite">
+			<tr>
+	        	<td><button class="cw_update">수정하기</button></td>
+	            <td><button class="cw_delete">삭제하기</button></td> 
+			</tr>
+		</table>
         </div>
     </div>
+    
+    <script>
+    c
+    
+    
+    </script>
+    
 </body>
 </html>
