@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>studycalendar</title>
+<link rel="stylesheet" th:href="@{/css/studyCalendar.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+
+    <div th:replace="common/header.html"></div>
+    <div class="studycalendar">
+    	<aside class="sidebar">
+  			<span onclick="location.href='/study/confirm'">인증 게시판</span><br>
+    		<span onclick="location.href='/study/studyCalendar'">스터디 일정</span><br>
+    		<span onclick="location.href='/study/myCalendar'">나의 출석체크</span>
+		</aside>
+	<div id="calendar">
+        <table>
+          <thead>
+            <tr><th data-selected="full-date" colspan="7" ></th></tr>
+            <tr>
+               <th>일</th>
+               <th>월</th>
+               <th>화</th>
+               <th>수</th>
+               <th>목</th>
+               <th>금</th>
+               <th>토</th>
+            </tr>
+          </thead>
+          <tdata >
+            <tr >
+            </tr>
+           
+          </tdata>
+        </table>
+        <div class="actions">
+        	<div class="next-button" onclick="changeMonth('prev')">이전 달</div>
+        	<div class="prev-button" onclick="changeMonth('next')">다음 달</div>
+        </div>
+   	</div>
+   	</div>
+      	
+      	
+      	<div th:replace="common/footer.html"></div>
+      	
+      <!-- <script src="../../static/js/studyCalendar.js"></script> -->
+      <script src="/js/studyCalendar.js"></script>
+</body>
+</html>
