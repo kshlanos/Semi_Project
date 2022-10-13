@@ -14,14 +14,14 @@
             <span id="hour">00</span>:<span id="minute">00</span>:<span id="seconds">00</span>
         </h1>
         
-        <p id="originTime" th:text="${ todoList.stopwatch.stopwatchTime }"></p>
+        <p id="originTime" th:text="${ stopwatch.remainTime }" style="display: none;"></p>
         <div id="stopwatch-button">
             <button id="start-btn">재생하기</button>
             <button id="pause-btn">일시정지</button>
         </div>
     </div>
     <form method="POST" th:action action="/study/stopwatch">
-        <input id="result" name="stopwatchTime">
+        <input id="result" name="remainTime" th:value="${ stopwatch.remainTime }" style="display: none;">
         <button id="save" type="submit">저장하고 나가기</button>
     </form>
 
