@@ -28,11 +28,9 @@ public class MemberDTO implements UserDetails{
     private Date memberDeletedate; 
     private String memberRole;
     private Long memberRatingCount;
-    private Long memberPhone;
+    private String memberPhone;
     private String memberGrade;
-    
-    
-  
+ 
     @Override
     public String toString() {
         return "MemberDto{" +

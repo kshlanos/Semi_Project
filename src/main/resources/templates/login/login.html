@@ -8,6 +8,8 @@
     <link href="../css/login.css" rel="stylesheet" typ="text/css">
     <link href="../css/header.css" rel="stylesheet" typ="text/css">
     <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
 	    const message = '[[${message}]]';
 		message && alert(message);
@@ -20,10 +22,10 @@
     </a>
   </div>
   <div class="login-form" >
-    <form id="loginForm" action="/login/login" method="post" align="center" >
-        <input type="text" name="memberId" class="text-field" placeholder="아이디" autofocus required>
-        <input type="password" name="memberPwd" class="text-field" placeholder="비밀번호" required>
-        <input type="submit" value="로그인" class="submit-btn" id="loginSubmit">
+    <form id="loginForm" name="loginForm" action="/login/login" method="post" align="center" >
+        <input type="text" name="memberId" class="text-field" placeholder="아이디" autofocus >
+        <input type="password" name="memberPwd" class="text-field" placeholder="비밀번호" >
+        <input type="button" value="로그인" class="submit-btn" id="loginSubmit" onclick="login()">
     </form>
     <div class="links">
       <a href="forgotId">아이디 찾기</a>

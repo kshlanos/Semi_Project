@@ -49,7 +49,7 @@ public class BoardController {
 		return "board/studyList";
 	}
 	
-	@GetMapping("/detail")
+	@GetMapping("/detailMember")
 	public String selectDetailMember(Model model, String studyBoardNo) {
 		
 		log.info("[BoardController] ========================================= ");
@@ -70,9 +70,9 @@ public class BoardController {
 		return "board/studyWrite";
 	}
 	
-	@PostMapping(value="/studyList")
-	public String redirectMain() {
+	@GetMapping("/login/login")
+	public String loginForm() {
 		
-		return "redirect:/";
+		return "redirect:/login/login";
 	}
 }

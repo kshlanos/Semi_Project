@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
-<title>studycalendar</title>
+<title>studyCalendar</title>
 <link rel="stylesheet" th:href="@{/css/studyCalendar.css}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -11,6 +11,7 @@
 
     <div th:replace="common/header.html"></div>
     <div class="studycalendar">
+    <h1 th:text="${ studyList }"></h1>
     	<aside class="sidebar">
   			<span onclick="location.href='/study/confirm'">인증 게시판</span><br>
     		<span onclick="location.href='/study/studyCalendar'">스터디 일정</span><br>

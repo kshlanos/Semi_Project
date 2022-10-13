@@ -75,14 +75,13 @@ public class Member {
 	private String memberRole;		
 
 	@Column(name = "MEMBER_RATING_COUNT")
-	private Long memberRatingCount;		
+	private long memberRatingCount;
 	
 	@Column(name = "MEMBER_PHONE")
-	private long memberPhone;	
+	private String memberPhone;		
 	
 	@Column(name = "MEMBER_GRADE")
 	private String memberGrade;
 
-	}
-	
-	
+}
+
