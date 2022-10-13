@@ -102,6 +102,9 @@ public class Board {
 	@ManyToOne
 	@JoinColumn(name="MEMBER_NO", insertable=false, updatable=false)
 	private Member member;
+
+	@Column(name = "BOARD_COUNT")
+	private Long boardCount;
 	
 	
 }

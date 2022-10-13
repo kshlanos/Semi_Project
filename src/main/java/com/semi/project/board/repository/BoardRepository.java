@@ -15,7 +15,7 @@ import com.semi.project.board.entity.Board;
 
 public interface BoardRepository extends JpaRepository<Board, String>{
 
-	Page<Board> findByStudyStatus(char studyStatus, Pageable pageable);
+	Page<Board> findByStudyStatus(String studyStatus, Pageable pageable);
 
 	@Query("SELECT b " +
 			 "FROM Board b " +
@@ -24,10 +24,10 @@ public interface BoardRepository extends JpaRepository<Board, String>{
 			   "OR b.studyContent LIKE '%' || :searchValue || '%' " +
 			   "OR b.studyTag LIKE '%' || :searchValue || '%' " +
 			   "OR b.studyPlace LIKE '%' || :searchValue || '%' )")
-	Page<Board> findBySearchValue(@Param("studyStatus") char studyStatus, @Param("searchValue") String searchValue, Pageable pageable);
+	Page<Board> findBySearchValue(@Param("studyStatus") String studyStatus, @Param("searchValue") String searchValue, Pageable pageable);
 
 	
-	Board findByStudyBoardNoAndStudyStatus(Long boardNo, char studyStatus);
+	Board findByStudyBoardNoAndStudyStatus(Long boardNo, String studyStatus);
 
 	Board findByStudyId(String studyId);
 

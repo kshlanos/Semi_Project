@@ -98,8 +98,8 @@ public class BoardController {
 		log.info("[BoardController] ========================================= ");
 		log.info("[BoardController] registBoard request : {}", board);
 		
-		board.setBoardWriter(member);
-		boardService.registBoard(board);
+//		board.setBoardWriter(member);
+//		boardService.registBoard(board);
 //		board.setMemberNo(member);
 //		boardService.registBoard(board);
 				
@@ -111,13 +111,6 @@ public class BoardController {
 
 	
 	
-	@PostMapping(value="/studyList")
-	public String redirectMain() {
 
-	@GetMapping("/login/login")
-	public String loginForm() {
-
-		
-		return "redirect:/login/login";
-	}
+	
 }
