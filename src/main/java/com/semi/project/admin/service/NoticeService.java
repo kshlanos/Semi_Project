@@ -26,9 +26,9 @@ public class NoticeService {
 
 	
 	public static final int TEXT_PAGE_SIZE = 10;
-//	public static final int THUMBNAIL_PAGE_SIZE = 3;
-	public static final int TEXT_NOTICE_CODE = 1; /* 1은 공지사항, 2는 이벤트 */
-//	public static final int THUMBNAIL_BOARD_TYPE = 0;
+	public static final int THUMBNAIL_PAGE_SIZE = 3;
+	public static final int TEXT_NOTICE_CODE = 1; /* 공지사항 */ 
+	public static final int THUMBNAIL_BOARD_TYPE = 2; /*이벤트*/
 	public static final String SORT_BY = "noticeNo";
 	public static final String ACTIVE_STATUS = "N";
 	
@@ -39,6 +39,8 @@ public class NoticeService {
 		this.noticeMainRepository = noticeMainRepository;
 		this.modelMapper = modelMapper;
 	}
+	
+	
 	
 	
 	public Page<NoticeDTO> selectNoticeList(int page, String searchValue) {
@@ -67,11 +69,70 @@ public class NoticeService {
 	}
 
 
-	public void removeNoticeMain(NoticeDTO removeNoticeMain) {
-		
-		Notice foundNotice = noticeMainRepository.findByNoticeNo(removeNoticeMain.getNoticeNo());
-		foundNotice.setNoticeDelete("Y");
+
+
+
+	public void registNoticeMain(NoticeDTO notice) {
+		noticeMainRepository.save(modelMapper.map(notice, Notice.class));
 	}
+
+
+
+
+	public NoticeDTO goUpdateNoticeMain(Long noticeNo) {
+
+		Notice notice = noticeMainRepository.findByNoticeNo(noticeNo);
+		
+		return modelMapper.map(notice, NoticeDTO.class);
+	}
+
+
+
+
+	public void modifyNoticeMain(NoticeDTO updateNotice) {
+
+		Notice savedNotice = noticeMainRepository.findByNoticeNo(updateNotice.getNoticeNo());
+		savedNotice.setNoticeTitle(updateNotice.getNoticeTitle());
+		savedNotice.setNoticeContent(updateNotice.getNoticeContent());
+		
+	}
+
+
+
+
+	public void removeNotice(NoticeDTO deleteNotice) {
+		
+		Notice savedNotice = noticeMainRepository.findByNoticeNo(deleteNotice.getNoticeNo());
+		savedNotice.setNoticeDelete("Y");
+		
+	}
+
+
+
+
+	public void registThumbnail(NoticeDTO notice) {
+		NoticeType noticeCode = new NoticeType();
+		noticeCode.setNoticeCode(2L);
+		noticeMainRepository.save(modelMapper.map(notice, Notice.class));
+		
+	}
+
+
+
+
+	public Page<NoticeDTO> selectEventList(int page) {
+		
+		Pageable pageable = PageRequest.of(page - 1, THUMBNAIL_PAGE_SIZE, Sort.by(SORT_BY).descending());
+		NoticeType noticeCode = new NoticeType();
+		noticeCode.setNoticeCode(2L);
+		Page<Notice> eventList = null;
+		
+		eventList = noticeMainRepository.findByNoticeCodeAndNoticeDelete(noticeCode, ACTIVE_STATUS, pageable);
+		
+		return eventList.map(notice -> modelMapper.map(notice, NoticeDTO.class));
+	}
+
+	
 
 
 }

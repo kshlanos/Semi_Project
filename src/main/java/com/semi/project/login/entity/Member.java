@@ -75,7 +75,7 @@ public class Member {
 	private String memberRole;		
 
 	@Column(name = "MEMBER_RATING_COUNT")
-	private long memberRatingCount;		
+	private long memberRatingCount;
 	
 	@Column(name = "MEMBER_PHONE")
 	private String memberPhone;		
@@ -84,3 +84,4 @@ public class Member {
 	private String memberGrade;
 
 }
+
