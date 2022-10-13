@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoBeBest</title>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/registNoticeMain.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+   <div th:replace="common/header.html"></div> 
+   <div th:replace="common/noticeheaderDetail.html"></div> 
+
+    <div class="list_insert">
+        <table align="center">
+            <tr>
+                <td class="insert_title">
+                    <span>사진첨부</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <input class="title" type="text" placeholder="  공지 제목을 입력하세요.">
+                </td>
+            </tr>
+            <tr>
+                <td class="insert_write" colspan="5">
+                    <textarea name ="" cols="130" rows="40" placeholder="내용을 입력하세요."></textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="write_btn">
+            <button class="w_btn">글쓰기</button>
+            <button class="c_btn"
+            		th:onclick="|location.href='/admin/noticeMain'|">취소</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -57,5 +57,36 @@
     </div>
     
     <div th:replace="common/footer.html"></div>
+    
+    <script>
+    (function(){
+	    const fileElements = document.querySelectorAll("[type=file]");
+	    const imageArea = document.querySelectorAll(".UserImage");
+	    imageArea.forEach(item => item.addEventListener('click', open));
+	    fileElements.forEach(item => item.addEventListener('change', preview));
+	    
+	    function open() {
+	    	const index = Array.from(imageArea).indexOf(this);
+	    	fileElements[index].click();
+	    }
+	    
+	    function preview(){
+	    	const index = Array.from(fileElements).indexOf(this);
+	    	console.log(this);
+	    	console.log(this.files, this.files[0]);
+	        if (this.files && this.files[0]) {
+	           const reader = new FileReader();
+	           reader.readAsDataURL(this.files[0]);
+	           reader.onload = function () {
+	        	   if(index === 0){		        		   
+	        		   imageArea[index].innerHTML = `<img src='${reader.result}' style='width: 350px; height: 200px;'>`;
+	        	   } else {
+	        		   imageArea[index].innerHTML = `<img src='${reader.result}' style='width: 120px; height: 100px;'>`;  
+	        	   }
+	           }
+	       }
+	    }
+	})();
+    </script>
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>todoListModify</title>
+<link rel="stylesheet" th:href="@{/css/todoModify.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+    <!-- 팝업창으로 생성 -->
+	
+    <h1 align="center">Todo List 수정</h1>
+
+    <h th:text="${ todoList.todoListStartDate }"></h>
+    
+    <form class="todo-form" action="/study/todoModify" method="POST" th:action>
+
+		<div id="certified-form">
+			<p>인증 조건</p>
+			<input id="certified-input" type="text" th:value="${ todoList.certified.certifiedExplain }" name="certifiedExplain">
+		</div>
+		
+		<div id="stopwatch-form">
+		<input id="stopwatch-hour" type="text" name="stopwatchHour" value="00" >:
+		<input id="stopwatch-minute" type="number" name="stopwatchMinute" value="00">
+		
+		<input id="totalTime" th:value="${ todoList.stopwatch.stopwatchTime }" type="hidden" disabled>
+		<input id="resultTime" name="stopwatchTime" type="hidden">
+		
+		</div>	
+		
+		<button id="todoModify-btn" type="submit">완료</button>
+		
+	</form>
+
+    <script src="/js/todoModify.js"></script>
+    
+</body>
+</html>
