@@ -1,6 +1,10 @@
 package com.semi.project.login.controller;
 
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.login.service.AuthenticationService;
+import com.semi.project.login.service.FinePwdMailService;
 import com.semi.project.login.service.MemberService;
 import com.semi.project.login.service.RegistMailService;
 
@@ -36,13 +41,15 @@ public class LoginController {
     private final MemberService memberService;
     private final AuthenticationService authenticationService;
     private final RegistMailService registMailService;
+    private final FinePwdMailService finePwdMailService;
   
-    public LoginController(MessageSourceAccessor messageSourceAccessor, MemberService memberService, PasswordEncoder passwordEncoder, AuthenticationService authenticationService, RegistMailService registMailService) {
+    public LoginController(MessageSourceAccessor messageSourceAccessor, MemberService memberService, PasswordEncoder passwordEncoder, AuthenticationService authenticationService, RegistMailService registMailService, FinePwdMailService finePwdMailService) {
         this.messageSourceAccessor = messageSourceAccessor;
         this.memberService = memberService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationService = authenticationService;
 		this.registMailService = registMailService;
+		this.finePwdMailService = finePwdMailService;
     }
 
 
@@ -152,6 +159,31 @@ public class LoginController {
 		return "/login/forgotPassword";
 		
 	}
+	
+	// 일반 회원 비밀번호 찾기 및 임시 패스워드로 변경
+		@PostMapping("/forgotPassword")
+		@ResponseBody
+		String findIdByMemberIdAndMemberNameAndMemberEmail(@ModelAttribute MemberDTO updatepassword,@RequestParam("memberId") String memberId, @RequestParam("memberName") String memberName,
+				@RequestParam("memberEmail") String memberEmail)  throws Exception {
+			 System.out.println(memberId + " : " + memberName + " : " + memberEmail);
+			 
+			
+			String mdto = memberService.findIdByMemberIdAndMemberNameAndMemberEmail(memberId, memberName, memberEmail);
+			log.info(memberId);
+			log.info(memberName);
+			log.info(memberEmail);
+			if(mdto != null) {
+				// 임시 패스워드 메일 발송 및 변수 저장
+				String tempPw = passwordEncoder.encode(finePwdMailService.sendSimpleMessage(memberEmail));
+				log.info(tempPw);
+				// System.out.println("tempPw : " + tempPw);
+				// 임시 패스워드 db 에 저장
+				memberService.changeTempPw(tempPw, memberId);
+			return tempPw;
+			}
+			return null;
+		}
+	 
 	  protected Authentication createNewAuthentication(Authentication currentAuth, String memberId) {
 	    	
 	    	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
