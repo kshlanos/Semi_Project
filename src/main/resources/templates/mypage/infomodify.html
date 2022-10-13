@@ -36,17 +36,20 @@
         <br>
         <form class="userinfo" action="/mypage/infomodify" method="post">
             <p>아이디</p>
-            <p th:text="${ #authentication.principal.memberId }"></p>
+            <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberId }" readonly>
             <br>
             <p>이름</p>
-            <p th:text="${ #authentication.principal.memberName }"></p>
+            <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberName }" readonly>
             <br>
             <p>생년월일</p>
-            <p th:text="${ #authentication.principal.memberBirth }"></p>
+            <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberBirth }" readonly>
+            <br>
+            <p>e-mail</p>
+            <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberEmail }" readonly>
             <br>
             <p>닉네임</p>
             <input class="userinput" type="text" name="memberNickname" th:value="${ #authentication.principal.memberNickname }">
-            <br><br>
+            <br>
             <p>우편번호</p>
             <input class="userinput" type="text" name="zipCode" id="zipCode"
              th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 0 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[0] : '' }"
@@ -62,9 +65,7 @@
             <input class="userinput" type="text" name="address2" id="address2" 
              th:value="${ #strings.listSplit(#authentication.principal.memberAddress,'$').size() > 2 ? #strings.listSplit(#authentication.principal.memberAddress,'$')[2] : '' }" 
              >
-            <br><br>
-            <p>e-mail</p>
-            <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberEmail }">
+            <br>
             <div class="userbtn">
             <button type="submit" class="usersavebtn">수정하기</button>
             </div>
