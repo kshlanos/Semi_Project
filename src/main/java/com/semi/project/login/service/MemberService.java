@@ -43,8 +43,7 @@ public class MemberService {
 		Member savedMember = memberRepository.findByMemberNo(updateMember.getMemberNo());
 		savedMember.setMemberNickname(updateMember.getMemberNickname());
 		savedMember.setMemberAddress(updateMember.getMemberAddress());
-		savedMember.setMemberEmail(updateMember.getMemberEmail());
-	
+		
 
 	}
 	
@@ -66,17 +65,6 @@ public class MemberService {
 		 
 	       return member.getMemberId();
 	    }
-	
-//    /** 임시 비밀번호로 업데이트 **/
-//    public void updatePassword(String tmpPassword, String memberEmail) {
-//
-//        String encryptPassword = passwordEncoder.encode(tmpPassword);
-//        Member member = memberRepository.findByMemberEmail(memberEmail).orElseThrow(() ->
-//                new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
-//
-//        member.updatePassword(encryptPassword);
-//        log.info("임시 비밀번호 업데이트");
-//    }
 
 	
 	public String findIdByMemberIdAndMemberNameAndMemberEmail(String memberId, String memberName, String memberEmail) {
@@ -90,12 +78,12 @@ public class MemberService {
 		return member.getMemberEmail();
 	}
 
-	public void changeTempPw(String tempPw, String memberId) {
+	/** 임시 비밀번호로 업데이트 **/
+	public void changeTempPw(MemberDTO updatepassword) {
 		
-		Member savedMember = memberRepository.findByMemberPwdAndMemberId(tempPw,memberId);
-		log.info(tempPw);
-		
-		
+		Member savedMember = memberRepository.findByMemberId(updatepassword.getMemberId());
+		savedMember.setMemberPwd(updatepassword.getMemberPwd());
+
 	}
     
 	

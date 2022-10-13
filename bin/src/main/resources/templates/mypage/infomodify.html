@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head>
+<head> 
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link href="../css/mypage.css" rel="stylesheet" type="text/css">
@@ -13,14 +13,14 @@
     <div class="content">
         <nav class="sidebar">
             <ul class="sidebar1">
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</a></li>
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</a></li>
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1문의하기</a></li>
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</a></li>
-                <li class="liinfo"><a href="#"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
+     			<li class="liinfo"><a onclick="location.href='/mypage/infomodify'"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</a></li>
+                <li class="liinfo"><a onclick="location.href='/mypage/mystudy'"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</a></li>
+                <li class="liinfo"><a onclick="location.href='/mypage/inquirycheck'"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1문의하기</a></li>
+                <li class="liinfo"><a onclick="location.href='/mypage/myboard'"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</a></li>
+                <li class="liinfo"><a onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
             </ul>
         </nav>
-        <button class="pwdbtn"><img class="pwdchbtn" src="../images/free-icon-padlock-2575570.png">비밀번호 변경</button>
+        <button onclick="location.href='/mypage/passwordchange';" class="pwdbtn"><img class="pwdchbtn" src="../images/free-icon-padlock-2575570.png">비밀번호 변경</button>
         <p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-profile-3106773.png">회원정보</p>
         <img class="userImage" src="../images/free-icon-user-149071.png">    
         <div class="infomovebtn">
@@ -30,7 +30,7 @@
         <br><br><br>
         <p class="teamscore">팀스터디 평점 : ☆☆☆☆☆</p>
         <br><br>
-        <form class="userinfo">
+        <form th:action="@{/mypage/infomodify}" method="post" class="userinfo">
             <p>아이디</p>
             <input class="userinput" tpye="text" name="userId">
             <br><br>
@@ -48,11 +48,11 @@
             <br><br>
             <p>e-mail</p>
             <input class="userinput" tpye="text" name="useremail">
-            <div class="userbtn">
-            <button class="usersavebtn">저장하기</button>
-            <button class="userdeletebtn">회원탈퇴</button>
-            </div>
         </form>
+        	<div class="userbtn">
+            <button onclick="location.href='/';" class="usersavebtn">저장하기</button>
+            <button onclick="location.href='/mypage/passwordcheck';" class="userdeletebtn">회원탈퇴</button>
+            </div>
         
     </div>
     
