@@ -72,7 +72,17 @@ public class Member {
 	private Date memberDeletedate;		
 	
 	@Column(name = "MEMBER_ROLE")
-	private String memberRole;						
+	private String memberRole;		
+
+	@Column(name = "MEMBER_RATING_COUNT")
+	private Long memberRatingCount;		
+	
+	@Column(name = "MEMBER_PHONE")
+	private long memberPhone;	
+	
+	@Column(name = "MEMBER_GRADE")
+	private String memberGrade;
+
+	}
 	
 	
-}

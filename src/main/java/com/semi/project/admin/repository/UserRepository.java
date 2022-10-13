@@ -13,6 +13,11 @@ public interface UserRepository extends JpaRepository<Member, Long>{
 	Page<Member> findByMemberStatus(String memberStatus, Pageable pageable);
 
 	
+	Member findByMemberNo(Long memberNo);
+
+//	Page<Member> findByAll(Pageable pageable);
+
+	
 
 	
 

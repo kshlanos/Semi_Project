@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoBeBest</title>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/registNoticeMain.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+   <div th:replace="common/header.html"></div> 
+   <div th:replace="common/noticeheaderDetail.html"></div> 
+
+	<form id="registNoticeEvent" th:action="@{/admin/registNoticeEvent}" th:method="post" enctype="multipart/form-data">
+	    <div class="list_insert">
+	        <table align="center">
+	            <tr>
+	                <td class="cont" colspan="5">
+	                    <input class="title" type="text" placeholder="  이벤트 제목을 입력하세요." name="noticeTitle">
+	                </td>
+	            </tr>
+	            <tr>
+                <th width="50px" class="event_data">이벤트 시작일</th>
+                <td>
+                	<input class="eventStart" type="date" name="eventStart">
+                </td>
+                <th width="50px" class="event_data">이벤트 종료일</th>
+                <td>
+                	<input class="eventEnd" type="date" name="eventEnd">
+                </td>
+                </tr>
+	            <tr>
+	            	<td>
+	            		<div class="event-image-area" align="center">
+	            			<img style="width: 300px; height: 200px;">
+	            		</div>
+	            	</td>
+	            	<td>
+	            		<div class="event-image-area" align="center">
+	            			<img style="width: 300px; height: 200px;">
+	            		</div>
+	            	</td>
+	            	<td>
+	            		<div class="event-image-area" align="center">
+	            			<img style="width: 300px; height: 200px;">
+	            		</div>
+	            	</td>
+	            </tr>
+	            <tr>
+	                <td class="insert_write" colspan="5">
+	                    <textarea cols="130" rows="40" placeholder="내용을 입력하세요." name="noticeContent"></textarea>
+	                </td>
+	            </tr>
+	        </table>
+				<div class="thumbnail-file-area" style="display: none;">
+					<input type="file" name="attachImage"
+						accept="image/gif,image/jpeg,image/png"> <input
+						type="file" name="attachImage"
+						accept="image/gif,image/jpeg,image/png"> <input
+						type="file" name="attachImage"
+						accept="image/gif,image/jpeg,image/png"> <input
+						type="file" name="attachImage"
+						accept="image/gif,image/jpeg,image/png">
+				</div>
+	        <div class="write_btn">
+	            <button type="submit" class="w_btn">글쓰기</button>
+	        </div>
+	    </div>
+   	</form>
+	   		<div class="write_btn">
+	   			<button class="c_btn"
+		         		th:onclick="|location.href='/admin/noticeMain'|">취소</button>
+			</div>
+<script>
+	(function() {
+		/* input type=file인 요소를 탐색 */
+		const fileElements = document.querySelectorAll("[type=file]");
+		/* div image_area 요소를 탐색 */
+		const imageArea = document.querySelectorAll(".event-image-area");
+		/* div 클릭 이벤트 발생 시 open 함수가 동작 */
+		imageArea.forEach(item => item.addEventListener('click', open));
+		/* 파일 첨부 이벤트 발생시 preview 함수로 미리보기 동작 */
+		fileElements.forEach(item => item.addEventListener('change', preview));
+		
+		function open() {
+			const index = Array.from(imageArea).indexOf(this);
+			fileElements[index].click();
+		}
+		
+		function preview() {
+			const index = Array.from(fileElements).indexOf(this);
+	    	console.log(this);
+	    	console.log(this.files, this.files[0]);
+	        if (this.files && this.files[0]) {
+	           const reader = new FileReader();
+	           reader.readAsDataURL(this.files[0]);
+	           reader.onload = function () {
+	           
+	           imageArea[index].innerHTML = `<img src='${reader.result}' style='width: 300px; height: 200px;'>`;
+	           }
+	       }
+	    }
+	})();
+</script>
+</body>
+</html>
+

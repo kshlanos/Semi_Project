@@ -27,6 +27,10 @@ public class MemberDTO implements UserDetails{
     private String memberStatus;
     private Date memberDeletedate; 
     private String memberRole;
+    private Long memberRatingCount;
+    private Long memberPhone;
+    private String memberGrade;
+    
     
   
     @Override
@@ -45,6 +49,9 @@ public class MemberDTO implements UserDetails{
                 ", memberStatus='" + memberStatus + '\'' +
                 ", memberDeletedate='" + memberDeletedate + '\'' +
                 ", memberRole='" + memberRole + '\'' +
+                ", memberRatingCount='" + memberRatingCount + '\'' +
+                ", memberPhone='" + memberPhone + '\'' +
+                ", memberGrade='" + memberGrade + '\'' +
                 '}';
     }
 

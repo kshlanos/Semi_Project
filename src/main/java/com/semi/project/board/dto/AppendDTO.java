@@ -1,8 +1,13 @@
 package com.semi.project.board.dto;
 
+import javax.persistence.Column;
+
 import com.semi.project.admin.dto.NoticeDTO;
 import com.semi.project.login.dto.MemberDTO;
 
+import lombok.Data;
+
+@Data
 public class AppendDTO {
 	
 	private Long appendNo;
@@ -14,5 +19,8 @@ public class AppendDTO {
 //	private CertifiedDTO refcertified_Id;
 	private NoticeDTO refnoticeNo;
 	private MemberDTO memberNo;
+	private String appendStatus;
+	private String appendPath;
+	private String appendThumbnailPath;
 	
 }

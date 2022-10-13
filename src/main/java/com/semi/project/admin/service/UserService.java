@@ -9,6 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.semi.project.admin.dto.NoticeDTO;
+import com.semi.project.admin.entity.Notice;
+import com.semi.project.admin.entity.NoticeType;
 import com.semi.project.admin.repository.UserRepository;
 import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.login.entity.Member;
@@ -40,12 +43,48 @@ public class UserService {
 		
 		if(searchValue != null && !searchValue.isEmpty()) {
 		} else {
-			userList = userRepository.findByMemberStatus(ACTIVE_STATUS, pageable); /*유저리스트 조회 구문*/
+			userList = userRepository.findByMemberStatus(ACTIVE_STATUS, pageable);
+//			userList = userRepository.findByAll(pageable);
 		}
 		
 		return userList.map(member -> modelMapper.map(member, MemberDTO.class));
 		
 	}
+
+
+	public MemberDTO updateUserAdmin(Long memberNo) {
+		
+		Member user = userRepository.findByMemberNo(memberNo);
+		
+		return modelMapper.map(user, MemberDTO.class);
+	}
+
+
+	public void modifyUser(MemberDTO updateUser) {
+		
+		Member savedUser = userRepository.findByMemberNo(updateUser.getMemberNo());
+		savedUser.setMemberName(updateUser.getMemberName());
+		savedUser.setMemberbirth(updateUser.getMemberBirth());
+		savedUser.setMemberNickname(updateUser.getMemberNickname());
+		savedUser.setMemberAddress(updateUser.getMemberAddress());
+		savedUser.setMemberEmail(updateUser.getMemberEmail());
+		savedUser.setMemberPhone(updateUser.getMemberPhone());
+
+		
+	}
+
+	/* 강사님한테 ... */
+	public void removeUser(MemberDTO deleteUser) {
+		
+		Member savedUser = userRepository.findByMemberNo(deleteUser.getMemberNo());
+		savedUser.setMemberStatus("Y");
+		
+	}
+
+	
+	
+
+
 
 
 }

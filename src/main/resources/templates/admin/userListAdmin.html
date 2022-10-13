@@ -39,16 +39,19 @@
                 <th>평점</th>
                 <th>주소</th>
                 <th>탈퇴여부</th>
+                <th>핸드폰번호</th>
             </tr>    
         </thead>
         <tbody class="user_list_body">
-            <tr th:each="member : ${ userListAdmin }">
+            <tr th:each="member : ${ userList }"
+            	th:onclick="|location.href='/admin/userUpdateAdmin?memberNo=${member.memberNo}'|"
+            	style="cursor:pointer;">
                 <td th:text="${ member.memberNo }"></td>
-                <td th:text="${ member.memberRole }"></td>
+                <td th:text="${ member.memberGrade }"></td>
                 <td th:text="${ member.memberName }"></td>
                 <td th:text="${ member.memberId }"></td>
                 <td th:text="${ member.memberNickname }"></td>
-                <td th:text="${ member.memberBrith }"></td>
+                <td th:text="${ member.memberBirth }"></td>
                 <td th:text="${ member.memberEmail }"></td>
                 <td th:text="${ member.memberRating }"></td>
                 <td th:text="${ member.memberAddress }"></td>
