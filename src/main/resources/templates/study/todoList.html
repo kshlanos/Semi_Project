@@ -33,25 +33,29 @@
 		<button id="stopwatch">스톱워치</button>
 		<button id="todoModify-btn">수정 하기</button>
 		<p id="startDate" th:text="${ todoList.todoListStartDate }" style="display:none;"></p>
-		<p id="todoListId" th:text="${ todoList.todoListId }" style="display:none;"></p>
-		
+		<p id="todoListId" th:text="${ todoList.todoListId }" style="display:none;"></p>		
 	</div>
 
-    
-    <!-- 
-    <table>
-    	<tr th:each="todo : ${ todoList }">
-			<td th:text="${ todo.todoListId }"></td>
-			<td th:text="${ todo.todoListStartDate }"></td>
-			<td th:text="${ todo.studyId }"></td>
-			<td th:text="${ todo.todoListEndDate }"></td>
-			<td th:text="${ todo.todoListUpdDate }"></td>
-			<td th:text="${ todo.todoListDelStatus }"></td>
-		</tr>
-	</table>
-	 -->
 
-    <script src="/js/todoList.js"></script>
+    <script th:inline="javascript">
+    
+    const urlParams = new URL(location.href).searchParams;
+	
+    const studyNo = urlParams.get('studyNo');
+    const date = urlParams.get('todoListStartDate');
+    const todoListId = document.querySelector('#todoListId').textContent;
+    
+    const todoListStartDate = document.querySelector('#todoModify-btn');
+
+    todoListStartDate.addEventListener('click', () => {
+      location.href = `todoModify?todoListId=${todoListId}&todoListStartDate=${date}&studyNo=${studyNo}`;	
+    });
+
+    const stopwatchPlay = document.querySelector('#stopwatch').addEventListener('click', ()=> {
+    	location.href = `stopwatch?todoListId=${todoListId}`
+    });
+    
+    </script>
     
 </body>
 </html>

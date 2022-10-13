@@ -1,13 +1,11 @@
-package com.semi.project.board.dto;
+package com.semi.project.study.detail.dto;
 
 import java.sql.Date;
-
-import com.semi.project.login.entity.Member;
 
 import lombok.Data;
 
 @Data
-public class BoardDTO {
+public class StudyDTO {
 
 	private String studyId;
 	private String studyTag;
@@ -27,7 +25,4 @@ public class BoardDTO {
 	private Long memberNo;
 	private String studyCondition;
 	private String studyTitle;
-	private Member member;
-	
 }
-

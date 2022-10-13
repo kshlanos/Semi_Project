@@ -13,8 +13,12 @@ import com.semi.project.study.todo.entity.TodoList;
 
 public interface TodoListRepository extends JpaRepository<TodoList, Integer>{
 
-	@Query("SELECT t FROM TodoList t WHERE todoListStartDate <= :todoDate and todoListEndDate >= :todoDate")
-	List<TodoList> findAllBytodoListStartDate(@Param("todoDate") Date todoListStartDate);
+	@Query("SELECT t "
+			+ "FROM TodoList t "
+			+ "WHERE todoListStartDate <= :todoDate "
+			+ "and todoListEndDate >= :todoDate "
+			+ "and studyId = :studyId")
+	List<TodoList> findAllBytodoListStartDateAndStudyId(@Param("todoDate") Date todoListStartDate, @Param("studyId") String studyId);
 
 	TodoList findBytodoListId(String todoListId);
 

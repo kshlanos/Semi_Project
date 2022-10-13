@@ -1,5 +1,9 @@
 package com.semi.project.board.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.semi.project.board.dto.BoardDTO;
 import com.semi.project.board.entity.Board;
 import com.semi.project.board.repository.BoardRepository;
+import com.semi.project.study.detail.dto.StudyMemberDTO;
 
 @Service
 @Transactional
@@ -52,6 +57,28 @@ public class BoardService {
 		board.setBoardCount(board.getBoardCount() + 1);
 		
 		return modelMapper.map(board, BoardDTO.class);
+	}
+
+	public List<BoardDTO> selectBoard(List<StudyMemberDTO> studyList) {
+		
+//		List<List<Board>> List = new ArrayList<List<Board>>();
+//		
+//		for ( StudyMemberDTO memberDTO : studyList ) {
+//			
+//			List<Board> boardList = boardRepository.findByStudyId(memberDTO.getStudyId());
+//			List.add(boardList);
+//		}
+		
+		List<Board> boardList = new ArrayList<Board>();
+		
+		for ( StudyMemberDTO memberDTO : studyList ) {
+			
+			boardList.add(boardRepository.findByStudyId(memberDTO.getStudyId()));
+		}
+		
+		
+		return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
+		
 	}
 
 }
