@@ -21,7 +21,7 @@
     <div>
         <table class="detail_table">
             <tr>
-                <td class="detail_category" th:text="${ board.studyCategory.studyCategory }"></td>
+                <td class="detail_category" th:text="${ board.category.studyCategory }"></td>
                 <td colspan="3" rowspan="3">프로필사진</td>
                 <td colspan="3" rowspan="3" th:text="${ board.boardWriter.memberNickname }"></td>
             </tr>
@@ -40,11 +40,11 @@
             </tr>
             <tr>
                 <td class="con_info1">카테고리1</td>
-                <td class="con_info2" th:text="${ board.studyCategory.studyCategory }"></td>
+                <td class="con_info2" th:text="${ board.category.studyCategory }"></td>
             </tr>
             <tr>
                 <td class="con_info1">카테고리2</td>
-                <td class="con_info2" th:text="${ board.studyCategory.studyCategory }"></td>
+                <td class="con_info2" th:text="${ board.category.studyCaName }"></td>
             </tr>
             <tr>
                 <td class="con_info1">태그</td>
@@ -81,11 +81,13 @@
         <!-- 스터디 신청자 리스트-->
         <table class="req_list">
             <tr>
-                <td class="profile_pt" colspan="3" rowspan="3">프로필사진</td>
+                <td class="profile_pt" colspan="3" rowspan="3"><img class="userImage" width="100px" src="../images/free-icon-user-149071.png">  </td>
             </tr>
             <tr>
                 <td class="profile_nick">바보다바보1</td>
                 <td class="profile_id">바보다바보2</td>
+                <td class="but_td"><button class="leader_ok">수락</button></td>
+                <td class="but_td"><button class="leader_no">거절</button></td>
             </tr>
             <tr>
                 <td class="profile_grade">★★★★☆</td>
@@ -93,11 +95,13 @@
         </table>
         <table class="req_list">
             <tr>
-                <td class="profile_pt" colspan="3" rowspan="3">프로필사진</td>
+                <td class="profile_pt" colspan="3" rowspan="3"><img class="userImage" width="100px" src="../images/free-icon-user-149071.png"></td>
             </tr>
             <tr>
                 <td class="profile_nick">자바의신</td>
                 <td class="profile_id">javaS2JAVA</td>
+                <td class="but_td"><button class="leader_ok">수락</button></td>
+                <td class="but_td"><button class="leader_no">거절</button></td>
             </tr>
             <tr>
                 <td class="profile_grade">★★★★☆</td>
@@ -107,7 +111,7 @@
 		<!-- 버튼용 테이블 -->
 		<div class="detail_btn">
 		<table id="boardWrite">
-		<input type="hidden" id="studyBoardNo" th:value="${board.studyBoardNo}"/>
+		<input type="hidden" id="studyId" th:value="${board.studyId}"/>
 			<tr>
             	<td><button class="invite_btn"> 스터디 초대하기 </button></td>
 			</tr>
@@ -115,7 +119,7 @@
 		
 		
 		<table id ="btns" style="margin:auto;">
-			<input type="hidden" id="studyBoardNo" th:value="${board.studyBoardNo}"/>
+			<input type="hidden" id="studyId" th:value="${board.studyId}"/>
 			<tr>
 		        <td><button class="req_btn"> 스터디 신청하기 </button></td>
 		        <td><button class="list_btn"

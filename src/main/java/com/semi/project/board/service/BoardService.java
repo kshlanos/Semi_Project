@@ -23,7 +23,7 @@ import com.semi.project.study.detail.dto.StudyMemberDTO;
 public class BoardService {
 	
 	public static final int TEXT_PAGE_SIZE = 10; 
-	public static final String SORT_BY = "studyBoardNo";
+	public static final String SORT_BY = "studyId";
 	public static final String ACTIVE_STATUS = "N";
 	public static final String STUDY_ID = "studyId";
 
@@ -59,9 +59,9 @@ public class BoardService {
 	
 	
 	/* 게시글 상세 조회 */
-	public BoardDTO selectDetailMember(Long BoardNo) {
+	public BoardDTO selectDetailMember(Long StudyId) {
 		
-		Board board = boardRepository.findByStudyBoardNoAndStudyStatus(BoardNo, ACTIVE_STATUS);
+		Board board = boardRepository.findByStudyIdAndStudyStatus(StudyId, ACTIVE_STATUS);
 		board.setBoardCount(board.getBoardCount() + 1);
 		
 		return modelMapper.map(board, BoardDTO.class);
@@ -73,7 +73,7 @@ public class BoardService {
 	/* 게시글 작성 */
 	public void registBoard(BoardDTO board) {
 		
-		board.setStudyId(STUDY_ID);
+		board.setStudyId(null);
 		boardRepository.save(modelMapper.map(board, Board.class));
 		
 	}

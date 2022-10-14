@@ -70,12 +70,12 @@ public class BoardController {
 	
 	/* 게시글 상세보기 */
 	@GetMapping("detailMember")
-	public String selectDetailMember(Model model, Long studyBoardNo) {
+	public String selectDetailMember(Model model, Long studyId) {
 		
 		log.info("[BoardController] ========================================= ");
-		log.info("[BoardController] studyBoardNo : {}", studyBoardNo);
+		log.info("[BoardController] studyId : {}", studyId);
 		
-		BoardDTO board = boardService.selectDetailMember(studyBoardNo);
+		BoardDTO board = boardService.selectDetailMember(studyId);
 		
 		model.addAttribute("board", board);
 		
@@ -98,8 +98,8 @@ public class BoardController {
 		log.info("[BoardController] ========================================= ");
 		log.info("[BoardController] registBoard request : {}", board);
 		
-//		board.setBoardWriter(member);
-//		boardService.registBoard(board);
+		board.setBoardWriter(member);
+		boardService.registBoard(board);
 //		board.setMemberNo(member);
 //		boardService.registBoard(board);
 				
