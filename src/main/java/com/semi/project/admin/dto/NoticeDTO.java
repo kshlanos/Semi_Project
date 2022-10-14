@@ -23,6 +23,8 @@ public class NoticeDTO {
 	private Date noticeUpdDate;
 	private String noticeDelete;
 	private int noticeViews;
+	private String noticeEventContent;
 	private List<AppendDTO> noticeAppendFileList;
+
 	
 }

@@ -18,6 +18,7 @@ public class InquiryDTO {
 	private Long inquiryRefNo;
 	private MemberDTO member;
 	private String inquiryStatus;
+	private String inquiryStatusContent;
 	
 	
 	

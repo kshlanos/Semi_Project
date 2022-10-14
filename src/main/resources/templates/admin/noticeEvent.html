@@ -20,49 +20,94 @@
         	<button class="notice_write_button"
         			th:onclick="'location.href=\'registNoticeEvent\''">글쓰기</button> <hr>
         </div>
+        <th:block th:each="notice : ${ eventList }">
 
         <!-- 이벤트 게시판 -->
         <table class="event_list">
-        <th:block th:each="append : ${ noticeAppendFileList }">
             <tr>
                 <td th:text="${ notice.noticeTitle }"></td>
-                <td>30명(1인 2매, 총 60매)</td>
-                <td>2022.09.16~2022.09.30</td>            
+                <td th:text="${ notice.noticeEventContent }"></td>
+                <td th:text="${ notice.eventStart } + '~' + ${ notice.eventEnd }"></td>            
                 <td>
                     <div class="event_image_box">
-                        <img class="event_image_thumbnail" th:if="${ append.appendType == 'TITLE' }"
-                        	 th:src="${ append.appendThumbnailPath }" width="380px" height="220px">
+                        <th:block th:each="append : ${ notice.noticeAppendFileList }"
+                        		  th:onclick="|location.href='/admin/noticeEventDetail?noticeNo=${notice.noticeNo}">
+	                        <img class="event_image_thumbnail"
+	                        	 th:if="${ append.appendType == 'TITLE' }"
+	                        	 th:src="${ append.appendThumbnailPath }" width="380px" height="220px">
+                    	</th:block>
+                    <hr>
                     </div>
                 </td>
-            </tr>
-          </th:block>
-            <tr>
-                <td>영화 '코딩좋아'시사회 예매권</td>
-                <td>30명(1인 2매, 총 60매)</td>
-                <td>2022.09.16~2022.09.30</td>            
-                <td>
-                    <div class="event_image_box">
-                        <img class="event_image_thumbnail">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>영화 '코딩좋아'시사회 예매권</td>
-                <td>30명(1인 2매, 총 60매)</td>
-                <td>2022.09.16~2022.09.30</td>            
-                <td>
-                    <div class="event_image_box">
-                        <img class="event_image_thumbnail">
-                    </div>
-                </td>
-            </tr>             
-            
+            </tr>      
+        </th:block>    
         </table>
-                
+        
+		<!-- 페이징 바 -->
+		<div id="paging" align="center" style=" margin:auto;">
 
-            </tfoot>
-        </table>    
+			<th:block th:if="${ searchValue != null }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
 
-    </div>
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ noticeEvent.first }">&lt;</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ noticeEvent?.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+
+			</th:block>
+			
+			<!-- 검색값이 없는 경우 -->
+			<th:block th:if="${ param.searchValue == null || param.searchValue.isEmpty() }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${paging.currentPage - 1}} + '\''"
+					th:disabled="${ noticeEvent?.first }">&lt;</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${page}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${paging.currentPage + 1}} + '\''"
+					th:disabled="${ noticeEvent?.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/noticeEvent?page=' + @{${paging.endPage}} + '\''">>></button>
+			</th:block>
+			
+		</div>   
+		
+
 </body>
 </html>
