@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.semi.project.admin.entity.Notice;
 import com.semi.project.login.entity.Member;
 
 import lombok.Getter;
@@ -58,6 +57,10 @@ public class Append {
 	
 	@Column(name = "REF_NOTICE_NO")
 	private Long refnoticeNo;
+	
+	@OneToOne
+	@JoinColumn(name = "MEMBER_NO")
+	private Member member;
 	
 	@OneToOne
 	@JoinColumn(name = "MEMBER_NO")
