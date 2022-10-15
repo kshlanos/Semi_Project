@@ -17,17 +17,15 @@ public class BoardDTO {
 	private Long recruits;
 	private String studyPlace;
 	private String studyContent;
-	private String studyCategory;
+	private CategoryDTO studyCategory;
 	private Date studyStartDate;
 	private Date studyEndDate;
 	private Date studyRegDate;
 	private Date studyUpdDate;
 	private String studyStatus;
 	private String studyRefId;
-
 	private Long studyBoardNo;
 	private MemberDTO boardWriter;
-
 	private String studyCondition;
 	private String studyTitle;
 	private String studyName;

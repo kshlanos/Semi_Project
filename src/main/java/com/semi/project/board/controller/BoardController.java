@@ -110,14 +110,4 @@ public class BoardController {
 	/* 글 삭제기능 */
 
 	
-	
-	@PostMapping(value="/studyList")
-	public String redirectMain() {
-
-	@GetMapping("/login/login")
-	public String loginForm() {
-
-		
-		return "redirect:/login/login";
-	}
 }

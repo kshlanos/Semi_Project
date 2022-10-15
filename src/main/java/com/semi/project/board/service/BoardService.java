@@ -18,6 +18,9 @@ import com.semi.project.board.entity.Board;
 import com.semi.project.board.repository.BoardRepository;
 import com.semi.project.study.detail.dto.StudyMemberDTO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 @Transactional
 public class BoardService {
@@ -94,6 +97,8 @@ public class BoardService {
 			
 			boardList.add(boardRepository.findByStudyId(memberDTO.getStudyId()));
 		}
+		
+    	log.info("[BoardService] boardList : {}", boardList);
 		
 		
 		return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
