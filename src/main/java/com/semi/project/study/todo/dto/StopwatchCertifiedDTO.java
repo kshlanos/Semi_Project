@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class StopwatchCertifiedDTO {
 	
-	private String stopwatchId;
+	private Long stopwatchId;
 	private String todoListId;
-	private Long memberId;
+	private Long memberNo;
 	private String stopwatchStatus;
 	private Long remainTime;
 

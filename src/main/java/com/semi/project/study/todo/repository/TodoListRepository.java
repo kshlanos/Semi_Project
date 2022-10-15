@@ -23,5 +23,7 @@ public interface TodoListRepository extends JpaRepository<TodoList, Integer>{
 	TodoList findBytodoListId(String todoListId);
 
 	List<TodoList> findStopwatchBytodoListId(String todoListId);
+
+	TodoList findStudyIdByTodoListId(String todoListId);
 	
 }

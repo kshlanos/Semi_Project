@@ -52,4 +52,11 @@ public class StudyMemberService {
 		return studyList.stream().map(study -> modelMapper.map(study, StudyMemberDTO.class)).collect(Collectors.toList());
 	}
 
+	public StudyMemberDTO selectRole(Long memberNo, String studyId) {
+
+		StudyMember studyRole = studyMemberRepository.findByStudyIdAndMemberNo(studyId, memberNo);
+		
+		return modelMapper.map(studyRole, StudyMemberDTO.class);
+	}
+
 }

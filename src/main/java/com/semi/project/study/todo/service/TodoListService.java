@@ -13,9 +13,12 @@ import org.springframework.stereotype.Service;
 import com.semi.project.board.dto.BoardDTO;
 import com.semi.project.board.service.BoardService;
 import com.semi.project.study.detail.dto.StudyMemberDTO;
+import com.semi.project.study.detail.repository.StudyMemberRepository;
 import com.semi.project.study.detail.service.StudyMemberService;
 import com.semi.project.study.todo.dto.TodoListDTO;
+import com.semi.project.study.todo.entity.StopwatchCertified;
 import com.semi.project.study.todo.entity.TodoList;
+import com.semi.project.study.todo.repository.StopwatchCertifiedRepository;
 import com.semi.project.study.todo.repository.TodoListRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,21 +32,21 @@ public class TodoListService {
 	private final StudyMemberService studyMemberService;
 	private final ModelMapper modelMapper;
 	private final BoardService boardService;
+	private final StudyMemberRepository studyMemberRepository;
+	private final StopwatchCertifiedRepository stopwatchCertifiedRepository;
 	
 	@Autowired
-	public TodoListService(TodoListRepository todoListRepository, ModelMapper modelMapper, StudyMemberService studyMemberService, BoardService boardService) {
+	public TodoListService(TodoListRepository todoListRepository, ModelMapper modelMapper, StudyMemberService studyMemberService, BoardService boardService,
+			StudyMemberRepository studyMemberRepository, StopwatchCertifiedRepository stopwatchCertifiedRepository) {
 		this.todoListRepository = todoListRepository;
 		this.modelMapper = modelMapper;
 		this.studyMemberService = studyMemberService;
 		this.boardService = boardService;
-		
+		this.studyMemberRepository = studyMemberRepository;
+		this.stopwatchCertifiedRepository = stopwatchCertifiedRepository;
 	}
 
 	public List<TodoListDTO> selectTodoList(Date todoListStartDate, int studyNo, Long memberNo) {
-
-		log.info("[TodoService] todoListStartDate : {}",todoListStartDate);
-		log.info("[TodoService] studyNo : {}", studyNo);
-		log.info("[TodoService] memberNo : {}", memberNo);
   
 		List<StudyMemberDTO> studyList = studyMemberService.selectAllStudy(memberNo);
 		
@@ -51,11 +54,7 @@ public class TodoListService {
 		
 		String studyId = study.get(studyNo).getStudyId();	
 		
-		log.info("[TodoService] studyId : {}", studyId);
-		
-		List<TodoList> todoList = todoListRepository.findAllBytodoListStartDateAndStudyId(todoListStartDate, studyId);
-		
-		log.info("[TodoService] todoList : {}", todoList);			
+		List<TodoList> todoList = todoListRepository.findAllBytodoListStartDateAndStudyId(todoListStartDate, studyId);		
 		
 		return todoList.stream().map(todo -> modelMapper.map(todo, TodoListDTO.class)).collect(Collectors.toList());
 	}
@@ -65,13 +64,38 @@ public class TodoListService {
 		TodoList todoList = todoListRepository.findBytodoListId(todoListId);
 		todoList.getCertified().setCertifiedExplain(certifiedExplain);
 		todoList.getStopwatch().setStopwatchTime(stopwatchTime);
+
+		log.info("[TodoController] todoListDate : {}", todoListId);
 		
+		List<StopwatchCertified> modifyStopwatch = stopwatchCertifiedRepository.findByTodoListId(todoListId);
+
+		log.info("[TodoController] modifyStopwatch : {}", modifyStopwatch);
+		
+		for ( StopwatchCertified stopwatch : modifyStopwatch ) {
+			
+			stopwatch.setRemainTime(stopwatchTime);
+			
+		}
 	}
 
 	public void playStopwatch(Long stopwatchTime, String todoListId) {
 
 		TodoList todoList = todoListRepository.findBytodoListId(todoListId);
 		todoList.getStopwatch().setStopwatchTime(stopwatchTime);
+		
+	}
+
+	public void registTodoList(TodoListDTO todoListDTO) {
+		
+		TodoList todoList = todoListRepository.findBytodoListId(todoListDTO.getTodoListId());
+		todoList.setTodoListSort("SC");
+
+	}
+
+	public void deleteTodoList(String todoListId) {
+
+		TodoList todoList = todoListRepository.findBytodoListId(todoListId);
+		todoList.setTodoListSort("N");
 		
 	}
 

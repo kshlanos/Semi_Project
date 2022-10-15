@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.semi.project.login.dto.MemberDTO;
+import com.semi.project.study.detail.dto.StudyMemberDTO;
 import com.semi.project.study.detail.service.StudyMemberService;
+import com.semi.project.study.todo.dto.CertifiedDTO;
 import com.semi.project.study.todo.dto.StopwatchCertifiedDTO;
+import com.semi.project.study.todo.dto.StopwatchDTO;
 import com.semi.project.study.todo.dto.TodoListDTO;
+import com.semi.project.study.todo.service.CertifiedService;
 import com.semi.project.study.todo.service.StopwatchCertifiedService;
+import com.semi.project.study.todo.service.StopwatchService;
 import com.semi.project.study.todo.service.TodoListService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,12 +34,17 @@ public class TodoController {
 	private final ModelMapper modelMapper;
 	private final StudyMemberService studyMemberService;
 	private final StopwatchCertifiedService stopwatchCertifiedService;
+	private final StopwatchService stopwatchService;
+	private final CertifiedService certifiedService;
 	
-	public TodoController(TodoListService todoListService, ModelMapper modelMapper, StudyMemberService studyMemberService, StopwatchCertifiedService stopwatchCertifiedService) {
+	public TodoController(TodoListService todoListService, ModelMapper modelMapper, StudyMemberService studyMemberService, 
+			StopwatchCertifiedService stopwatchCertifiedService, StopwatchService stopwatchService, CertifiedService certifiedService) {
 		this.todoListService = todoListService;
 		this.modelMapper = modelMapper;
 		this.studyMemberService = studyMemberService;
 		this.stopwatchCertifiedService = stopwatchCertifiedService;
+		this.stopwatchService = stopwatchService;
+		this.certifiedService = certifiedService;
 	}
 
 //	@GetMapping("/todoList")
@@ -52,11 +62,12 @@ public class TodoController {
         //LocalDate date = LocalDate.parse(todoListStartDate, formatter);
 		java.sql.Date date = java.sql.Date.valueOf(todoListStartDate);
 		
-		List<TodoListDTO> todoList = todoListService.selectTodoList(date, studyNo, user.getMemberNo());
-
-		TodoListDTO todoListDTO = todoList.get(0);
+		TodoListDTO todoList = todoListService.selectTodoList(date, studyNo, user.getMemberNo()).get(0);
 		
-		model.addAttribute("todoList", todoListDTO);
+		StudyMemberDTO studyMember = studyMemberService.selectRole(user.getMemberNo(), todoList.getStudyId());
+		
+		model.addAttribute("todoList", todoList);
+		model.addAttribute("role", studyMember);
 		
 		log.info("[TodoController] todoListDate : {}", todoList);
 		
@@ -85,6 +96,7 @@ public class TodoController {
 	@PostMapping("/todoModify")
 	public String todoListUpdate (Model model, String certifiedExplain, Long stopwatchTime, String todoListId) {
 		
+		log.info("[TodoController] todoListDate : {}", stopwatchTime);
 		
 		todoListService.modifyTodoList(certifiedExplain, stopwatchTime, todoListId);
 
@@ -113,10 +125,45 @@ public class TodoController {
 	@PostMapping("/stopwatch")
 	public String PlayStopwatch(Model model, Long remainTime, String todoListId, @AuthenticationPrincipal MemberDTO user) {
 		
+		log.info("[TodoController Stopwatch] remainTime : {}", remainTime);
+		log.info("[TodoController Stopwatch] todoListId : {}", todoListId);
+		log.info("[TodoController Stopwatch] user : {}", user);
+		
 		stopwatchCertifiedService.playStopwatch(remainTime, todoListId, user.getMemberNo());
 		
 		return "/study/close";
 	}
 	
+	@GetMapping("/todoRegist")
+	public String todoRegist(Model model, TodoListDTO todoList) {
+		
+		StopwatchDTO stopwatch = new StopwatchDTO();
+		CertifiedDTO certified = new CertifiedDTO();
+		
+		certified.setCertifiedExplain("출석체크");
+		certified.setCertifiedRegStatus("Y");
+		certified.setTodoListId(todoList.getTodoListId());
+		stopwatch.setStopwatchRegStatus("Y");
+		stopwatch.setStopwatchTime(3600L);
+		stopwatch.setTodoListId(todoList.getTodoListId());
+		
+		certifiedService.registCertified(certified);
+		stopwatchService.registStopwatch(stopwatch);
+		todoListService.registTodoList(todoList);
+		stopwatchCertifiedService.registStopwatch(todoList);
+		
+		model.addAttribute("todoList", todoList);
+		
+		return "forward:/study/todoList";
+		
+	}
+	
+	@GetMapping("/todoDelete")
+	public String todoDelete(String todoListId) {
+		
+		todoListService.deleteTodoList(todoListId);
+		
+		return "/study/close";
+	}
 	
 }

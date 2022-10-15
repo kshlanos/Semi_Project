@@ -9,7 +9,7 @@ public class StudyMemberDTO {
 
 	private String StudyRole;
 	private String StudyId;
-	private String StudyMemId;
+	private String StudyMemberId;
 	private Date studyStartDate;
 	private Date studyEndDate;
 	private String studyMemStatus;

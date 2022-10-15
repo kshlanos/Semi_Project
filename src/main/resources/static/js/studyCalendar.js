@@ -185,7 +185,7 @@ const changeMonth = (operation) =>{
 	}
 
 		let popUrl = `todoList?todoListStartDate=${clickDate}&studyNo=${studyNo}`;
-		let popOption = "width = 800px, height=700px, top=300px, left=300px, scrollbars=yes";
+		let popOption = "width = 800px, height=700px, top=500px, left=300px, scrollbars=yes";
 		
 		window.open(popUrl," TodoList ",popOption);
 
