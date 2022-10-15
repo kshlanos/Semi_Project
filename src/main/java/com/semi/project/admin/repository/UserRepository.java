@@ -21,6 +21,9 @@ public interface UserRepository extends JpaRepository<Member, Long>{
 
 
 
+
+
+
 	
 
 	

@@ -31,4 +31,6 @@ public interface NoticeMainRepository extends JpaRepository<Notice, Long> {
 	          "AND (n.noticeTitle LIKE '%' || :searchValue || '%')")
 	Page<Notice> findBySearchValue(@Param("noticeCode")NoticeType noticeCode, @Param("noticeDelete")String noticeDelete, @Param("searchValue")String searchValue, Pageable pageable);
 
+
+
 }

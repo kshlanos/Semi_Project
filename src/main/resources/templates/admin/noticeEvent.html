@@ -14,33 +14,47 @@
 
     <div th:replace="common/header.html"></div> 
     
-    <div th:replace="common/noticeheader.html"></div> 
+    <div th:replace="common/noticeheaderEvent.html"></div> 
     
      	<div id="notice_write_box">
+     	    <th:block sec:authorize="isAuthenticated()">
+            	<th:block sec:authorize="hasRole('ADMIN')">
         	<button class="notice_write_button"
-        			th:onclick="'location.href=\'registNoticeEvent\''">글쓰기</button> <hr>
+        			th:onclick="'location.href=\'registNoticeEvent\''">글쓰기</button><hr>
+        		</th:block>
+        	</th:block>
         </div>
-        <th:block th:each="notice : ${ eventList }">
-
+        <br><br><br>
+        <th:block th:each="notice : ${ eventList }"
+        		  th:onclick="|location.href='/admin/noticeEventDetail?noticeNo=${notice.noticeNo}'|"
+        		  style="cursor:pointer;">
         <!-- 이벤트 게시판 -->
         <table class="event_list">
+
             <tr>
-                <td th:text="${ notice.noticeTitle }"></td>
-                <td th:text="${ notice.noticeEventContent }"></td>
-                <td th:text="${ notice.eventStart } + '~' + ${ notice.eventEnd }"></td>            
+                <td th:text="${ notice.noticeTitle }"
+                	th:onclick="|location.href='/admin/noticeEventDetail?noticeNo=${notice.noticeNo}'|"
+                	style="cursor:pointer;"></td>
+                <td th:text="${ notice.noticeEventContent }"
+                	th:onclick="|location.href='/admin/noticeEventDetail?noticeNo=${notice.noticeNo}'|"
+                	style="cursor:pointer;"></td>
+                <td th:text="${ notice.eventStart } + '~' + ${ notice.eventEnd }"
+                	th:onclick="|location.href='/admin/noticeEventDetail?noticeNo=${notice.noticeNo}'|"
+                	style="cursor:pointer;"></td>            
                 <td>
                     <div class="event_image_box">
                         <th:block th:each="append : ${ notice.noticeAppendFileList }"
-                        		  th:onclick="|location.href='/admin/noticeEventDetail?noticeNo=${notice.noticeNo}">
+                        		  th:onclick="|location.href='/admin/noticeEventDetail?noticeNo=${notice.noticeNo}'|">
 	                        <img class="event_image_thumbnail"
 	                        	 th:if="${ append.appendType == 'TITLE' }"
-	                        	 th:src="${ append.appendThumbnailPath }" width="380px" height="220px">
+	                        	 th:src="${ append.appendThumbnailPath }" width="380px" height="220px"
+                        		 style="cursor:pointer;">
                     	</th:block>
                     <hr>
                     </div>
                 </td>
-            </tr>      
-        </th:block>    
+            </tr>     
+        </th:block> 
         </table>
         
 		<!-- 페이징 바 -->

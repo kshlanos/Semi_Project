@@ -15,11 +15,12 @@
     <div th:replace="common/noticeheaderDetail.html"></div> 
    
     <div>
-            <form th:action="@{/admin/noticeEventDetail}" method="post" class="userinfo">
+
+  <!--           <form th:action="@{/admin/noticeEventDetail}" method="post" class="userinfo">  -->
+        <form>
         <table class="detail_table">
             <tr>
                 <td class="detail_category"></td>
-                <td colspan="3" rowspan="3">프로필사진</td>
                 <td colspan="3" rowspan="3">관리자</td>
             </tr>
             <tr>
@@ -27,11 +28,18 @@
                 </td>
             </tr>
             <tr>
-                <td class="detail_info" th:text="${ notice.noticeRegDate } + ' / 조회수 ' + ${ notice.noticeViews } + '회'">
+                <td class="detail_info" th:text="'이벤트 기간 : ' + ${ notice.eventStart } + ' 부터 ' + ${ notice.eventEnd } + '까지'">
                 </td>
             </tr>
         </table>
         <table class="contents">
+        	<tr>
+				<div id="titleImgArea" align="center">
+					<th:block th:if="${ notice.noticeAppendFileList[0].appendThumbnailPath != null }">
+					<img width="1000" 
+						th:src="${ notice.noticeAppendFileList[0].appendThumbnailPath }"/>
+					<br>
+					</th:block>
             <tr>
                 <td class="con_info4" th:text="${ notice.noticeContent }">
                 </td>
@@ -39,16 +47,20 @@
         </table>
         </form>
         <div class="con_write_btn">
+        <th:block sec:authorize="isAuthenticated()">
+            <th:block sec:authorize="hasRole('ADMIN')">
             <input type="button" class="cw_update" value="수정하기" id="updateNoticeMain"
             	   th:onclick="|location.href='/admin/updateNoticeMain?noticeNo=${notice.noticeNo}'|">
         
-        <form th:action="@{/admin/deleteNoticeMain}" method="post">
+        <form th:action="@{/admin/deleteNoticeEvent}" method="post">
         	<input type="hidden" name="noticeNo" th:value="${ notice.noticeNo }">
 	        <td><p type="hidden" name="noticeDelete" th:value="${ notice.noticeDelete }"></p></td>
             <input type="submit" class="cw_delete" value="삭제하기" id="removeNotice">   
         </form>     
+        </th:block>
+        	</th:block>
             <button class="cw_list"
-            		th:onclick="|location.href='/admin/noticeMain'|">글목록</button>
+            		th:onclick="|location.href='/admin/noticeEvent'|">글목록</button>
         </div>
         <br><br>
     </div>

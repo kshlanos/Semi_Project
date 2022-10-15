@@ -56,7 +56,7 @@ public class NoticeController {
 		this.messageSourceAccesor = messageSourceAccesor;
 	}
 	
-	/* yml에 입력했던 image 값을 해당 어노테이션에 담음 */
+
 	@Value("${image.image-dir}")
 	private String IMAGE_DIR;
 	
@@ -104,10 +104,7 @@ public class NoticeController {
 		return "/admin/noticeMainDetail";
 		
 	}
-	/* ---------------- */	
-	
-	
-	
+
 
 	/* 공지사항 작성 기능 구현 */
 	@GetMapping(value = {"/registNoticeMain"})
@@ -133,10 +130,7 @@ public class NoticeController {
 		return "redirect:/admin/noticeMain";
 	}
 	
-	/* ------------------ */
-	
-	
-	
+
 	/* 공지사항 수정 기능 구현 */
 	@GetMapping(value = {"/updateNoticeMain"})
 	public String goModifyNoticeMain(Model model, Long noticeNo) {
@@ -156,14 +150,8 @@ public class NoticeController {
 		
 	}
 	
-
-	
-	/* ---------------- */
-
-	
 	
 	/* 공지사항 삭제 기능 구현 */
-	
 	@PostMapping(value = {"/deleteNoticeMain"})
 	public String deleteNotice(@ModelAttribute NoticeDTO deleteNotice, Long noticeNo) {
 		
@@ -175,11 +163,10 @@ public class NoticeController {
 		return "redirect:/admin/noticeMain";
 	}
 	
-	/* ---------------- */
+
+	/* -------------------------------------------------------------------------------- */
 	
-	
-	
-	
+
 	/* 이벤트 목록 조회 구현 */
 	@GetMapping(value = {"/noticeEvent"})
 	public String selectAllEventList(@RequestParam(defaultValue="1") int page, @RequestParam(required=false) String searchValue, Model model) {
@@ -204,33 +191,24 @@ public class NoticeController {
 		
 		return "admin/noticeEvent";
 	}
+
 	
-//	/* 이벤트 상세 조회 기능 구현 */
-//	
-//	@GetMapping(value = {"/noticeEvent"})
-//	public String getNoticeEvent() {
-//		return "/admin/noticeEvent";
-//	}
+	/* 이벤트 상세 조회 구현 */
+	@GetMapping(value = {"/noticeEventDetail"})
+	public String goNoticeEventDetail(Model model, Long noticeNo) {
+		
+		log.info("[이벤트게시글 확인] ===========================");
+		log.info("[이벤트게시글 확인] 게시글번호 : {}", noticeNo);		
+		NoticeDTO notice = noticeService.selectNoticeEventDetail(noticeNo);
+
+		log.info("[이벤트게시글 확인] 썸넬 : {}", notice);	
+		model.addAttribute("notice", notice);
+
+		return "/admin/noticeEventDetail";
+	}
+
 	
-	
-//	/* 이벤트 상세 조회 구현 */
-//	@GetMapping(value = {"/noticeEventDetail"})
-//	public String gotNoticeEventDetail(Model model, Long noticeNo) {
-//		
-//		return "/admin/noticeEventDetail";
-//	}
-	
-	
-	
-//	/* 이벤트 등록 기능 구현 */
-//	@GetMapping(value = {"/registNoticeEvent"})
-//	public String goRegistNoticeEvent() {
-//		
-//		
-//		return "/admin/registNoticeEvent";
-//	}
-	
-	/* 이벤트 등록 기능 구현 만지는중 */
+	/* 이벤트 등록 기능 구현 */
 	@GetMapping(value = {"/registNoticeEvent"})
 	public String goRegistNoticeEvent() {
 		
@@ -238,15 +216,7 @@ public class NoticeController {
 		return "/admin/registNoticeEvent";
 	}
 
-//	/* 회원상세및수정조회 */
-//	@GetMapping(value = {"/userUpdateAdmin"})
-//	public String getUserUpdateAdmin(Model model, Long memberNo) {
-//		
-//		MemberDTO user = userService.updateUserAdmin(memberNo);
-//		model.addAttribute("user", user);
-//		return "/admin/userUpdateAdmin";
-//	}
-	
+
 	@PostMapping(value = {"/registNoticeEvent"})
 	public String RegistNoticEventThumbnail(NoticeDTO notice, List<MultipartFile> attachImage,
 				@AuthenticationPrincipal MemberDTO member) {
@@ -341,13 +311,27 @@ public class NoticeController {
 		
 		return "redirect:/admin/noticeEvent";
 	}
+
+
+	/* 이벤트 삭제 기능 구현 */
+	@PostMapping(value = {"/deleteNotice"})
+	public String deleteEvent(@ModelAttribute NoticeDTO deleteNotice, Long noticeNo) {
+		
+		log.info("[noticeController] noticeNo : {}", noticeNo);
+		noticeService.removeNotice(deleteNotice);
+		
+		log.info("[UserController] deleteNotice : {}", deleteNotice);
+		
+		return "redirect:/admin/noticeEvent";
+	}
+	
+
 	
 	
-	
+	/* -------------------------------------------------------------------------------- */	
 	
 	
 	/* 회원 관리 기능 구현 */
-	
 	@GetMapping(value = {"/userListAdmin"})
 	public String getUserListAdmin(@RequestParam(defaultValue="1") int page, @RequestParam(required=false) String searchValue, Model model) {
 		Page<MemberDTO> userList = userService.selectUserList(page, searchValue);
@@ -366,14 +350,13 @@ public class NoticeController {
 		log.info("[UserController] userList : {}", userList.getContent());
 
 
-//		if(searchValue != null && !searchValue.isEmpty()) {
-//			model.addAttribute("searchValue", searchValue);
-//		}
+
 		
 		return "/admin/userListAdmin";
 	}
 	
-	/* 회원상세및수정조회 */
+	
+	/* 회원상세 및 수정 조회 */
 	@GetMapping(value = {"/userUpdateAdmin"})
 	public String getUserUpdateAdmin(Model model, Long memberNo) {
 		
@@ -382,12 +365,11 @@ public class NoticeController {
 		return "/admin/userUpdateAdmin";
 	}
 	
+	
 	/* 회원수정 */
 	@PostMapping(value = "/userUpdateAdmin")
-	public String modifyUserAdmin(@ModelAttribute MemberDTO updateUser/*, @RequestParam String zipCode, @RequestParam String address1 @RequestParam String address2*/) {
+	public String modifyUserAdmin(@ModelAttribute MemberDTO updateUser) {
 		
-//		String address = zipCode + "$" + address1;
-//		updateUser.setMemberAddress(address);
 		
 		log.info("[UserController] ModifyUser request user : {}", updateUser);
 		userService.modifyUser(updateUser);
@@ -395,8 +377,8 @@ public class NoticeController {
 		return "redirect:/admin/userListAdmin";
 	}
 	
-	/*회원비활성*/
 	
+	/* 회원 비활성 */
 	@PostMapping(value = {"/userDeleteAdmin"})
 	public String deleteUserAdmin(@ModelAttribute MemberDTO deleteUser, Long memberNo) {
 		
@@ -408,18 +390,6 @@ public class NoticeController {
 		return "redirect:/admin/userListAdmin";
 	}
 	
-//	@GetMapping(value = "/userDeleteAdmin")
-//	public String deleteUserAdmin(Model model, Long memberNo) {
-//		
-//		log.info("[UserController] memberNo : {}", memberNo);
-//		userService.removeUser(deleteUser);
-//		
-//		log.info("[UserController] deleteUser : {}", deleteUser);
-//		
-//		return "redirect:/admin/userListAdmin";
-//	}
-	
-
 	
 	/* 회원 문의 조회 기능 구현 */
 	@GetMapping(value = {"/userQnaListAdmin"})
@@ -439,8 +409,9 @@ public class NoticeController {
 		return "/admin/userQnaListAdmin";
 	}
 	
-	/* 회원 문의 상세 조회 기능 구현 */
 	
+	
+	/* 회원 문의 상세 조회 기능 구현 */
 	@GetMapping(value = {"/userQnaDetail"})
 	public String getUserQnaDetail(Model model, Long inquiryNo) {
 		
@@ -451,10 +422,10 @@ public class NoticeController {
 		return "/admin/userQnaDetail";
 	}
 	
+	
 	/* 회원 문의 답변 기능 구현 */
 	@PostMapping("/registComment")
 	public ResponseEntity<List<CommentDTO>> registInquiryComment(@RequestBody CommentDTO registComment,
-	//	public ResponseEntity<List<CommentDTO>> registInquiryComment(@RequestBody CommentDTO registComment,
 			@AuthenticationPrincipal MemberDTO member) {
 		
 		log.info("[코멘트 테스트] ================================");
@@ -485,6 +456,8 @@ public class NoticeController {
 //		
 //		return ResponseEntity.ok(commentList);
 //	}
+	
+	
 	@GetMapping("/loadComment")
 	public ResponseEntity<List<CommentDTO>> loadComment(Inquiry refInquiry) {
 		
@@ -511,17 +484,6 @@ public class NoticeController {
 	}
 
 	
-//	/* 공지사항 상세 조회 구현 */
-//	@GetMapping(value = {"/noticeMainDetail"})
-//	public String getNoticeMainDetail(Model model, Long noticeNo) {
-//		
-//		NoticeDTO notice = noticeService.selectNoticeDetail(noticeNo);
-//		
-//		model.addAttribute("notice", notice);
-//		return "/admin/noticeMainDetail";
-//		
-//	}
-//	/* ---------------- */	
 
 	
 }

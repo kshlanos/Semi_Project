@@ -57,7 +57,6 @@ public class UserService {
 		if(searchValue != null && !searchValue.isEmpty()) {
 		} else {
 			userList = userRepository.findByMemberStatus(ACTIVE_STATUS, pageable);
-//			userList = userRepository.findByAll(pageable);
 		}
 		
 		return userList.map(member -> modelMapper.map(member, MemberDTO.class));
@@ -95,23 +94,7 @@ public class UserService {
 	}
 
 	
-//public Page<InquiryDTO> selectInquiryList(int page, MemberDTO member) {
-//		
-//		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY).descending());
-//		Page<Inquiry> inquiryList = inquiryRepository.findInquiryList(member.getMemberNo(), pageable);
-//		return inquiryList.map(inquiry -> modelMapper.map(inquiry, InquiryDTO.class));
-//	}
 
-
-//	public Page<InquiryDTO> selectQnaList(int page) {
-//		
-//		
-//		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY_QNA).descending());
-//		Page<Inquiry> qnaMain = qnaRepository.findByInquiryDelete(ACTIVE_STATUS, pageable);
-//		
-//		
-//		return qnaMain.map(inquiry -> modelMapper.map(inquiry, InquiryDTO.class));
-//	}
 
 	public Page<InquiryDTO> selectQnaList(int page, Long inquiryRefNo) {
 		
@@ -133,15 +116,22 @@ public class UserService {
 
 	
 	
-	public List<CommentDTO> registComment(CommentDTO registComment) {
+//	public List<CommentDTO> registComment(CommentDTO registComment) {
+//		
+//		commentRepository.save(modelMapper.map(registComment, Comment.class));
+//		
+//		List<Comment> commentList = commentRepository.findByRefInquiryAndCommentStatus(modelMapper.map(registComment.getRefInquiry(), Inquiry.class), ACTIVE_STATUS);
+//		
+//		return commentList.stream().map(comment -> modelMapper.map(comment, CommentDTO.class)).collect(Collectors.toList());
+//	}
+
+	public List<CommentDTO> registComment(CommentDTO registComment) {;
 		
 		commentRepository.save(modelMapper.map(registComment, Comment.class));
 		
 		List<Comment> commentList = commentRepository.findByRefInquiryAndCommentStatus(modelMapper.map(registComment.getRefInquiry(), Inquiry.class), ACTIVE_STATUS);
-		
 		return commentList.stream().map(comment -> modelMapper.map(comment, CommentDTO.class)).collect(Collectors.toList());
 	}
-	
 	
 //	public List<CommentDTO> loadComment(CommentDTO loadComment) {
 //		

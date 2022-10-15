@@ -137,6 +137,7 @@ public class NoticeService {
 		Page<Notice> eventList = null;
 		
 		if(searchValue != null && !searchValue.isEmpty()) {
+			eventList = noticeMainRepository.findBySearchValue(noticeCode, ACTIVE_STATUS, searchValue, pageable);
 		} else {
 			eventList = noticeMainRepository.findByNoticeCodeAndNoticeDelete(noticeCode, ACTIVE_STATUS, pageable);
 		}
@@ -144,7 +145,19 @@ public class NoticeService {
 		return eventList.map(notice -> modelMapper.map(notice, NoticeDTO.class));
 	}
 
-	
+
+
+
+	public NoticeDTO selectNoticeEventDetail(Long noticeNo) {
+		NoticeType noticeCode = new NoticeType();
+		noticeCode.setNoticeCode(2L);
+		Notice notice = noticeMainRepository.findByNoticeNoAndNoticeCodeAndNoticeDelete(noticeNo, noticeCode, ACTIVE_STATUS);
+		
+		return modelMapper.map(notice, NoticeDTO.class);
+	}
+
+
+
 
 
 }
