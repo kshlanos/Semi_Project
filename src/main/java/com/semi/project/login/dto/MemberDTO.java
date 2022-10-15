@@ -78,14 +78,14 @@ public class MemberDTO implements UserDetails{
         return true; // 활성화
     }
 
-	@Override
-	public String toString() {
-		return "MemberDTO [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
-				+ ", memberName=" + memberName + ", memberGender=" + memberGender + ", memberNickname=" + memberNickname
-				+ ", memberBirth=" + memberBirth + ", memberAddress=" + memberAddress + ", memberEmail=" + memberEmail
-				+ ", memberRating=" + memberRating + ", memberStatus=" + memberStatus + ", memberDeletedate="
-				+ memberDeletedate + ", memberRole=" + memberRole + ", memberRatingCount=" + memberRatingCount
-				+ ", memberPhone=" + memberPhone + ", memberGrade=" + memberGrade + "]";
-	}
-    
+    @Override
+    public String toString() {
+        return "MemberDTO [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
+                + ", memberName=" + memberName + ", memberGender=" + memberGender + ", memberNickname=" + memberNickname
+                + ", memberBirth=" + memberBirth + ", memberAddress=" + memberAddress + ", memberEmail=" + memberEmail
+                + ", memberRating=" + memberRating + ", memberStatus=" + memberStatus + ", memberDeletedate="
+                + memberDeletedate + ", memberRole=" + memberRole + ", memberRatingCount=" + memberRatingCount
+                + ", memberPhone=" + memberPhone + ", memberGrade=" + memberGrade + ", memberProfile=" + memberProfile
+                + "]";
+    }
 }

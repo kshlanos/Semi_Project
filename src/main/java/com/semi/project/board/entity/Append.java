@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -49,18 +48,12 @@ public class Append {
 	@Column(name = "APPEND_SORT")
 	private String appendSort;
 	
-	
 //	private InquiryDTO refinquiryNo;
-	
 	
 //	private CertifiedDTO refcertified_Id;
 	
 	@Column(name = "REF_NOTICE_NO")
 	private Long refnoticeNo;
-	
-	@OneToOne
-	@JoinColumn(name = "MEMBER_NO")
-	private Member member;
 	
 	@OneToOne
 	@JoinColumn(name = "MEMBER_NO")

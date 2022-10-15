@@ -21,11 +21,18 @@
 		frm.memberPwd.focus();
 		return false;
 	}
-	document.loginForm.submit(); //유효성 검사가 통과되면 서버로 전송.
+	loginForm.submit(); //유효성 검사가 통과되면 서버로 전송.
 }
-
-
 window.onload = function() {
+	
+   if(document.getElementById("deleteMember")) {
+        const $update = document.getElementById("deleteMember");
+        $update.onclick = function() {
+            location.href = "/mypage/delete";
+        }
+    }
+
+
 
     /* 화면에 랜더링 된 태그들이 존재하지 않는 경우 에러 발생 가능성이 있어서 if문으로 태그가 존재하는지 부터 확인하고 이벤트를 연결한다. */
     if(document.getElementById("register")) {
@@ -63,13 +70,7 @@ window.onload = function() {
         }
     }
     
-    if(document.getElementById("deleteMember")) {
-        const $update = document.getElementById("deleteMember");
-        $update.onclick = function() {
-            location.href = "/member/delete";
-        }
-    }
-
+ 
 	/* ------------------------------------------------------------- */
 
     if(document.getElementById("writeBoard")) {
