@@ -8,8 +8,8 @@ import lombok.Data;
 public class StudyMemberDTO {
 
 	private String StudyRole;
-	private String StudyId;
-	private String StudyMemId;
+	private Long StudyId;
+	private String StudyMemberId;
 	private Date studyStartDate;
 	private Date studyEndDate;
 	private String studyMemStatus;

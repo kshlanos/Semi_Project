@@ -1,40 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
- <link href="../css/mypage.css" rel="stylesheet" type="text/css">
+<meta charset="UTF-8"/>
+<title>studyCalendar</title>
+ <link rel="stylesheet" th:href="@{/css/mypage.css}">
  <link href="../css/header.css" rel="stylesheet" type="text/css">
-  <script>
-	    const message = '[[${message}]]';
-		message && alert(message);
-	</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body>
-     <div th:replace="common/header.html"></div> 
-    <br><br>  
- <div class="content">
-        <nav class="sidebar">
-            <ul class="sidebar1">
-     			<li class="liinfo"><a onclick="location.href='/mypage/infomodify'"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/mystudy'"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/inquirycheck'"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1문의하기</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/myboard'"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
-            </ul>
-        </nav>
-         <button onclick="location.href='/mypage/passwordchange';" class="pwdbtn"><img class="pwdchbtn" src="../images/free-icon-padlock-2575570.png">비밀번호 변경</button>
+
+    <div th:replace="common/header.html"></div>
+    <div class="infomove">
+    	<aside class="sidebar">
+    		<span onclick="location.href='/mypage/infomodify'"><img class="userimg1" src="../images/free-icon-profile-3106773.png"><p>회원정보</p></span><br>
+    		<span onclick="location.href='/mypage/mystudy'"><img class="userimg1" src="../images/free-icon-book-2931424.png"><p>진행중인 스터디</p></span><br>
+    		<span onclick="location.href='/mypage/inquirycheck'"><img class="userimg1" src="../images/free-icon-envelope-4477862.png"><p>1:1 문의하기</p></span><br>
+    		<span onclick="location.href='/mypage/myboard'"><img class="userimg1" src="../images/free-icon-billboard-4228907.png"><p>내 게시글</p></span><br>
+    		<span onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</span><br>
+		</aside>
+	<div id="user">
+   		<button onclick="location.href='/mypage/passwordchange';" class="pwdbtn"><img class="pwdchbtn" src="../images/free-icon-padlock-2575570.png">비밀번호 변경</button>
         <p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-profile-3106773.png">회원정보</p>
-        <img class="userImage" src="../images/free-icon-user-149071.png">    
-        <div class="infomovebtn">
-        <button class="infobtn">이미지 선택</button>
-        <button class="infobtn">이미지 제거</button>
+   
+        <form th:action="@{/mypage/infoimage}" method="post"  enctype="multipart/form-data">
+        
+        <div class="image-area">
+        	<img style="width: 150px; height: 150px;" 
+        	th:src="${ #authentication.principal.memberProfile == null ? '/images/free-icon-user-149071.png' : #authentication.principal.memberProfile.appendThumbnailPath }" 
+        	>
+		</div>
+        <div class="thumbnail-file-area" style="display: none;">
+        	<input type="file" name="attachImage" accept="image/gif,image/jpeg,image/png" required>
         </div>
+        <div>
+        <button type=submit class="infobtn">이미지 등록하기</button>
+        </div>
+        </form>
+       	</th:block>
+       	
         <br><br><br>
         <p class="teamscore">팀스터디 평점 : ☆☆☆☆☆</p>
         <br>
-        <form class="userinfo" action="/mypage/infomodify" method="post">
+        <form class="userinfo" th:action="@{/mypage/infomodify}" method="post">
             <p>아이디</p>
             <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberId }" readonly>
             <br>
@@ -69,13 +77,15 @@
             <div class="userbtn">
             <button type="submit" class="usersavebtn">수정하기</button>
             </div>
-        </form>    
-        <div class="userbtn">
-            <button onclick="location.href='/mypage/passwordcheck';" class="userdeletebtn">회원 탈퇴</button>
-        </div>
-    </div>
-    
-    <div th:replace="common/footer.html"></div>
+        	</form>    
+        	<div class="userbtn">
+            	<button onclick="location.href='/mypage/passwordcheck';" class="userdeletebtn">회원 탈퇴</button>
+        	</div>
+   	</div>
+   	</div>
+      	
+      	
+      	<div th:replace="common/footer.html"></div>
 
    
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -102,6 +112,40 @@
 	    }
 	
 	</script>
-
+	<!-- 사진파일 첨부 부분 -->
+	<script>
+		(function(){
+			// input type file 요소들
+		    const fileElements = document.querySelectorAll("[type=file]");
+		    // div image_area 요소들
+		    const imageArea = document.querySelectorAll(".image-area");
+		    // div 클릭 이벤트 발생 시 open 함수 동작
+		    imageArea.forEach(item => item.addEventListener('click', open));
+		    // change(파일 첨부가 발생하는 상황) 이벤트 발생 시 preview 함수 동작
+		    fileElements.forEach(item => item.addEventListener('change', preview));
+		    
+		    function open() {
+		    	const index = Array.from(imageArea).indexOf(this);
+		    	fileElements[index].click();
+		    }
+	
+		    function preview(){
+		    	const index = Array.from(fileElements).indexOf(this);
+		    	console.log(this);
+		    	console.log(this.files, this.files[0]);
+		        if (this.files && this.files[0]) {
+		           const reader = new FileReader();
+		           reader.readAsDataURL(this.files[0]);
+		           reader.onload = function () {
+		        	   if(index === 0){		        		   
+		        		   imageArea[index].innerHTML = `<img src='${reader.result}' style='width: 300px; height: 200px;'>`;
+		        	   } else {
+		        		   imageArea[index].innerHTML = `<img src='${reader.result}' style='width: 120px; height: 100px;'>`;  
+		        	   }
+		           }
+		       }
+		    }
+		})();
+	</script>
 </body>
 </html>

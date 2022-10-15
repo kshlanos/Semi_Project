@@ -12,7 +12,7 @@ public class TodoListDTO {
 
 	private String todoListId;
 	private Date todoListStartDate;
-	private String studyId;
+	private Long studyId;
 	private Date todoListEndDate;
 	private String todoListSort;
 	private Date todoListCreDate;

@@ -12,6 +12,8 @@ public interface StopwatchCertifiedRepository extends JpaRepository<StopwatchCer
 
 	StopwatchCertified findRemainTimeByMemberNoAndTodoListId(Long memberNo, String todoListId);
 
+	List<StopwatchCertified> findByTodoListId(String todoListId);
+
 
 
 }

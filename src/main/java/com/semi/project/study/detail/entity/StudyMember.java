@@ -36,7 +36,7 @@ public class StudyMember {
 	private String studyRole;
 	
 	@Column(name="STUDY_ID")
-	private String studyId;
+	private Long studyId;
 	
 	@Column(name="STUDY_START_DATE")
 	private Date studyStartDate;

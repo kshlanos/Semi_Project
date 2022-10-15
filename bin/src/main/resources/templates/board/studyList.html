@@ -20,15 +20,6 @@
     <h3>스터디 목록</h3>
     
         <!-- 카테고리 -->
-        <div class="category">
-           <select name="mainCategory" id="studyCategory">
-			   <option value="">카테고리 선택</option>
-			</select>
-		
-			<select name="subCategory" id="studyCaName">
-			   <option value="">카테고리 선택</option>
-			</select>
-        </div>
     </div>
         <!-- 게시판 -->
         
@@ -46,11 +37,11 @@
             </thead>
             <tbody class="list_body">
 				<tr th:each="board : ${ studyList }"
-					th:data-board-no="${board.studyBoardNo}"
+					th:data-board-no="${board.studyId}"
 					style="cursor:pointer;">
-                    <td th:text="${ board.studyBoardNo }"></td>
-                    <td th:text="${ board.studyCategory.studyCategory }"></td>
-                    <td class="txt_pink" th:text="${ board.studyCategory.studyCategory }"></td>
+                    <td th:text="${ board.studyId }"></td>
+                    <td th:text="${ board.studyCategory }"></td>
+                    <td class="txt_pink" th:text="${ board.categoryName }"></td>
                     <td th:text="${ board.studyTitle }"></td>
                     <td th:text="${ board.recruits }"></td>
                     <td th:text="${ board.closingDate }"></td>
@@ -67,7 +58,7 @@
         	const $list = document.querySelector(".list_body");
         	$list.addEventListener('click', function(e){
         		console.log(e.target.closest("tr").dataset.boardNo);
-        		location.href="/board/detailMember?studyBoardNo="+e.target.closest("tr").dataset.boardNo;
+        		location.href="/board/detailMember?studyId="+e.target.closest("tr").dataset.boardNo;
         	});
         	
         	</script>
