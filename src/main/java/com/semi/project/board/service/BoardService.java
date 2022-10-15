@@ -24,7 +24,8 @@ public class BoardService {
 	
 	public static final int TEXT_PAGE_SIZE = 10; 
 	public static final String SORT_BY = "studyBoardNo";
-	public static final char ACTIVE_STATUS = 'N';
+	public static final String ACTIVE_STATUS = "N";
+	public static final String STUDY_ID = "studyId";
 
 	private final BoardRepository boardRepository;
 	private final ModelMapper modelMapper;
@@ -42,7 +43,7 @@ public class BoardService {
 		Page<Board> studyList = null;
 		
 		if(searchValue != null && !searchValue.isEmpty()) {
-			
+			studyList = boardRepository.findBySearchValue(ACTIVE_STATUS, searchValue, pageable);
 		} else {
 			studyList = boardRepository.findByStudyStatus(ACTIVE_STATUS, pageable);
 		}
@@ -50,13 +51,31 @@ public class BoardService {
 		return studyList.map(board -> modelMapper.map(board, BoardDTO.class));
 	}
 
+	
+
+	
+	
+	
+	
+	
 	/* 게시글 상세 조회 */
-	public BoardDTO selectDetailMember(String studyBoardNo) {
+	public BoardDTO selectDetailMember(Long BoardNo) {
 		
-		Board board = boardRepository.findByStudyBoardNoAndStudyStatus(studyBoardNo, ACTIVE_STATUS);
+		Board board = boardRepository.findByStudyBoardNoAndStudyStatus(BoardNo, ACTIVE_STATUS);
 		board.setBoardCount(board.getBoardCount() + 1);
 		
 		return modelMapper.map(board, BoardDTO.class);
+	}
+	
+	
+	
+
+	/* 게시글 작성 */
+	public void registBoard(BoardDTO board) {
+		
+		board.setStudyId(STUDY_ID);
+		boardRepository.save(modelMapper.map(board, Board.class));
+		
 	}
 
 	public List<BoardDTO> selectBoard(List<StudyMemberDTO> studyList) {

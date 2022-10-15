@@ -32,12 +32,12 @@ public class FinePwdMailService implements MailRepository {
 		MimeMessage message = emailsender.createMimeMessage();
 
 		message.addRecipients(RecipientType.TO, to);// 보내는 대상
-		message.setSubject("GoodJob 계정 임시 패스워드");// 제목
+		message.setSubject("DOBEBEST 계정 임시 패스워드");// 제목
 
 		String msgg = "";
 		msgg += "<div style='margin:100px;'>";
 		msgg += "<h1> 안녕하세요</h1>";
-		msgg += "<h1> 통합 취업 정보 포탈 GoodJob 입니다</h1>";
+		msgg += "<h1>스터디 모임 관리 포탈 DOBEBEST 입니다</h1>";
 		msgg += "<br>";
 		msgg += "<p>회원님의 임시 비밀번호 입니다<p>";
 		msgg += "<p>해당 비밀번호로 로그인 후 패스워드 변경 부탁드립니다.<p>";
@@ -51,7 +51,7 @@ public class FinePwdMailService implements MailRepository {
 		msgg += tempPW + "</strong><div><br/> ";
 		msgg += "</div>";
 		message.setText(msgg, "utf-8", "html");// 내용
-		message.setFrom(new InternetAddress("dong5398@naver.com", "GoodJob_Admin"));// 보내는 사람
+		message.setFrom(new InternetAddress("dong5398@naver.com", "DOBEBEST_Admin"));// 보내는 사람
 
 		return message;
 	}

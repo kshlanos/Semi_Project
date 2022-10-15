@@ -16,8 +16,8 @@
             </a></h1>
         <nav>
             <ul class="menuBar">
-                <li><a href="/noticeMain">공지사항</a></li>
-                <li><a href="/studyList">스터디 찾기</a></li>
+                <li><a href="/admin/noticeMain">공지사항</a></li>
+                <li><a href="/board/studyList">스터디 찾기</a></li>
                 <li>커뮤니티</li>
             </ul>
         </nav>
@@ -28,7 +28,7 @@
                 	<li><a href="login/register">회원가입</a></li>
                	</th:block>
                	<th:block sec:authorize="isAuthenticated()">
-               	<li><a href="login/logout">로그아웃</a></li>
+               	<li><a href="/login/logout">로그아웃</a></li>
                 <li><a href="/mypage/infomodify">마이페이지</a></li>
                 </th:block>
             </ul>

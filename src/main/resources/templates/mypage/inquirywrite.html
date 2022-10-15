@@ -7,6 +7,11 @@
  <link href="../css/mypage.css" rel="stylesheet" type="text/css">
  <link href="../css/header.css" rel="stylesheet" type="text/css">
 </head>
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
 <body>
 	 <div th:replace="common/header.html"></div> 
     <br><br><br><br><br><br>
@@ -27,8 +32,8 @@
         <br><br>
        <textarea id="textarea1" name="inquiryContent" rows="20" cols="118" style="resize:none;"  placeholder="내용을 입력해주세요" ></textarea>
        <button type="submit" onclick="location.href='/mypage/inquirycheck';" class="inqbtn1">확인</button>
-       <button type="reset" onclick="location.href='/mypage/inquirycheck';" class="inqbtn2">취소</button>
     </form>
+    <button type="reset" onclick="location.href='/mypage/inquirycheck';" class="inqbtn2">취소</button>
     <br>
 
     </div> 

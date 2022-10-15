@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoBeBest</title>
+    <link href="../css/noticeMainDetail.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" th:srec="@{js/noticeEvent.js}"></script>
+</head>
+<body>
+    <div th:replace="common/header.html"></div> 
+    
+    <div th:replace="common/noticeheaderDetail.html"></div> 
+   
+
+    <div>
+        <table class="detail_table">
+            <tr>
+                <td class="detail_category"></td>
+                <td colspan="3" rowspan="3">프로필사진</td>
+                <td colspan="3" rowspan="3">관리자</td>
+            </tr>
+            <tr>
+                <td class="detail_title" th:text="${ notice.noticeTitle }">
+                    우수 회원에 대한 안내
+                </td>
+            </tr>
+            <tr>
+                <td class="detail_info" th:text="${ notice.noticeRegDate } + ' / 조회수 ' + ${ notice.noticeViews } + '회'">
+                </td>
+            </tr>
+        </table>
+        <table class="contents">
+            <tr>
+                <td class="con_info4" th:text="${ notice.noticeContent }">
+                </td>
+            </tr>
+        </table>
+        <div class="con_write_btn">
+            <!--  <button class="cw_update" id="updateNotice">수정하기</button>-->
+            <input type="button" class="cw_update" value="수정하기" id="updateNotice">
+            <!-- <button class="cw_delete">삭제하기</button>  -->
+            <input type="button" class="cw_delete" value="삭제하기" id="removeNotice">           
+            <button class="cw_list"
+            		th:onclick="|location.href='/admin/noticeMain'|">글목록</button>
+        </div>
+        <br><br>
+    </div>
+    
+</body>
+</html>

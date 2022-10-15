@@ -57,6 +57,7 @@ public class Inquiry {
 	@Column(name = "INQUIRY_MOD_DATE")
 	private Date inquiryModDate;
 	
+	
 	@Column(name = "INQUIRY_REF_NO")
 	private Long inquiryRefNo;
 	

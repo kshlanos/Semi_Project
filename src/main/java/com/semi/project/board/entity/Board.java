@@ -29,12 +29,16 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "TBL_STUDY")
-@SequenceGenerator(name = "STUDY_SEQ_GENERATOR", sequenceName = "SEQ_STUDY_ID", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "BOARD_SEQ_GENERATOR", sequenceName = "SEQ_STUDY_BOARD_NO", initialValue = 1, allocationSize = 1)
+
+
+
 @DynamicInsert
 
 public class Board {
 
-	@Id
+
+	
 	@Column(name = "STUDY_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDY_SEQ_GENERATOR")
 	private String studyId;
@@ -78,11 +82,14 @@ public class Board {
 	@Column(name = "STUDY_REF_ID")
 	private String studyRefId;
 	
+	@Id
 	@Column(name = "STUDY_BOARD_NO")
-	private String studyBoardNo;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOARD_SEQ_GENERATOR")
+	private Long studyBoardNo;
 	
-	@Column(name = "MEMBER_NO")
-	private Long memberNo;
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_NO")
+	private Member boardWriter;
 	
 	@Column(name = "STUDY_CONDITION")
 	private String studyCondition;
@@ -90,10 +97,11 @@ public class Board {
 	@Column(name = "STUDY_TITLE")
 	private String studyTitle;
 	
-	@ManyToOne
-	@JoinColumn(name="MEMBER_NO", insertable=false, updatable=false)
-	private Member member;
+	@Column(name = "STUDY_NAME")
+	private String studyName;
 	
-		
+	@Column(name = "BOARD_COUNT")
+	private Long boardCount;
+	
 	
 }

@@ -2,6 +2,7 @@ package com.semi.project.board.dto;
 
 import java.sql.Date;
 
+import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.login.entity.Member;
 
 import lombok.Data;
@@ -16,18 +17,19 @@ public class BoardDTO {
 	private Long recruits;
 	private String studyPlace;
 	private String studyContent;
-	private String studyCategory;
+	private CategoryDTO studyCategory;
 	private Date studyStartDate;
 	private Date studyEndDate;
 	private Date studyRegDate;
 	private Date studyUpdDate;
 	private String studyStatus;
 	private String studyRefId;
-	private String studyBoardNo;
-	private Long memberNo;
+	private Long studyBoardNo;
+	private MemberDTO boardWriter;
 	private String studyCondition;
 	private String studyTitle;
-	private Member member;
+	private String studyName;
+	private Long boardCount;
 	
 }
 

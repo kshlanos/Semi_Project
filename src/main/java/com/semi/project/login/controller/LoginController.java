@@ -9,6 +9,7 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -172,18 +173,20 @@ public class LoginController {
 			log.info(memberId);
 			log.info(memberName);
 			log.info(memberEmail);
+			
 			if(mdto != null) {
 				// 임시 패스워드 메일 발송 및 변수 저장
 				String tempPw = passwordEncoder.encode(finePwdMailService.sendSimpleMessage(memberEmail));
 				log.info(tempPw);
+				updatepassword.setMemberPwd(tempPw);
 				// System.out.println("tempPw : " + tempPw);
 				// 임시 패스워드 db 에 저장
-				memberService.changeTempPw(tempPw, memberId);
+				memberService.changeTempPw(updatepassword);
 			return tempPw;
 			}
 			return null;
 		}
-	 
+
 	  protected Authentication createNewAuthentication(Authentication currentAuth, String memberId) {
 	    	
 	    	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);

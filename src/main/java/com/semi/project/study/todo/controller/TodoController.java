@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.semi.project.login.dto.CustomUser;
+import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.study.detail.service.StudyMemberService;
 import com.semi.project.study.todo.dto.StopwatchCertifiedDTO;
 import com.semi.project.study.todo.dto.TodoListDTO;
@@ -44,7 +45,7 @@ public class TodoController {
 //	}
 	
 	@GetMapping("/todoList")
-	public String selectTodoList(Model model, String todoListStartDate, int studyNo, @AuthenticationPrincipal CustomUser user) {
+	public String selectTodoList(Model model, String todoListStartDate, int studyNo, @AuthenticationPrincipal MemberDTO user) {
 		
 		log.info("[TodoController] todoListStartDate : {}", todoListStartDate);
 		
@@ -65,7 +66,7 @@ public class TodoController {
 	}
 	
 	@GetMapping("/todoModify")
-	public String todoModify(Model model, String todoListStartDate, int studyNo, @AuthenticationPrincipal CustomUser user) {
+	public String todoModify(Model model, String todoListStartDate, int studyNo, @AuthenticationPrincipal MemberDTO user) {
 		
 		log.info("[TodoController Modify] todoListStartDate : {}", todoListStartDate);
 		
@@ -93,7 +94,7 @@ public class TodoController {
 	}
 	
 	@GetMapping("/stopwatch")
-	public String stopwatch(Model model, String todoListId, @AuthenticationPrincipal CustomUser user) {
+	public String stopwatch(Model model, String todoListId, @AuthenticationPrincipal MemberDTO user) {
 		
 		log.info("[TodoController Stopwatch] todoListId : {}", todoListId);
 		
@@ -111,7 +112,7 @@ public class TodoController {
 	}
 	
 	@PostMapping("/stopwatch")
-	public String PlayStopwatch(Model model, Long remainTime, String todoListId, @AuthenticationPrincipal CustomUser user) {
+	public String PlayStopwatch(Model model, Long remainTime, String todoListId, @AuthenticationPrincipal MemberDTO user) {
 		
 		stopwatchCertifiedService.playStopwatch(remainTime, todoListId, user.getMemberNo());
 		

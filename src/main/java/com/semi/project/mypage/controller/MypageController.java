@@ -3,6 +3,7 @@ package com.semi.project.mypage.controller;
 import java.util.List;
 
 import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,7 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.semi.project.board.dto.BoardDTO;
 import com.semi.project.board.service.BoardService;
-import com.semi.project.login.dto.CustomUser;
+import com.semi.project.common.Pagenation;
+import com.semi.project.common.PagingButtonInfo;
 import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.login.service.AuthenticationService;
 import com.semi.project.login.service.MemberService;
@@ -31,12 +33,17 @@ import com.semi.project.study.detail.service.StudyMemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
-/* 테스트 */
-@Controller
 @Slf4j
+@Controller
 @RequestMapping("/mypage")
 public class MypageController {
 	
+	 @GetMapping("/login/login")
+	public String loginForm() {
+			
+		return "redirect:/login/login";
+	}
+
 	private final PasswordEncoder passwordEncoder;
     private final MessageSourceAccessor messageSourceAccessor;
     private final MemberService memberService;
@@ -56,22 +63,21 @@ public class MypageController {
         this.studyMemberService = studyMemberService;
         this.boardService = boardService;
     }
-	
+
+    protected Authentication createNewAuthentication(Authentication currentAuth, String memberId) {
+    	
+    	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
+    	UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(newPrincipal, currentAuth.getCredentials(), newPrincipal.getAuthorities());
+    	newAuth.setDetails(currentAuth.getDetails());
+        return newAuth;
+        
+  }
 	@GetMapping("/infomodify")
 	public String getinfoModify() {
 		
 		return "mypage/infomodify";
 	}
-	
-	 protected Authentication createNewAuthentication(Authentication currentAuth, String memberId) {
-	    	
-	    	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
-	    	UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(newPrincipal, currentAuth.getCredentials(), newPrincipal.getAuthorities());
-	    	newAuth.setDetails(currentAuth.getDetails());
-	        return newAuth;
-	        
-	  }
-	  /* 회원정보 수정*/
+	 /* 회원정보 수정*/
 	  @PostMapping("/infomodify")
 	    public String modifyMember(@ModelAttribute MemberDTO updateMember,
 	    		@RequestParam String zipCode, @RequestParam String address1, @RequestParam String address2,
@@ -99,7 +105,7 @@ public class MypageController {
 	    	
 	    	return "redirect:/mypage/infomodify";
 	    }
-	
+	  
 	@GetMapping("/passwordchange")
 	public String getpasswordChange() {
 		
@@ -113,9 +119,11 @@ public class MypageController {
 	}
 	
 	@GetMapping("/mystudy")
-	public String getmyStudy(Model model, @AuthenticationPrincipal CustomUser user) {
 
-		List<StudyMemberDTO> studyList = studyMemberService.selectAllStudy(user.getMemberNo());
+	public String getmyStudy(Model model, @AuthenticationPrincipal MemberDTO member){
+
+
+		List<StudyMemberDTO> studyList = studyMemberService.selectAllStudy(member.getMemberNo());
 				
 		List<BoardDTO> study = boardService.selectBoard(studyList);
 		
@@ -138,12 +146,13 @@ public class MypageController {
 		return "mypage/inquirywrite";
 	}
 	
+	/* 작성한 문의글내용 DB에 전송. */
 	@PostMapping("/inquirywrite")
 	public String inquiryBoard(InquiryDTO inquiry, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
 		
-		log.info("[MypageController] ==========");
-		log.info("[MypageController] inquiryBoard request : {}", inquiry);
-		log.info("[MypageController] inquiryBoard request : {}", member);
+//		log.info("[MypageController] ==========");
+//		log.info("[MypageController] inquiryBoard request : {}", inquiry);
+//		log.info("[MypageController] inquiryBoard request : {}", member);
 		
 		inquiry.setMember(member);
 		inquiryService.inquiryBoard(inquiry);
@@ -154,13 +163,58 @@ public class MypageController {
 	}
 	
 	@GetMapping("/inquirymodify")
-	public String getinquiryModify() {
+	public String getinquiryModify(Model model, Long inquiryNo) {
+			
+		log.info("[MypageController kjjkh] =====================================");
+		log.info("[MypageController] inquiryNo : {}", inquiryNo);
+		
+		List<InquiryDTO> inquiry = inquiryService.inquiryconfirm(inquiryNo);
+		
+		model.addAttribute("inquiry", inquiry);
+		
+		log.info("inquiry : {}", inquiry);
 		
 		return "mypage/inquirymodify";
 	}
 	
+	/* 문의글 수정하기 */
+	@PostMapping("/inquirymodify")
+	public String inquiryChange(InquiryDTO inquiry, RedirectAttributes rttr) {
+		
+		log.info("[MypageController kjjkh] =====================================");
+		log.info("[MypageController] inquiry : {}", inquiry);
+		
+		inquiryService.inquiryChange(inquiry);
+		
+		return "redirect:/mypage/inquirycheck";
+	}
+	
+	/* 문의글 삭제하기 */
+	@PostMapping("/inquiryconfirm")
+	public String inquirydelete(Long inquiryNo) {
+		
+		inquiryService.inquirydelete(inquiryNo);
+		return "redirect:/mypage/inquirycheck";
+	}
+	
+	/* 문의내역 페이징처리 및 조회 */
 	@GetMapping("/inquirycheck")
-	public String getinquiryCheck() {
+	public String getinquiryCheck(@RequestParam(defaultValue="1") int page, @AuthenticationPrincipal MemberDTO member, Model model) {
+		
+		//log.info("[MypageController] ==========");
+		//log.info("[MypageController] param page : {}", page);
+		
+		Page<InquiryDTO> inquiryList = inquiryService.selectInquiryList(page, member);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(inquiryList);
+		
+		//log.info("[MypageController] MypageController : {}", inquiryList);
+		//log.info("[MypageController] MypageController : {}", inquiryList.getContent());
+		//log.info("[MypageController] Paging : {}", paging);
+		
+		model.addAttribute("inquiryList", inquiryList);
+		model.addAttribute("paging", paging);
+		
+		//log.info("[MypageController] ==========");
 		
 		return "mypage/inquirycheck";
 	}
@@ -172,7 +226,17 @@ public class MypageController {
 	}
 	
 	@GetMapping("/inquiryconfirm")
-	public String getinquiryConfirm() {
+	/*# @RequestParam 생략*/
+	public String getinquiryConfirm(Model model, Long inquiryNo) {
+		
+		log.info("[MypageController 54541] =====================================");
+		log.info("[MypageController] inquiryNo : {}", inquiryNo);
+		
+		List<InquiryDTO> inquiry = inquiryService.inquiryconfirm(inquiryNo);
+		
+		model.addAttribute("inquiry", inquiry);
+		
+		log.info("inquiry : {}", inquiry);
 		
 		return "mypage/inquiryconfirm";
 	}
