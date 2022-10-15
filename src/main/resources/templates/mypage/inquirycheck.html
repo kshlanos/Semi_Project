@@ -1,83 +1,92 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-  <link rel="stylesheet" th:href="@{/css/mypage.css}">
-  <link href="../css/header.css" rel="stylesheet" type="text/css">
+<meta charset="UTF-8"/>
+<title>studyCalendar</title>
+ <link rel="stylesheet" th:href="@{/css/mypage.css}">
+ <link href="../css/header.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body>
-	<div th:replace="common/header.html"></div> 
-    <br><br>
-    <div class="content">
-        <nav class="sidebar">
-            <ul class="sidebar1">
-                <li class="liinfo"><a onclick="location.href='/mypage/infomodify'"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/mystudy'"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/inquirycheck'"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1문의하기</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/myboard'"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
-            </ul>
-        </nav>
-        <button onclick="location.href='/mypage/inquirywrite';" class="inqbtn3"><img class="inqimg" src="../images/free-icon-envelope-4477862.png">문의하기</button>
-        <p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-envelope-4477862.png">1:1 문의하기</p>
-        <p class="inqname">문의내역</p>
-        <table class="menutable">
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>등록일</th>
-                <th>상태</th>
-                <th>작성자</th>
-            </tr>
-			<tr th:each="inquiry : ${ inquiryList }"
-				th:onclick="|location.href='/mypage/inquiryconfirm?inquiryNo=${inquiry.inquiryNo}'|"
-				style="cursor:pointer;">
-				<td th:text="${ inquiry.inquiryNo}"></td>
-				<td th:text="${ inquiry.inquiryTitle}"></td>
-				<td th:text="${ inquiry.inquiryRegDate}"></td>
-				<td th:text="${ inquiry.inquiryStatus}"></td>
-				<td th:text="${ inquiry.member.memberName}"></td>
-        </table>
-        
-		<!-- 페이징 바 -->
-		<div id="paging" align="center" style="margin-top:20px;">
 
-				<!-- 맨 앞으로 이동 -->
-				<!-- boart/list안에 page라는 파라미터가 있으면 계산해서 가져온 @{${paging.startPage}}를 이 버튼안에 넣겠다.-->
-				<button
-					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
-				
-				<!-- boart/list안에 page라는 파라미터가 있으면 계산해서 가져온 @{${paging.startPage}}의 -1한 값을 버튼안에 넣겠다.-->
-				<!-- 이전 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
-					th:disabled="${ inquiryList.first }">&lt;</button>
-
-				<!-- 숫자 버튼 -->
-				<th:block
-					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
-					<button
-						th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
-						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
-					</button>
-				</th:block>
-
-				<!-- 다음 페이지로 이동 -->
-				<button
-					th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
-					th:disabled="${ inquiryList.last }">></button>
-
-				<!-- 맨 끝으로 이동 -->
-				<button
-					th:onclick="'location.href=\'/inquiry/check?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
-
-			
-		</div>
-		
-
-        
-    </div>
+    <div th:replace="common/header.html"></div>
+    <div class="infomove">
+        	<aside class="sidebar">
+    		<span onclick="location.href='/mypage/infomodify'"><img class="userimg1" src="../images/free-icon-profile-3106773.png"><p>회원정보</p></span><br>
+    		<span onclick="location.href='/mypage/mystudy'"><img class="userimg1" src="../images/free-icon-book-2931424.png"><p>진행중인 스터디</p></span><br>
+    		<span onclick="location.href='/mypage/inquirycheck'"><img class="userimg1" src="../images/free-icon-envelope-4477862.png"><p>1:1 문의하기</p></span><br>
+    		<span onclick="location.href='/mypage/myboard'"><img class="userimg1" src="../images/free-icon-billboard-4228907.png"><p>내 게시글</p></span><br>
+    		<span onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</span><br>
+		</aside>
+	<div id="calendar">
+			<div class="inqbtn3">
+			 <button onclick="location.href='/mypage/inquirywrite';" ><img class="inqimg" src="../images/free-icon-envelope-4477862.png">문의하기</button>
+			</div>
+            <p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-envelope-4477862.png">1:1 문의하기</p>
+            <p class="inqname">문의내역</p>
+            <table class="menutable">
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>등록일</th>
+                    <th>상태</th>
+                    <th>작성자</th>
+                </tr>
+                <tr th:each="inquiry : ${ inquiryList }"
+                    th:onclick="|location.href='/mypage/inquiryconfirm?inquiryNo=${inquiry.inquiryNo}'|"
+                    style="cursor:pointer;">
+                    <td th:text="${ inquiry.inquiryNo}"></td>
+                    <td th:text="${ inquiry.inquiryTitle}"></td>
+                    <td th:text="${ inquiry.inquiryRegDate}"></td>
+                    <td th:text="${ inquiry.inquiryStatus}"></td>
+                    <td th:text="${ inquiry.member.memberName}"></td>
+            </table>
+            
+            <!-- 페이징 바 -->
+            <div id="paging" align="center" style="margin-top:20px;">
+    
+                    <!-- 맨 앞으로 이동 -->
+                    <!-- boart/list안에 page라는 파라미터가 있으면 계산해서 가져온 @{${paging.startPage}}를 이 버튼안에 넣겠다.-->
+                    <button
+                        th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
+                    
+                    <!-- boart/list안에 page라는 파라미터가 있으면 계산해서 가져온 @{${paging.startPage}}의 -1한 값을 버튼안에 넣겠다.-->
+                    <!-- 이전 페이지로 이동 -->
+                    <button
+                        th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+                        th:disabled="${ inquiryList.first }">&lt;</button>
+    
+                    <!-- 숫자 버튼 -->
+                    <th:block
+                        th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+                        <button
+                            th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+                            th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+                        </button>
+                    </th:block>
+    
+                    <!-- 다음 페이지로 이동 -->
+                    <button
+                        th:onclick="'location.href=\'/mypage/inquirycheck?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+                        th:disabled="${ inquiryList.last }">></button>
+    
+                    <!-- 맨 끝으로 이동 -->
+                    <button
+                        th:onclick="'location.href=\'/inquiry/check?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+    
+                
+            </div>
+            
+    
+            
+        </div>
+   	</div>
+      	
+      	
+      	<div th:replace="common/footer.html"></div>
+      	
+      <!-- <script src="../../static/js/studyCalendar.js"></script> -->
+      <script src="/js/studyCalendar.js"></script>
 </body>
 </html>

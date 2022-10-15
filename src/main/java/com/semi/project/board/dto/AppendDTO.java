@@ -18,6 +18,7 @@ public class AppendDTO {
 //	private InquiryDTO refinquiryNo;
 //	private CertifiedDTO refcertified_Id;
 	private Long refnoticeNo;
+	private MemberDTO member;
 	private Long memberNo;
 	private String appendStatus;
 	private String appendPath;

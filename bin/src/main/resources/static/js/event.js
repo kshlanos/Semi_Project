@@ -1,33 +1,46 @@
+ function login(){
+	var frm = document.loginForm;
+	if (!frm.memberId.value) { //아이디를 입력하지 않으면.
+		swal({
+			  title: "아이디를 입력하세요.",
+			  //text: "15자리내의 영문,숫자",
+			  icon: "warning",
+			  button: "확인",
+			});
+
+		frm.memberId.focus();
+		return false;
+	}
+	if (!frm.memberPwd.value) { //패스워드를 입력하지 않으면.
+		swal({
+			  title: "비밀번호를 입력하세요.",
+			  //text: "16자리내의 영문,숫자,특수문자",
+			  icon: "warning",
+			  button: "확인",
+			});
+		frm.memberPwd.focus();
+		return false;
+	}
+	document.loginForm.submit(); //유효성 검사가 통과되면 서버로 전송.
+}
+
+
 window.onload = function() {
 
     /* 화면에 랜더링 된 태그들이 존재하지 않는 경우 에러 발생 가능성이 있어서 if문으로 태그가 존재하는지 부터 확인하고 이벤트를 연결한다. */
-    if(document.getElementById("regist")) {
-        const $regist = document.getElementById("regist");
+    if(document.getElementById("register")) {
+        const $regist = document.getElementById("register");
         $regist.onclick = function() {
-            location.href = "/member/regist";
+            location.href = "/login/register";
         }
     }
+}
 
-    if(document.getElementById("duplicationCheck")) {
+//아이디 비밀번호 유효성 검사 (공백일 경우 경고창 표시)
 
-        const $duplication = document.getElementById("duplicationCheck");
-
-        $duplication.onclick = function() {
-            let memberId = document.getElementById("memberId").value.trim();
-
-            fetch("/member/idDupCheck", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8'
-                },
-                body: JSON.stringify({memberId: memberId})
-            })
-                .then(result => result.text())
-                .then(result => alert(result))
-                .catch((error) => error.text().then((res) => alert(res)));
-
-        }
-    }
+  
+    
+ 
 
     if(document.getElementById("login")) {
         const $login = document.getElementById("login");
@@ -72,4 +85,3 @@ window.onload = function() {
             location.href = "/thumbnail/regist";
         }
     }
-}

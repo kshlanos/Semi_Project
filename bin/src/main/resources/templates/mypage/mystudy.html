@@ -20,42 +20,38 @@
                 <li class="liinfo"><a onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
             </ul>
         </nav>
+        
         <p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-book-2931424.png">진행중인 스터디</p>
-        <table class="menutable">
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>모집인원</th>
-                <th>시작일자</th>     
-                <th>종료일자</th>
-                <th>작성자</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>html, css 너무어려워요 도와주세요 ㅠㅠ</td>
-                <td>6</td>
-                <td>2022-10-01</td>
-                <td>2022-09-31</td>
-                <td>홍길동</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>html, css 꿀팁</td>
-                <td>5</td>
-                <td>2022-10-01</td>
-                <td>2022-09-31</td>
-                <td>유관순</td>
-            </tr>
-        </table>
-        <div class="page-wrap">
-            <ul class="page-nation">
-                <li><a href="/board/list?p=1">1</a></li>
-                <li><a href="/board/list?p=2">2</a></li>
-                <li><a href="/board/list?p=3">3</a></li>
-                <li><a href="/board/list?p=4">4</a></li>
-                <li><a href="/board/list?p=5">5</a></li>
-            </ul>
-        </div>
+
+        <table id="listArea" style="margin: auto;">
+				<tr>
+					<th style="width: 100px">스터디 제목</th>
+					<th style="width: 100px">모집 인원</th>
+					<th style="width: 100px">시작일</th>
+					<th style="width: 100px">종료일</th>
+					<th style="width: 100px">작성자</th>
+					<th style="display: none">스터디번호</th>
+				</tr>
+				<tr th:each="study, studyL : ${ studyList }"
+				    th:onclick="|location.href='/study/studyCalendar?studyNo=${ studyL.index }'|"
+				    style="cursor:pointer;" id="move">
+					<td th:text="${ study.studyTitle }"></td>
+					<td th:text="${ study.recruits }"></td>
+					<td th:text="${ study.studyStartDate }"></td>
+					<td th:text="${ study.studyEndDate }"></td>
+					<td th:text="${ study.member.memberNickname }"></td>
+					<td style="display: none" th:text="${ studyL.index }"></td>
+				</tr>
+			</table>
+			
     </div>
+    
+    <script>
+document.querySelector('#move').addEventListener('click', function() {
+	
+		
+    		
+    	});
+    </script>
 </body>
 </html>

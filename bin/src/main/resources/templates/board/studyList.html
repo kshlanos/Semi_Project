@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +8,9 @@
     <title>DoBeBest</title>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
     <link href="../css/study_list.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    
 </head>
 <body>
     <div th:replace="common/header.html"></div> 
@@ -18,24 +21,13 @@
     
         <!-- 카테고리 -->
         <div class="category">
-            <select class="select01">
-                <option>카테고리</option>
-                <option>어학</option>
-                <option>IT</option>
-                <option>자격증</option>
-                <option>운동</option>
-                <option>취미</option>
-                <option>기타</option>
-            </select>
-            <select class="select02">
-                <option>카테고리</option>
-                <option>어학</option>
-                <option>IT</option>
-                <option>자격증</option>
-                <option>운동</option>
-                <option>취미</option>
-                <option>기타</option>
-            </select>
+           <select name="mainCategory" id="studyCategory">
+			   <option value="">카테고리 선택</option>
+			</select>
+		
+			<select name="subCategory" id="studyCaName">
+			   <option value="">카테고리 선택</option>
+			</select>
         </div>
     </div>
         <!-- 게시판 -->
@@ -53,11 +45,13 @@
                 </tr>
             </thead>
             <tbody class="list_body">
-                <tr th:each="board : ${ studyList }">
+				<tr th:each="board : ${ studyList }"
+					th:data-board-no="${board.studyBoardNo}"
+					style="cursor:pointer;">
                     <td th:text="${ board.studyBoardNo }"></td>
-                    <td th:text="${ board.studyCategory.studyCaName }"></td>
-                    <td class="txt_pink" th:text="${ board.studyCategory.studyCaName }"></td>
-                    <td th:text="${ board.studyId }"></td>
+                    <td th:text="${ board.studyCategory.studyCategory }"></td>
+                    <td class="txt_pink" th:text="${ board.studyCategory.studyCategory }"></td>
+                    <td th:text="${ board.studyTitle }"></td>
                     <td th:text="${ board.recruits }"></td>
                     <td th:text="${ board.closingDate }"></td>
                     <td th:text="${ board.studyCondition }"></td>
@@ -65,38 +59,109 @@
               
             </tbody>
 
-            <!-- 페이징처리 -->
-            <tfoot class="list_foot">
-                <tr>
-                    <td colspan="6">
-                        <span class="arrow radius-right">≪</span>
-                        <span class="arrow radius-left">＜</span>
-                        
-                        <a href="javascript:;" class="num_box txt_point">1</a>
-                        <a href="javascript:;" class="num_box ">2</a>
-                        <a href="javascript:;" class="num_box ">3</a>
-                        <a href="javascript:;" class="num_box ">4</a>
-                        <a href="javascript:;" class="num_box ">5</a>
-                        <a href="javascript:;" class="num_box ">6</a>
-                        <a href="javascript:;" class="num_box ">7</a>
-                        <a href="javascript:;" class="num_box ">8</a>
-                        <a href="javascript:;" class="num_box ">9</a>
-                        <a href="javascript:;" class="num_box ">10</a>
+			<tfoot>  
+            </tfoot>
+        </table>  
+        <script>
+        
+        	const $list = document.querySelector(".list_body");
+        	$list.addEventListener('click', function(e){
+        		console.log(e.target.closest("tr").dataset.boardNo);
+        		location.href="/board/detailMember?studyBoardNo="+e.target.closest("tr").dataset.boardNo;
+        	});
+        	
+        	</script>
+        	
 
-                        <span class="arrow radius-right">＞</span>
-                        <span class="arrow radius-left">≫</span>
-                    </td>
-                    <td>     
+        
+        
+        		<!-- 페이징 바 -->
+		<div id="paging" align="center" style="margin-top:20px;">
+
+			<th:block th:if="${ searchValue != null }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/studyList?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/studyList?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ studyList.first }">&lt;</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/board/studyList?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/studyList?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ sutdyList?.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/studyList?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+
+			</th:block>
+			
+			<!-- 검색값이 없는 경우 -->
+			<th:block th:if="${ param.searchValue == null || param.searchValue.isEmpty() }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/studyList?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/studyList?page=' + @{${paging.currentPage - 1}} + '\''"
+					th:disabled="${ studyList.first }">&lt;</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/board/studyList?page=' + @{${page}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/studyList?page=' + @{${paging.currentPage + 1}} + '\''"
+					th:disabled="${ studyList.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/studyList?page=' + @{${paging.endPage}} + '\''">>></button>
+			</th:block>
+			        <td>     
                         <button class="list_write_btn"
                         th:onclick="'location.href=\'studyWrite\''">모집하기</button>
                     </td>
-                </tr>    
-            </tfoot>
-        </table>  
-        <div class="search">
-            <input type="search" class="searchbar">
-            <button class="search_btn">검색</button>
-        </div>
+		</div>  
+        
+        
+        <!-- 검색 -->
+		<div class="search-area" align="center" style="margin-top:20px;">
 
+			<form id="searchForm" th:action="@{/board/studyList}" method="get"
+				style="display: inline-block">
+				<th:block th:if="${ searchValue != null }">
+					<input type="search" id="searchValue" name="searchValue"
+						th:value="${ searchValue }">
+				</th:block>
+				<th:block th:if="${ searchValue == null }">
+					<input type="search" id="searchValue" name="searchValue">
+				</th:block>
+				<button class="search_btn" type="submit">검색</button>
+			</form>
+        
+        </div>
+        
+        
+        
 </body>
 </html>

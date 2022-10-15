@@ -4,7 +4,7 @@
 
 
 .title{
-	width : 700px;
+	width : 925px;
 	height : 40px;
 	font-size: 20px;
 }
@@ -67,4 +67,8 @@
     margin: 5px 5px 5px 5px;
     background-color:#cfcfcf;
     border-radius: 5px;
+}
+
+.event_data{
+	
 }

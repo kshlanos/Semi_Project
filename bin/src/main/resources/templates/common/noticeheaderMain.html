@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <div id=notice_title class="notice_title"> 
+    <!-- 공지사항 타이틀 -->
+        <ul class="notice_category">
+            <li><a href="noticeMain">공지사항</a></li>
+            <li><a href="noticeEvent">이벤트</a></li>
+        </ul>
+    </div>
+
+    <form id="searchForm" th:action="@{/admin/noticeMain}" method="get">
+        <div id="searchBar" class="searchBar">
+         <th:block th:if="${ searchValue != null }">
+                <input id="input" type="search" role="combobox" name="searchValue" class="search" placeholder="검색할 내용을 입력하세요."
+                	   th:value="${ searchValue }"/>
+         </th:block>
+         <th:block th:if="${ searchValue == null }">
+                <input id="input" type="search" role="combobox" name="searchValue" class="search" placeholder="검색할 내용을 입력하세요."/>
+         </th:block>
+        </div> 
+        <div id="searchIcon" class="searchIcon">
+            <img class="searchIconTag" src="../images/MagnifyingGlass.png">
+        </div>
+    </form>
+</body>
+</html>

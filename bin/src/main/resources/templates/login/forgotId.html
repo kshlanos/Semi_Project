@@ -6,7 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아이디 찾기</title>
-    <link href="../css/login.css" rel="stylesheet" typ="text/css">
+    <link href="../css/login.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <script type="text/javascript" th:src="@{/js/forgotId.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
     <div style="text-align : center">
         <a href="/main">
@@ -17,10 +21,10 @@
         <tr>아이디 찾기</tr>
     </div>
     <div class="login-form">
-        <form>
-          <input type="text" name="name" class="text-field" placeholder="이름" autofocus required> 
-          <input type="tel" name="tel" class="text-field" placeholder="연락처" required>
-          <input type="submit" value="아이디 찾기" class="submit-btn">
+        <form action="/login/forgotId" method="post">
+          <input type="text" name="memberName" class="text-field" id="memberName" placeholder="이름" autofocus required> 
+          <input type="tel" name="memberPhone" class="text-field" id="memberPhone" placeholder="연락처" required>
+          <input type="button" value="아이디 찾기" class="submit-btn"  onclick="findId();">
         </form>
     <div class="links-id">
         <a href="forgotPassword">비밀번호 찾기</a>

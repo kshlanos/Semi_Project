@@ -16,15 +16,8 @@
     </div>
     <!-- 여기도 충돌수정 완료~~~~~~~~~~~~~~~~~! -->
 
-    <div id="searchUser" class="searchUser">
-        <select name="searchUserCategory" id="searchUserCategory">
-            <option value="user1">이름</option>
-            <option value="user2">아이디</option>
-            <option value="user3">닉네임</option>
-        </select>
-        <input id="searchUserBar" type="search" role="combobox" name="searchUserBar" class="searchUserBar"/>
-        <button id="searchUserButton" class="searchUserButton">검색</button>
-    </div>
+
+
 
     <table class="user_list_admin" align="center">
         <thead class="user_list_head">
@@ -38,109 +31,93 @@
                 <th>이메일</th>
                 <th>평점</th>
                 <th>주소</th>
-                <th>탈퇴여부</th>
+                <th>핸드폰번호</th>
             </tr>    
         </thead>
         <tbody class="user_list_body">
-            <tr>
-                <td>1</td>
-                <th>💎관리자</th>
-                <th>💎관리자</th>
-                <th>DOBEST</th>
-                <th>두비스트</th>
-                <th>1996.01.10</th>
-                <th>DOBEST@greedy.com</th>
-                <th>-</th>
-                <th>-</th>
-                <th>N</th>
+            <tr th:each="member : ${ userList }"
+            	th:onclick="|location.href='/admin/userUpdateAdmin?memberNo=${member.memberNo}'|"
+            	style="cursor:pointer;">
+                <td th:text="${ member.memberNo }"></td>
+                <td th:text="${ member.memberGrade }"></td>
+                <td th:text="${ member.memberName }"></td>
+                <td th:text="${ member.memberId }"></td>
+                <td th:text="${ member.memberNickname }"></td>
+                <td th:text="${ member.memberBirth }"></td>
+                <td th:text="${ member.memberEmail }"></td>
+                <td th:text="${ member.memberRating }"></td>
+                <td th:text="${ member.memberAddress }"></td>
+                <td th:text="'0' + ${ member.memberPhone }"></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <th>일반회원</th>
-                <th>홍길동</th>
-                <th>hong123</th>
-                <th>아빠라부를래</th>
-                <th>1443.01.23</th>
-                <th>hong123@greedy.com</th>
-                <th id="userScore">★★★★☆</th>
-                <th>경기도 남양주시 어쩌구저쩌구 무슨동 무슨호</th>
-                <th>N</th>
-            </tr>
-            <tr>
-                <td>2</td>
-                <th>일반회원</th>
-                <th>홍길동</th>
-                <th>hong123</th>
-                <th>아빠라부를래</th>
-                <th>1443.01.23</th>
-                <th>hong123@greedy.com</th>
-                <th id="userScore">★★★★☆</th>
-                <th>경기도 남양주시 어쩌구저쩌구 무슨동 무슨호</th>
-                <th>N</th>
-            </tr>
-            <tr>
-                <td>2</td>
-                <th>일반회원</th>
-                <th>홍길동</th>
-                <th>hong123</th>
-                <th>아빠라부를래</th>
-                <th>1443.01.23</th>
-                <th>hong123@greedy.com</th>
-                <th id="userScore">★★★★☆</th>
-                <th>경기도 남양주시 어쩌구저쩌구 무슨동 무슨호</th>
-                <th>N</th>
-            </tr>
-            <tr>
-                <td>2</td>
-                <th>일반회원</th>
-                <th>홍길동</th>
-                <th>hong123</th>
-                <th>아빠라부를래</th>
-                <th>1443.01.23</th>
-                <th>hong123@greedy.com</th>
-                <th id="userScore">★★★★☆</th>
-                <th>경기도 남양주시 어쩌구저쩌구 무슨동 무슨호</th>
-                <th>N</th>
-            </tr>
-            <tr>
-                <td>2</td>
-                <th>일반회원</th>
-                <th>홍길동</th>
-                <th>hong123</th>
-                <th>아빠라부를래</th>
-                <th>1443.01.23</th>
-                <th>hong123@greedy.com</th>
-                <th id="userScore">★★★★☆</th>
-                <th>경기도 남양주시 어쩌구저쩌구 무슨동 무슨호</th>
-                <th>N</th>
-            </tr>
-            <tr>
-                <td>2</td>
-                <th>일반회원</th>
-                <th>홍길동</th>
-                <th>hong123</th>
-                <th>아빠라부를래</th>
-                <th>1443.01.23</th>
-                <th>hong123@greedy.com</th>
-                <th id="userScore">★★★★☆</th>
-                <th>경기도 남양주시 어쩌구저쩌구 무슨동 무슨호</th>
-                <th>N</th>
-            </tr>
-            <tr>
-                <td>2</td>
-                <th>일반회원</th>
-                <th>홍길동</th>
-                <th>hong123</th>
-                <th>아빠라부를래</th>
-                <th>1443.01.23</th>
-                <th>hong123@greedy.com</th>
-                <th id="userScore">★★★★☆</th>
-                <th>경기도 남양주시 어쩌구저쩌구 무슨동 무슨호</th>
-                <th>N</th>
-            </tr>
-
 
         </tbody>
+        
+
     </table>
+    
+		<!-- 페이징 바 -->
+		<div id="paging" align="center" style="margin-top:20px;">
+
+			<th:block th:if="${ searchValue != null }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ userListAdmin.first }">&lt;</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ userListAdmin.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+
+			</th:block>
+			
+			<!-- 검색값이 없는 경우 -->
+			<th:block th:if="${ param.searchValue == null || param.searchValue.isEmpty() }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${paging.currentPage - 1}} + '\''"
+					th:disabled="${ userListAdmin?.first }">&lt;</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${page}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${paging.currentPage + 1}} + '\''"
+					th:disabled="${ userListAdmin?.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/userListAdmin?page=' + @{${paging.endPage}} + '\''">>></button>
+			</th:block>
+			
+		</div>  
 </body>
 </html>
