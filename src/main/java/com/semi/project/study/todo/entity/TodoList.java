@@ -39,7 +39,7 @@ public class TodoList {
 	private Date todoListStartDate;
 	
 	@Column(name="STUDY_ID")
-	private String studyId;
+	private Long studyId;
 	
 	@Column(name="TODOLIST_END_DATE")
 	private Date todoListEndDate;

@@ -271,11 +271,13 @@ public class MypageController {
 
 		List<StudyMemberDTO> studyList = studyMemberService.selectAllStudy(member.getMemberNo());
 				
+    	log.info("[StudyMemberController] studyList : {}", studyList);
+		
 		List<BoardDTO> study = boardService.selectBoard(studyList);
 		
 		model.addAttribute("studyList", study);
 		
-    	log.info("[MemberController] studyList : {}", study);
+    	log.info("[StudyMemberController] studyList : {}", study);
 		
 		return "/mypage/mystudy";
 	}

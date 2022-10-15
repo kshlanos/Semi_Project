@@ -10,4 +10,8 @@ public interface StudyMemberRepository extends JpaRepository<StudyMember, Intege
 
 	List<StudyMember> findByMemberNo(Long memberNo);
 
+	List<StudyMember> findByStudyId(Long studyId);
+
+	StudyMember findByStudyIdAndMemberNo(Long studyId, Long memberNo);
+
 }

@@ -28,7 +28,7 @@ public class StopwatchCertified {
 	@Id
 	@Column(name="STOPWATCH_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STOPWATCH_SEQ_GENERATOR")
-	private String stopwatchId;
+	private Long stopwatchId;
 	
 	@Column(name="TODOLIST_ID")
 	private String todoListId;

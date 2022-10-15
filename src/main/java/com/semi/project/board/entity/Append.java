@@ -56,8 +56,8 @@ public class Append {
 	private Long refnoticeNo;
 	
 	@OneToOne
-    @JoinColumn(name = "MEMBER_NO")
-    private Member member; 
+	@JoinColumn(name = "MEMBER_NO")
+	private Member member;
 	
 	@Column(name = "APPEND_STATUS")
 	private String appendStatus;

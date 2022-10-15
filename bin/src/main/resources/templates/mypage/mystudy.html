@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-  <link href="../css/mypage.css" rel="stylesheet" type="text/css">
-  <link href="../css/header.css" rel="stylesheet" type="text/css">
+<meta charset="UTF-8"/>
+<title>studyCalendar</title>
+ <link rel="stylesheet" th:href="@{/css/mypage.css}">
+ <link href="../css/header.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body>
- <div th:replace="common/header.html"></div> 
-    <br><br>
-    <div class="content">
-        <nav class="sidebar">
-            <ul class="sidebar1">
-               	<li class="liinfo"><a onclick="location.href='/mypage/infomodify'"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/mystudy'"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/inquirycheck'"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1문의하기</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/myboard'"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
-            </ul>
-        </nav>
-        
-        <p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-book-2931424.png">진행중인 스터디</p>
 
-        <table id="listArea" style="margin: auto;">
+    <div th:replace="common/header.html"></div>
+    <div class="infomove">
+        	<aside class="sidebar">
+    		<span onclick="location.href='/mypage/infomodify'"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</span><br>
+    		<span onclick="location.href='/mypage/mystudy'"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</span><br>
+    		<span onclick="location.href='/mypage/inquirycheck'"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1 문의하기</span><br>
+    		<span onclick="location.href='/mypage/myboard'"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</span><br>
+    		<span onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</span><br>
+		</aside>
+	<div id="calendar">
+			<p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-book-2931424.png">진행중인 스터디</p>
+   			 <table id="listArea"   class="menutable">
 				<tr>
 					<th style="width: 100px">스터디 제목</th>
 					<th style="width: 100px">모집 인원</th>
@@ -43,10 +41,14 @@
 					<td style="display: none" th:text="${ studyL.index }"></td>
 				</tr>
 			</table>
-			
-    </div>
-    
-    <script>
+
+                
+        </div>
+   	</div>
+
+      	
+      	
+	<script>
 document.querySelector('#move').addEventListener('click', function() {
 	
 		
