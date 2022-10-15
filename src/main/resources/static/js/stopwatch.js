@@ -26,6 +26,7 @@ buttonPause.onclick = function() {
 }
 
 function stopwatch() {
+		
     seconds--;
     changeSeconds.textContent = seconds > 9 ? seconds : '0' + seconds
 
@@ -35,16 +36,21 @@ function stopwatch() {
         seconds = 60
         changeSeconds.textContent = "00"
     }
+    
     if(minute < 0) {
         hour--;
         changeHour.textContent = hour > 9 ? hour : '0' + hour
         minute = 60
         changeMinute.textContent = "00"
-
-
+        
     }
-
+    
+    if(hour == '00' && minute == '00' && seconds == '00') {
+		buttonPause.onclick();
+	}
+    
     document.querySelector('#result').value = (hour*3600)+(minute*60)+seconds;
+   
 }
 
 document.querySelector('#save').addEventListener('click', function() {

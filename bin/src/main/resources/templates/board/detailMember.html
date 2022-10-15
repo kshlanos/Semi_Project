@@ -21,7 +21,7 @@
     <div>
         <table class="detail_table">
             <tr>
-                <td class="detail_category" th:text="${ board.studyCategory.studyCategory }"></td>
+                <td class="detail_category" th:text="${ board.studyCategory }"></td>
                 <td colspan="3" rowspan="3">프로필사진</td>
                 <td colspan="3" rowspan="3" th:text="${ board.boardWriter.memberNickname }"></td>
             </tr>
@@ -40,11 +40,11 @@
             </tr>
             <tr>
                 <td class="con_info1">카테고리1</td>
-                <td class="con_info2" th:text="${ board.studyCategory.studyCategory }"></td>
+                <td class="con_info2" th:text="${ board.studyCategory }"></td>
             </tr>
             <tr>
                 <td class="con_info1">카테고리2</td>
-                <td class="con_info2" th:text="${ board.studyCategory.studyCategory }"></td>
+                <td class="con_info2" th:text="${ board.categoryName }"></td>
             </tr>
             <tr>
                 <td class="con_info1">태그</td>
@@ -79,52 +79,76 @@
         </div>
 
         <!-- 스터디 신청자 리스트-->
-        <table class="req_list">
+        <table class="req_list" id="req_list"></table>
+        
+        <!-- 스터디 신청자 리스트-->
+        <table class="req_list" id="req_list">
+        	
             <tr>
-                <td class="profile_pt" colspan="3" rowspan="3">프로필사진</td>
+                <td class="profile_pt" colspan="3" rowspan="3"><img class="userImage" width="100px" src="../images/free-icon-user-149071.png">  </td>
             </tr>
             <tr>
                 <td class="profile_nick">바보다바보1</td>
                 <td class="profile_id">바보다바보2</td>
+                <td class="but_td"><button class="leader_ok">수락</button></td>
+                <td class="but_td"><button class="leader_no">거절</button></td>
             </tr>
             <tr>
                 <td class="profile_grade">★★★★☆</td>
             </tr>
         </table>
-        <table class="req_list">
-            <tr>
-                <td class="profile_pt" colspan="3" rowspan="3">프로필사진</td>
-            </tr>
-            <tr>
-                <td class="profile_nick">자바의신</td>
-                <td class="profile_id">javaS2JAVA</td>
-            </tr>
-            <tr>
-                <td class="profile_grade">★★★★☆</td>
-            </tr>
-        </table>
-
+        
+        
+      
 		<!-- 버튼용 테이블 -->
 		<div class="detail_btn">
 		<table id="boardWrite">
-		<input type="hidden" id="studyBoardNo" th:value="${board.studyBoardNo}"/>
+
 			<tr>
             	<td><button class="invite_btn"> 스터디 초대하기 </button></td>
 			</tr>
 		</table>
 		
 		
-		<table id ="btns" style="margin:auto;">
-			<input type="hidden" id="studyBoardNo" th:value="${board.studyBoardNo}"/>
+		<table id ="reqStudy" style="margin:auto;">
+			<input type="hidden" id="studyId" th:value="${board.studyId}"/>
 			<tr>
-		        <td><button class="req_btn"> 스터디 신청하기 </button></td>
+		        <td><button type="button" id="reqbtn"> 스터디 신청하기 </button></td>
 		        <td><button class="list_btn"
 		        		style="cursor:pointer;"
 					    th:onclick="'location.href=\'/board/studyList\''"> 글목록 </button></td>
-
-          
 			</tr>
 		</table>
+		
+		<script>
+		
+			/* 1. 신청하기 이벤트 */
+			if(document.getElementById("reqbtn")){
+				
+				const $reqbtn = document.getElementById("reqbtn");
+				
+				$reqbtn.onclick = function(){
+					
+					const studyId = document.getElementById("studyId").value;
+					
+					fetch("/board/reqbtn", {
+						method: "POST",
+						headers: {
+							'Content-Type': 'application/json;charset-UTF-8'
+						},
+						body: JSON.stringify({
+							refStudyId: studyId,
+						})
+					})
+					.then(result => result.json())
+					.then(data => console.log(data))
+					.catch(error => console.log(error));
+				}
+				
+			}
+		
+		</script>
+		
 		
 		<table id="boardWrite">
 			<tr>
@@ -135,11 +159,7 @@
         </div>
     </div>
     
-    <script>
-    c
-    
-    
-    </script>
+
     
 </body>
 </html>

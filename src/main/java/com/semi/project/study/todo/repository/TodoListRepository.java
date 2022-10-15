@@ -18,10 +18,12 @@ public interface TodoListRepository extends JpaRepository<TodoList, Integer>{
 			+ "WHERE todoListStartDate <= :todoDate "
 			+ "and todoListEndDate >= :todoDate "
 			+ "and studyId = :studyId")
-	List<TodoList> findAllBytodoListStartDateAndStudyId(@Param("todoDate") Date todoListStartDate, @Param("studyId") String studyId);
+	List<TodoList> findAllBytodoListStartDateAndStudyId(@Param("todoDate") Date todoListStartDate, @Param("studyId") Long studyId);
 
 	TodoList findBytodoListId(String todoListId);
 
 	List<TodoList> findStopwatchBytodoListId(String todoListId);
+
+	TodoList findStudyIdByTodoListId(String todoListId);
 	
 }

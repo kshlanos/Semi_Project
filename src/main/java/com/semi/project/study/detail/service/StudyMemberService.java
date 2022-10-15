@@ -29,7 +29,7 @@ public class StudyMemberService {
 		this.modelMapper = modelMapper;
 	}
 	
-	public String selectStudyId(int studyNo, Long memberNo) {
+	public Long selectStudyId(int studyNo, Long memberNo) {
 		
 		List<StudyMember> studyMember = studyMemberRepository.findByMemberNo(memberNo);
 		
@@ -37,7 +37,7 @@ public class StudyMemberService {
 		List<StudyMemberDTO> studyList = studyMember.stream().map(study -> modelMapper.map(study, StudyMemberDTO.class)).collect(Collectors.toList());
 		
 		
-		String studyId = studyList.get(0).getStudyId();
+		Long studyId = studyList.get(0).getStudyId();
 		
 		
 		return studyId;
@@ -50,6 +50,13 @@ public class StudyMemberService {
     	log.info("[MemberService] studyList : {}", studyList);
 		
 		return studyList.stream().map(study -> modelMapper.map(study, StudyMemberDTO.class)).collect(Collectors.toList());
+	}
+
+	public StudyMemberDTO selectRole(Long memberNo, Long studyId) {
+
+		StudyMember studyRole = studyMemberRepository.findByStudyIdAndMemberNo(studyId, memberNo);
+		
+		return modelMapper.map(studyRole, StudyMemberDTO.class);
 	}
 
 }
