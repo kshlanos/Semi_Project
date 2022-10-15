@@ -9,6 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.semi.project.board.dto.AppendDTO;
+
 import lombok.Data;
 
 @Data  
@@ -30,28 +32,10 @@ public class MemberDTO implements UserDetails{
     private Long memberRatingCount;
     private String memberPhone;
     private String memberGrade;
+    /* 이미지등록을위한 DTO추가 + toString등록*/
+    private AppendDTO memberProfile;
  
-    @Override
-    public String toString() {
-        return "MemberDto{" +
-                "memberNo=" + memberNo +
-                ", memberId='" + memberId + '\'' +
-                ", memberPwd='" + memberPwd + '\'' +
-                ", memberName='" + memberName + '\'' +
-                ", memberGender='" + memberGender + '\'' +
-                ", memberNickname='" + memberNickname + '\'' +
-                ", memberBirth='" + memberBirth + '\'' +
-                ", memberAddress=" + memberAddress +
-                ", memberEmail='" + memberEmail + '\'' +
-                ", memberRating='" + memberRating + '\'' +
-                ", memberStatus='" + memberStatus + '\'' +
-                ", memberDeletedate='" + memberDeletedate + '\'' +
-                ", memberRole='" + memberRole + '\'' +
-                ", memberRatingCount='" + memberRatingCount + '\'' +
-                ", memberPhone='" + memberPhone + '\'' +
-                ", memberGrade='" + memberGrade + '\'' +
-                '}';
-    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -93,5 +77,15 @@ public class MemberDTO implements UserDetails{
     public boolean isEnabled() {
         return true; // 활성화
     }
+
+	@Override
+	public String toString() {
+		return "MemberDTO [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
+				+ ", memberName=" + memberName + ", memberGender=" + memberGender + ", memberNickname=" + memberNickname
+				+ ", memberBirth=" + memberBirth + ", memberAddress=" + memberAddress + ", memberEmail=" + memberEmail
+				+ ", memberRating=" + memberRating + ", memberStatus=" + memberStatus + ", memberDeletedate="
+				+ memberDeletedate + ", memberRole=" + memberRole + ", memberRatingCount=" + memberRatingCount
+				+ ", memberPhone=" + memberPhone + ", memberGrade=" + memberGrade + "]";
+	}
     
 }

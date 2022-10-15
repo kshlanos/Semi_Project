@@ -18,7 +18,8 @@ public class AppendDTO {
 //	private InquiryDTO refinquiryNo;
 //	private CertifiedDTO refcertified_Id;
 	private Long refnoticeNo;
-	private Long memberNo;
+	/* 이미지변경을 위한 MemberDTO타입으로 변경*/
+	private MemberDTO member;
 	private String appendStatus;
 	private String appendPath;
 	private String appendThumbnailPath;

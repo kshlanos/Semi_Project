@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <link href="../css/mypage.css" rel="stylesheet" type="text/css">
+ <link rel="stylesheet" th:href="@{/css/mypage.css}">
  <link href="../css/header.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -20,18 +20,19 @@
     <p id="name">이메일</p>
     <hr id="line">
     <br>
-    <form id="textarea1">
-        <input type="text" name="inqtitle" style="width:1200px; height: 30px;" placeholder="제목을 입력해주세요">
+    <form id="textarea1" th:action="@{/mypage/inquirymodify}" method="post">
+  		<input type="hidden" name="inquiryNo" th:value="${inquiry[0].inquiryNo}">
+        <input type="text" name="inquiryTitle" style="width:1200px; height: 30px;" th:value="${inquiry[0].inquiryTitle}">
         <br><br>
         <button class="filebtn">파일첨부</button>
         <br><br>
-       <textarea id="textarea1" name="textContent" rows="20" cols="118" style="resize:none;"  placeholder="내용을 입력해주세요" ></textarea>
-    </form>
+       <textarea id="textarea1" name="inquiryContent" rows="20" cols="118" style="resize:none;"  th:text="${inquiry[0].inquiryContent}"></textarea>
     <br>
         <div class="inqmovebtn">
-            <button class="inqbtn1">확인</button>
-            <button class="inqbtn2">취소</button>
+            <button onclick="location.href='/mypage/inquirycheck';" class="inqbtn1">확인</button>
+            <button onclick="location.href='/mypage/inquirycheck';" class="inqbtn2">취소</button>
         </div>
-    </div> 
+    </form>
+    </div>  
 </body>
 </html>

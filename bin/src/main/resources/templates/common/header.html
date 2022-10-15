@@ -18,7 +18,12 @@
             <ul class="menuBar">
                 <li><a href="/admin/noticeMain">공지사항</a></li>
                 <li><a href="/board/studyList">스터디 찾기</a></li>
-                <li>커뮤니티</li>
+                <li><a onclick="alert('서비스 준비중입니다!');" style="cursor:pointer">커뮤니티</a></li>
+                    <th:block sec:authorize="isAuthenticated()">
+               			<th:block sec:authorize="hasRole('ADMIN')">
+				<li><a href="/admin/userQnaListAdmin">문의조회</a></li>
+						</th:block>
+					</th:block>
             </ul>
         </nav>
         <nav>
@@ -28,8 +33,13 @@
                 	<li><a href="login/register">회원가입</a></li>
                	</th:block>
                	<th:block sec:authorize="isAuthenticated()">
+               		<th:block sec:authorize="hasRole('ADMIN')">
+				<li><a href="/admin/userListAdmin">회원관리</a></li>
+					</th:block>
                	<li><a href="/login/logout">로그아웃</a></li>
+               		<th:block sec:authorize="hasRole('MEMBER')">
                 <li><a href="/mypage/infomodify">마이페이지</a></li>
+                	</th:block>
                 </th:block>
             </ul>
         </nav>

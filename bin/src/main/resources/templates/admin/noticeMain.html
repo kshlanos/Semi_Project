@@ -13,11 +13,16 @@
 <!-- 여기도 충돌수정 완료~~~~~~~~~~~~~~~~~! -->
     <div th:replace="common/header.html"></div> 
     
-    <div th:replace="common/noticeheader.html"></div> 
+    <div th:replace="common/noticeheaderMain.html"></div> 
     
     	<div id="notice_write_box">
+    	<th:block sec:authorize="isAuthenticated()">
+            <th:block sec:authorize="hasRole('ADMIN')">
         	<button class="notice_write_button"
-        	th:onclick="'location.href=\'registNoticeMain\''">글쓰기</button> <hr>
+        	th:onclick="'location.href=\'registNoticeMain\''">글쓰기</button><hr>
+        	</th:block>
+        </th:block>
+		<br><br><br>
         </div>
 
         <!-- 공지사항 게시판 -->

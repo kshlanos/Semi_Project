@@ -1,7 +1,11 @@
 package com.semi.project.mypage.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,8 +21,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.semi.project.board.dto.AppendDTO;
 import com.semi.project.board.dto.BoardDTO;
 import com.semi.project.board.service.BoardService;
 import com.semi.project.common.Pagenation;
@@ -32,11 +38,15 @@ import com.semi.project.study.detail.dto.StudyMemberDTO;
 import com.semi.project.study.detail.service.StudyMemberService;
 
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Slf4j
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
+	
+	@Value("${image.image-dir}")
+	private String IMAGE_DIR;
 	
 	 @GetMapping("/login/login")
 	public String loginForm() {
@@ -105,6 +115,88 @@ public class MypageController {
 	    	
 	    	return "redirect:/mypage/infomodify";
 	    }
+	  
+	  @PostMapping("/infoimage")
+		public String infoImage(MultipartFile attachImage, @AuthenticationPrincipal MemberDTO member, 
+				RedirectAttributes rttr) {
+			
+			log.info("{}", member);
+			log.info("[ThumbnailController] ==========================================");
+
+			log.info("[ThumbnailController] member request : {}", member);
+			log.info("[ThumbnailController] attachImage request : {}", attachImage);
+
+			String rootLocation = IMAGE_DIR;
+
+			String fileUploadDirectory = rootLocation + "/upload/profile/original";
+			String thumbnailDirectory = rootLocation + "/upload/profile/thumbnail";
+
+			File directory = new File(fileUploadDirectory);
+			File directory2 = new File(thumbnailDirectory);
+
+			log.info("[ThumbnailController] directory : {}", directory);
+			log.info("[ThumbnailController] directory2 : {}", directory2);
+
+			if (!directory.exists() || !directory2.exists()) {
+				log.info("[ThumbnailController] 폴더 생성 : {}", directory.mkdirs());
+				log.info("[ThumbnailController] 폴더 생성 : {}", directory2.mkdirs());
+			}
+			
+			AppendDTO fileInfo = new AppendDTO();
+			
+			try {
+
+				String originalFileName = attachImage.getOriginalFilename();
+
+				log.info("[ThumbnailController] originalFileName : " + originalFileName);
+
+				String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
+				String savedFileName = UUID.randomUUID().toString().replace("-", "") + ext;
+
+				log.info("[ThumbnailController] savedFileName : " + savedFileName);
+
+				attachImage.transferTo(new File(fileUploadDirectory + "/" + savedFileName));
+
+				/* DB에 저장할 파일의 정보 */
+
+				fileInfo.setAppendName(originalFileName);
+				fileInfo.setAppendInhName(savedFileName);
+				fileInfo.setAppendPath("/upload/profile/original/");
+				fileInfo.setAppendType("PROFILE");
+				/* 대표 사진에 대한 썸네일을 가공해서 저장한다. */
+				Thumbnails.of(fileUploadDirectory + "/" + savedFileName).size(300, 300)
+						.toFile(thumbnailDirectory + "/thumbnail_" + savedFileName);
+				fileInfo.setAppendThumbnailPath("/upload/profile/thumbnail/thumbnail_" + savedFileName);
+				fileInfo.setMember(member);
+			
+
+				log.info("[ThumbnailController] fileInfo : {}", fileInfo);
+
+				memberService.registThumbnail(fileInfo);
+				
+				/* 세션에 저장 되어 있는 로그인 회원의 정보를 변경한다. */
+				log.info("[ThumbnailController] ------------------------------------- member : {}", member);
+		    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		    	SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication, member.getMemberId()));
+
+				rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("mypage.regist"));
+				
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+
+				File deleteFile = new File(fileInfo.getAppendPath() + "/" + fileInfo.getAppendInhName());
+				deleteFile.delete();
+
+				File deleteThumbnail = new File(thumbnailDirectory + "/thumbnail_" + fileInfo.getAppendInhName());
+				deleteThumbnail.delete();
+
+			}
+
+			log.info("[ThumbnailController] ==========================================");
+
+			return "redirect:/mypage/infomodify";
+		}
+	  
 	  
 	@GetMapping("/passwordchange")
 	public String getpasswordChange() {

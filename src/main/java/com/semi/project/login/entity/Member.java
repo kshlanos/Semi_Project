@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
+
+import com.semi.project.board.entity.Append;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -82,6 +85,10 @@ public class Member {
 	
 	@Column(name = "MEMBER_GRADE")
 	private String memberGrade;
+	
+	/* 이미지등록을위한 엔티티 추가*/
+	@OneToOne(mappedBy="member")
+	private Append memberProfile;
 
 }
 

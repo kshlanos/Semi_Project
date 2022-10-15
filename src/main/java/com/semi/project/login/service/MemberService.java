@@ -6,10 +6,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
+import com.semi.project.board.dto.AppendDTO;
+import com.semi.project.board.entity.Append;
 import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.login.entity.Member;
 import com.semi.project.login.repository.MemberRepository;
+import com.semi.project.mypage.repository.AppendRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,15 +19,18 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 public class MemberService {
-
+	
 	private final MemberRepository memberRepository;
 	private final ModelMapper modelMapper;
 	private final PasswordEncoder passwordEncoder;
+	private final AppendRepository appendRepository;
 	
-	public MemberService(MemberRepository memberRepository, ModelMapper modelMapper,PasswordEncoder passwordEncoder) {
+	public MemberService(MemberRepository memberRepository, ModelMapper modelMapper,PasswordEncoder passwordEncoder
+			,AppendRepository appendRepository) {
 		this.memberRepository = memberRepository;
 		this.modelMapper = modelMapper;
 		this.passwordEncoder = passwordEncoder;
+		this.appendRepository = appendRepository;
 	}
 
 	public boolean selectMemberById(String memberId) {
@@ -84,6 +89,14 @@ public class MemberService {
 		Member savedMember = memberRepository.findByMemberId(updatepassword.getMemberId());
 		savedMember.setMemberPwd(updatepassword.getMemberPwd());
 
+	}
+	
+	/* 이미지를 저장하기 위한 메소드*/
+	public void registThumbnail(AppendDTO memberProfile) {
+		
+		appendRepository.save(modelMapper.map(memberProfile, Append.class));
+		log.info("werwer : {}", memberProfile.getMember());
+		
 	}
     
 	

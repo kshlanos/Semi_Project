@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,13 +18,22 @@
     </div>
 
     <div class="list_insert">
+    	<form id="studyWriteForm" th:action="@{/board/studyWrite}" method="post">
         <table align="center">
             <tr>
+                <td class="insert_title">
+                    <span>글 제목</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <input class="title" type="text" placeholder="제목을 입력하세요." name="studyTitle">
+                </td>
+            </tr>
+                        <tr>
                 <td class="insert_title">
                     <span>스터디 명</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="title" type="text" placeholder="스터디 그룹 명을 입력하세요.">
+                    <input class="title" type="text" placeholder="스터디 그룹 명을 입력하세요." name="studyName">
                 </td>
             </tr>
             <tr>
@@ -31,7 +41,7 @@
                     <span>카테고리</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <select class="select01">
+                    <select class="select01" name="board.studyCategory.studyCategory">
                         <option>카테고리</option>
                         <option>어학</option>
                         <option>IT</option>
@@ -47,7 +57,7 @@
                     <span>카테고리2</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <select class="select02">
+                    <select class="select02" name="board.studyCategory.studyCategory">
                         <option>카테고리</option>
                         <option>어학</option>
                         <option>IT</option>
@@ -63,13 +73,13 @@
                     <span>태그</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="title" type="text">
+                    <input class="title" type="text" name="studyTag">
                 </td>
             </tr>
             <tr>
                 <th width="130px" class="title"> 모집 마감일자 </th>
                 <td>
-                <input class="calender" type="date">
+                	<input class="calender" type="date" name="closingDate">
                 </td>
             </tr>
             <tr>
@@ -77,7 +87,7 @@
                     <span>목표 진행일수</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="title" type="text" placeholder="목표진행 일수를 입력하세요.">
+               		<input class="calender" type="date" name="targetDay">
                 </td>
             </tr>
             <tr>
@@ -85,7 +95,7 @@
                     <span>모집인원</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="title" type="text" placeholder="스터디 그룹 인원을 입력하세요.">
+                    <input class="title" type="text" placeholder="스터디 그룹 인원을 입력하세요." name="recruits">
                 </td>
             </tr>
             <tr>
@@ -93,7 +103,19 @@
                     <span>장소</span>
                 </td>
                 <td class="cont" colspan="3">
-                    <input class="title" type="text" placeholder="스터디 진행 장소를 입력하세요.">
+                    <input class="title" type="text" placeholder="스터디 진행 장소를 입력하세요." name="studyPlace">
+                </td>
+            </tr>
+              <tr>
+                <td class="insert_title">
+                    <span>진행상태</span>
+                </td>
+                <td class="cont" colspan="3">
+                    <select class="select03" name="studyCondition">
+                        <option>모집중</option>
+                        <option>진행중</option>
+                        <option>종료</option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -103,14 +125,18 @@
             </tr>
             <tr>
                 <td class="insert_write" colspan="5">
-                    <textarea name ="" cols="130" rows="20" placeholder="내용을 입력하세요."></textarea>
+                    <textarea cols="130" rows="20" placeholder="내용을 입력하세요." name="studyContent"></textarea>
                 </td>
             </tr>
         </table>
         <div class="write_btn">
-            <button class="w_btn">글쓰기</button>
-            <button class="c_btn">취소</button>
+            <button class="w_btn" type="submit"
+            		style="cursor:pointer;">글쓰기</button>
+            <button class="c_btn" type="button"
+            	style="cursor:pointer;"
+            	th:onclick="'location.href=\'/board/studyList\''">취소</button>
         </div>
+        </form>
     </div>
 </body>
 </html>
