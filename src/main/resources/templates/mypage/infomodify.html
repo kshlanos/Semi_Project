@@ -5,8 +5,13 @@
 <title>studyCalendar</title>
  <link rel="stylesheet" th:href="@{/css/mypage.css}">
  <link href="../css/header.css" rel="stylesheet" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+ <script type="text/javascript" th:src="@{/js/event.js}"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script>
+	    const message = '[[${message}]]';
+		message && alert(message);
+	 </script>
 </head>
 <body>
 
@@ -50,7 +55,7 @@
             <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberName }" readonly>
             <br>
             <p>생년월일</p>
-            <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberBirth }" readonly>
+            <input class="userinput" type="text" name="memberBirth" th:value="${ #authentication.principal.memberBirth }" readonly>
             <br>
             <p>e-mail</p>
             <input class="userinput" type="text" name="memberEmail" th:value="${ #authentication.principal.memberEmail }" readonly>
@@ -77,15 +82,16 @@
             <div class="userbtn">
             <button type="submit" class="usersavebtn">수정하기</button>
             </div>
+            
+            <input type="button" value="회원 탈퇴" class="userdeletebtn" id="deleteMember" name="deleteMember">
+        	
         	</form>    
-        	<div class="userbtn">
-            	<button onclick="location.href='/mypage/passwordcheck';" class="userdeletebtn">회원 탈퇴</button>
-        	</div>
+        	
    	</div>
    	</div>
       	
       	
-      	<div th:replace="common/footer.html"></div>
+    <div th:replace="common/footer.html"></div>
 
    
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

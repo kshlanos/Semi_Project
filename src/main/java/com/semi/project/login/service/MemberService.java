@@ -99,6 +99,15 @@ public class MemberService {
 		
 	}
     
+	/* 비밀번호 변경 */
+	public String updatePassword(MemberDTO member) {
+		
+		Member savedMember = memberRepository.findByMemberId(member.getMemberId());
+		savedMember.setMemberPwd(member.getMemberPwd());
+		
+		log.info("{member.getMemberPwd}",member.getMemberPwd());
+		return member.getMemberPwd();
+	}
 	
 	
 }

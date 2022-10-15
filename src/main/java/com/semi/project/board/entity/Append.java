@@ -6,13 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.semi.project.admin.entity.Notice;
 import com.semi.project.login.entity.Member;
 
 import lombok.Getter;
@@ -49,17 +48,16 @@ public class Append {
 	@Column(name = "APPEND_SORT")
 	private String appendSort;
 	
-	
 //	private InquiryDTO refinquiryNo;
-	
 	
 //	private CertifiedDTO refcertified_Id;
 	
 	@Column(name = "REF_NOTICE_NO")
 	private Long refnoticeNo;
 	
-	@Column(name = "MEMBER_NO")
-	private Long memberNo;
+	@OneToOne
+    @JoinColumn(name = "MEMBER_NO")
+    private Member member; 
 	
 	@Column(name = "APPEND_STATUS")
 	private String appendStatus;

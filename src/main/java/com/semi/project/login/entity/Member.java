@@ -39,7 +39,7 @@ public class Member {
 			strategy = GenerationType.SEQUENCE,
 			generator = "MEMBER_SEQ_GENERATOR"
 	)
-	private long memberNo;
+	private Long memberNo;
 	
 	@Column(name = "MEMBER_ID")
 	private String memberId;
@@ -57,7 +57,7 @@ public class Member {
 	private String memberNickname;			
 	
 	@Column(name = "MEMBER_BIRTH")
-	private Date memberbirth;			
+	private Date memberBirth;			
 	
 	@Column(name = "MEMBER_ADDRESS")
 	private String memberAddress;	

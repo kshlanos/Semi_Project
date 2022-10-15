@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -116,6 +117,28 @@ public class MypageController {
 	    	return "redirect:/mypage/infomodify";
 	    }
 	  
+	  /* 회원 탈퇴 */
+	    /* 저장 된 인증 객체로부터 정보를 얻어 memberService.removeMember() 호출
+	     * SecurityContextHolder.clearContext() 메서드 호출하여 세션 초기화 
+	     * member.delete 메세지 가져가서 메인으로 redirect하고 alert
+	     * */
+	    @GetMapping("/delete")
+	    public String deleteMember(@AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
+
+	        log.info("[MemberController] deleteMember ==========================================================");
+	        log.info("[MemberController] member : " + member);
+	        
+	        memberService.removeMember(member);
+
+	        SecurityContextHolder.clearContext();
+
+	        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.delete"));
+
+	        log.info("[MemberController] deleteMember ==========================================================");
+
+	        return "redirect:/main";
+	   }
+	  
 	  @PostMapping("/infoimage")
 		public String infoImage(MultipartFile attachImage, @AuthenticationPrincipal MemberDTO member, 
 				RedirectAttributes rttr) {
@@ -203,6 +226,37 @@ public class MypageController {
 		
 		return "mypage/passwordchange";
 	}
+	
+	/* 비밀번호 변경 */
+  	@ResponseBody
+  	@PostMapping("/passwordchange")
+  	public String updatePwd(@ModelAttribute MemberDTO member,@RequestParam String pwd, @RequestParam String pwd2, @AuthenticationPrincipal MemberDTO loginMember,
+    		RedirectAttributes rttr) {
+  		
+  		String result = null;
+  		log.info(pwd);
+  		log.info(pwd2);
+  		log.info("loginMember : {}",loginMember.getMemberPwd());
+  		String defpwd = loginMember.getMemberPwd();
+  		log.info(defpwd);
+  		
+  		if(passwordEncoder.matches(pwd, defpwd)){
+  			
+  			String encodePwd = passwordEncoder.encode(pwd2);
+  			member.setMemberPwd(encodePwd);
+  			member.setMemberId(loginMember.getMemberId());
+  			
+  			log.info("변경한 비밀번호 확인 : {} ", encodePwd);
+  			
+  			result = memberService.updatePassword(member);
+  			
+  			log.info("{}",member);
+  			
+  		}
+		return result; 
+  		
+  		
+  	}
 	
 	@GetMapping("/passwordcheck")
 	public String getpasswordCheck() {
