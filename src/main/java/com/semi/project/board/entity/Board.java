@@ -4,6 +4,7 @@ package com.semi.project.board.entity;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,19 +30,17 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "TBL_STUDY")
-@SequenceGenerator(name = "BOARD_SEQ_GENERATOR", sequenceName = "SEQ_STUDY_BOARD_NO", initialValue = 1, allocationSize = 1)
-
-
+@SequenceGenerator(name = "STUDYID_SEQ_GENERATOR", sequenceName = "SEQ_STUDY_ID", initialValue = 1, allocationSize = 1)
 
 @DynamicInsert
 
 public class Board {
 
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDYID_SEQ_GENERATOR")
 	@Column(name = "STUDY_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDY_SEQ_GENERATOR")
-	private String studyId;
+	private Long studyId;
 	
 	@Column(name = "STUDY_TAG")
 	private String studyTag;
@@ -50,7 +49,7 @@ public class Board {
 	private Date closingDate;
 	
 	@Column(name = "TARGET_DAY")
-	private Date targetDay;
+	private String targetDay;
 	
 	@Column(name = "RECRUITS")
 	private Long recruits;
@@ -60,7 +59,11 @@ public class Board {
 	
 	@Column(name = "STUDY_CONTENT")
 	private String studyContent;
-	
+
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "STUDY_CATEGORY")
+//	private Category category;
+
 	@Column(name = "STUDY_CATEGORY")
 	private String studyCategory;
 	
@@ -81,11 +84,11 @@ public class Board {
 	
 	@Column(name = "STUDY_REF_ID")
 	private String studyRefId;
-	
-	@Id
-	@Column(name = "STUDY_BOARD_NO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOARD_SEQ_GENERATOR")
-	private Long studyBoardNo;
+//	
+//	@Id
+//	@Column(name = "STUDY_BOARD_NO")
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOARD_SEQ_GENERATOR")
+//	private Long studyBoardNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
@@ -102,6 +105,9 @@ public class Board {
 	
 	@Column(name = "BOARD_COUNT")
 	private Long boardCount;
+	
+	@Column(name = "CATEGORY_NAME")
+	private String categoryName;
 	
 	
 }

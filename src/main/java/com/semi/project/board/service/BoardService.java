@@ -13,8 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.semi.project.board.dto.AppliyDTO;
 import com.semi.project.board.dto.BoardDTO;
+import com.semi.project.board.entity.Appliy;
 import com.semi.project.board.entity.Board;
+import com.semi.project.board.repository.AppliyRepository;
 import com.semi.project.board.repository.BoardRepository;
 import com.semi.project.study.detail.dto.StudyMemberDTO;
 
@@ -23,17 +26,19 @@ import com.semi.project.study.detail.dto.StudyMemberDTO;
 public class BoardService {
 	
 	public static final int TEXT_PAGE_SIZE = 10; 
-	public static final String SORT_BY = "studyBoardNo";
+	public static final String SORT_BY = "studyId";
 	public static final String ACTIVE_STATUS = "N";
 	public static final String STUDY_ID = "studyId";
 
 	private final BoardRepository boardRepository;
+	private final AppliyRepository appliyRepository;
 	private final ModelMapper modelMapper;
 
 	
 	/* 게시판 목록 조회 */
-	public BoardService(BoardRepository boardRepository, ModelMapper modelMapper) {
+	public BoardService(BoardRepository boardRepository, AppliyRepository appliyRepository, ModelMapper modelMapper) {
 		this.boardRepository = boardRepository;
+		this.appliyRepository = appliyRepository;
 		this.modelMapper = modelMapper;
 	}
 
@@ -59,9 +64,9 @@ public class BoardService {
 	
 	
 	/* 게시글 상세 조회 */
-	public BoardDTO selectDetailMember(Long BoardNo) {
+	public BoardDTO selectDetailMember(Long StudyId) {
 		
-		Board board = boardRepository.findByStudyBoardNoAndStudyStatus(BoardNo, ACTIVE_STATUS);
+		Board board = boardRepository.findByStudyIdAndStudyStatus(StudyId, ACTIVE_STATUS);
 		board.setBoardCount(board.getBoardCount() + 1);
 		
 		return modelMapper.map(board, BoardDTO.class);
@@ -73,7 +78,7 @@ public class BoardService {
 	/* 게시글 작성 */
 	public void registBoard(BoardDTO board) {
 		
-		board.setStudyId(STUDY_ID);
+		board.setStudyId(null);
 		boardRepository.save(modelMapper.map(board, Board.class));
 		
 	}
@@ -98,6 +103,17 @@ public class BoardService {
 		
 		return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
 		
+	}
+
+	public List<AppliyDTO> reqbtn(AppliyDTO reqbtn) {
+		
+		appliyRepository.save(modelMapper.map(reqbtn, Appliy.class));
+		
+//		List<Appliy> reqList 
+//			= appliyRepository.findByRefStudyIdAndAppliyStatus(reqbtn.getRefStudyId(), ACTIVE_STATUS);
+		
+
+		return null;
 	}
 
 }

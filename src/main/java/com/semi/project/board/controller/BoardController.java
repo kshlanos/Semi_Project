@@ -1,20 +1,24 @@
 package com.semi.project.board.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.semi.project.board.dto.AppliyDTO;
 import com.semi.project.board.dto.BoardDTO;
 import com.semi.project.board.service.BoardService;
 import com.semi.project.common.Pagenation;
 import com.semi.project.common.PagingButtonInfo;
 import com.semi.project.login.dto.MemberDTO;
-import com.semi.project.login.service.AuthenticationService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,12 +74,12 @@ public class BoardController {
 	
 	/* 게시글 상세보기 */
 	@GetMapping("detailMember")
-	public String selectDetailMember(Model model, Long studyBoardNo) {
+	public String selectDetailMember(Model model, Long studyId) {
 		
 		log.info("[BoardController] ========================================= ");
-		log.info("[BoardController] studyBoardNo : {}", studyBoardNo);
+		log.info("[BoardController] studyId : {}", studyId);
 		
-		BoardDTO board = boardService.selectDetailMember(studyBoardNo);
+		BoardDTO board = boardService.selectDetailMember(studyId);
 		
 		model.addAttribute("board", board);
 		
@@ -98,8 +102,8 @@ public class BoardController {
 		log.info("[BoardController] ========================================= ");
 		log.info("[BoardController] registBoard request : {}", board);
 		
-//		board.setBoardWriter(member);
-//		boardService.registBoard(board);
+		board.setBoardWriter(member);
+		boardService.registBoard(board);
 //		board.setMemberNo(member);
 //		boardService.registBoard(board);
 				
@@ -107,8 +111,24 @@ public class BoardController {
 	}
 	
 	
-	/* 글 삭제기능 */
-
+	@PostMapping("/reqbtn")
+	public ResponseEntity<List<AppliyDTO>> reqbtn(@RequestBody AppliyDTO reqbtn,
+			@AuthenticationPrincipal MemberDTO member){
+		
+		log.info("[BoardController] ========================================= ");
+		log.info("[BoardController] regbtn : {}", reqbtn);
+		
+		// 로그인 유저를 신청자로 설정 
+		reqbtn.setAppliyId(member);
+		
+		// 신청 후 업데이트 된 신청자 목록 조회해서 반환 
+		List<AppliyDTO> reqList = boardService.reqbtn(reqbtn);
+		
+		log.info("[BoardController] reqList : {}", reqList);
+		log.info("[BoardController] ========================================= ");
+		
+		return ResponseEntity.ok(reqList);
+	}
 	
 	
 

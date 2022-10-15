@@ -1,6 +1,7 @@
 package com.semi.project.board.repository;
 
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -27,9 +28,13 @@ public interface BoardRepository extends JpaRepository<Board, String>{
 	Page<Board> findBySearchValue(@Param("studyStatus") String studyStatus, @Param("searchValue") String searchValue, Pageable pageable);
 
 	
-	Board findByStudyBoardNoAndStudyStatus(Long boardNo, String studyStatus);
+//	Board findByStudyStudyIdAndStudyStatus(Long StudyId, String studyStatus);
 
 	Board findByStudyId(String studyId);
+
+	Board findByStudyIdAndStudyStatus(Long studyId, String activeStatus);
+
+	
 
 
 
