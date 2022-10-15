@@ -10,25 +10,32 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.semi.project.admin.dto.NoticeDTO;
+import com.semi.project.admin.entity.NoticeType;
 import com.semi.project.admin.service.NoticeService;
 import com.semi.project.admin.service.UserService;
 import com.semi.project.board.dto.AppendDTO;
+import com.semi.project.board.dto.CommentDTO;
 //import com.semi.project.admin.service.UserService;
 import com.semi.project.common.Pagenation;
 import com.semi.project.common.PagingButtonInfo;
+import com.semi.project.login.dto.CustomUser;
 import com.semi.project.login.dto.MemberDTO;
+import com.semi.project.mypage.dto.InquiryDTO;
+import com.semi.project.mypage.entity.Inquiry;
 
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -49,7 +56,7 @@ public class NoticeController {
 		this.messageSourceAccesor = messageSourceAccesor;
 	}
 	
-	/* yml에 입력했던 image 값을 해당 어노테이션에 담음 */
+
 	@Value("${image.image-dir}")
 	private String IMAGE_DIR;
 	
@@ -79,6 +86,10 @@ public class NoticeController {
 		model.addAttribute("noticeMain", noticeMain);
 		model.addAttribute("paging", paging);
 		
+		if(searchValue != null && !searchValue.isEmpty()) {
+			model.addAttribute("searchValue", searchValue);
+		}
+		
 		return "admin/noticeMain";
 	}
 	
@@ -93,10 +104,7 @@ public class NoticeController {
 		return "/admin/noticeMainDetail";
 		
 	}
-	/* ---------------- */	
-	
-	
-	
+
 
 	/* 공지사항 작성 기능 구현 */
 	@GetMapping(value = {"/registNoticeMain"})
@@ -106,12 +114,13 @@ public class NoticeController {
 	}
 	
 	@PostMapping(value = {"/registNoticeMain"})
-	public String registNoticeMain(NoticeDTO notice, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
-		
+	public String registNoticeMain(NoticeDTO notice, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {		
 		log.info("[NoticController] ====== 작성값 체크 ====== ");
 		log.info(" registNotice request : {}", notice);
 		
 		notice.setNoticeWriter(member);
+
+		log.info(" member : {}", member);
 		noticeService.registNoticeMain(notice);
 		
 		rttr.addFlashAttribute("message", messageSourceAccesor.getMessage("admin.registNoticeMian"));
@@ -121,10 +130,7 @@ public class NoticeController {
 		return "redirect:/admin/noticeMain";
 	}
 	
-	/* ------------------ */
-	
-	
-	
+
 	/* 공지사항 수정 기능 구현 */
 	@GetMapping(value = {"/updateNoticeMain"})
 	public String goModifyNoticeMain(Model model, Long noticeNo) {
@@ -144,14 +150,8 @@ public class NoticeController {
 		
 	}
 	
-
-	
-	/* ---------------- */
-
-	
 	
 	/* 공지사항 삭제 기능 구현 */
-	
 	@PostMapping(value = {"/deleteNoticeMain"})
 	public String deleteNotice(@ModelAttribute NoticeDTO deleteNotice, Long noticeNo) {
 		
@@ -163,67 +163,64 @@ public class NoticeController {
 		return "redirect:/admin/noticeMain";
 	}
 	
-	/* ---------------- */
+
+	/* -------------------------------------------------------------------------------- */
 	
-	
-	
-	
+
 	/* 이벤트 목록 조회 구현 */
 	@GetMapping(value = {"/noticeEvent"})
-	public String selectAllEventList(@RequestParam(defaultValue="1") int page, Model model) {
+	public String selectAllEventList(@RequestParam(defaultValue="1") int page, @RequestParam(required=false) String searchValue, Model model) {
 		
 		log.info("[이벤트 컨트롤러] ======================= ");
 		log.info("[이벤트 컨트롤러] parameter page : {}", page);
+		log.info("[BoardController] param searchValue : {}", searchValue);
 		
-		Page<NoticeDTO> eventList = noticeService.selectEventList(page);
+		Page<NoticeDTO> eventList = noticeService.selectEventList(page, searchValue);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(eventList);
 		
 		log.info("[이벤트 컨트롤러] EventList : {}", eventList);
+		eventList.get().forEach(event -> log.info(event.toString()));
 		log.info("[이벤트 컨트롤러] paging : {}", paging);
 		
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("paging", paging);
 		
+		if(searchValue != null && !searchValue.isEmpty()) {
+			model.addAttribute("searchValue", searchValue);
+		}
+		
 		return "admin/noticeEvent";
 	}
+
 	
-//	/* 이벤트 상세 조회 기능 구현 */
-//	
-//	@GetMapping(value = {"/noticeEvent"})
-//	public String getNoticeEvent() {
-//		return "/admin/noticeEvent";
-//	}
-	
-	
-//	/* 이벤트 상세 조회 구현 */
-//	@GetMapping(value = {"/noticeEventDetail"})
-//	public String gotNoticeEventDetail(Model model, Long noticeNo) {
-//		
-//		return "/admin/noticeEventDetail";
-//	}
-	
-//	@GetMapping(value = {"/noticeMainDetail"})
-//	public String getNoticeMainDetail(Model model, Long noticeNo) {
-//		
-//		NoticeDTO notice = noticeService.selectNoticeDetail(noticeNo);
-//		
-//		model.addAttribute("notice", notice);
-//		return "/admin/noticeMainDetail";
-//		
-//	}
-	/* ---------------- */	
-	
+	/* 이벤트 상세 조회 구현 */
+	@GetMapping(value = {"/noticeEventDetail"})
+	public String goNoticeEventDetail(Model model, Long noticeNo) {
+		
+		log.info("[이벤트게시글 확인] ===========================");
+		log.info("[이벤트게시글 확인] 게시글번호 : {}", noticeNo);		
+		NoticeDTO notice = noticeService.selectNoticeEventDetail(noticeNo);
+
+		log.info("[이벤트게시글 확인] 썸넬 : {}", notice);	
+		model.addAttribute("notice", notice);
+
+		return "/admin/noticeEventDetail";
+	}
+
 	
 	/* 이벤트 등록 기능 구현 */
 	@GetMapping(value = {"/registNoticeEvent"})
 	public String goRegistNoticeEvent() {
+		
+		
 		return "/admin/registNoticeEvent";
 	}
-	
+
+
 	@PostMapping(value = {"/registNoticeEvent"})
 	public String RegistNoticEventThumbnail(NoticeDTO notice, List<MultipartFile> attachImage,
 				@AuthenticationPrincipal MemberDTO member) {
-		
+
 		log.info("[EventThumbnail] ======== ");
 		
 		log.info("notice Request : {}", notice);
@@ -312,15 +309,29 @@ public class NoticeController {
 		
 		log.info("[EventThumbnail] ======== ");
 		
-		return "/admin/noticeEvent";
+		return "redirect:/admin/noticeEvent";
+	}
+
+
+	/* 이벤트 삭제 기능 구현 */
+	@PostMapping(value = {"/deleteNotice"})
+	public String deleteEvent(@ModelAttribute NoticeDTO deleteNotice, Long noticeNo) {
+		
+		log.info("[noticeController] noticeNo : {}", noticeNo);
+		noticeService.removeNotice(deleteNotice);
+		
+		log.info("[UserController] deleteNotice : {}", deleteNotice);
+		
+		return "redirect:/admin/noticeEvent";
 	}
 	
+
 	
 	
+	/* -------------------------------------------------------------------------------- */	
 	
 	
 	/* 회원 관리 기능 구현 */
-	
 	@GetMapping(value = {"/userListAdmin"})
 	public String getUserListAdmin(@RequestParam(defaultValue="1") int page, @RequestParam(required=false) String searchValue, Model model) {
 		Page<MemberDTO> userList = userService.selectUserList(page, searchValue);
@@ -339,14 +350,13 @@ public class NoticeController {
 		log.info("[UserController] userList : {}", userList.getContent());
 
 
-//		if(searchValue != null && !searchValue.isEmpty()) {
-//			model.addAttribute("searchValue", searchValue);
-//		}
+
 		
 		return "/admin/userListAdmin";
 	}
 	
-	/* 회원상세및수정조회 */
+	
+	/* 회원상세 및 수정 조회 */
 	@GetMapping(value = {"/userUpdateAdmin"})
 	public String getUserUpdateAdmin(Model model, Long memberNo) {
 		
@@ -355,12 +365,11 @@ public class NoticeController {
 		return "/admin/userUpdateAdmin";
 	}
 	
+	
 	/* 회원수정 */
 	@PostMapping(value = "/userUpdateAdmin")
-	public String modifyUserAdmin(@ModelAttribute MemberDTO updateUser/*, @RequestParam String zipCode, @RequestParam String address1 @RequestParam String address2*/) {
+	public String modifyUserAdmin(@ModelAttribute MemberDTO updateUser) {
 		
-//		String address = zipCode + "$" + address1;
-//		updateUser.setMemberAddress(address);
 		
 		log.info("[UserController] ModifyUser request user : {}", updateUser);
 		userService.modifyUser(updateUser);
@@ -368,8 +377,8 @@ public class NoticeController {
 		return "redirect:/admin/userListAdmin";
 	}
 	
-	/*회원비활성*/
 	
+	/* 회원 비활성 */
 	@PostMapping(value = {"/userDeleteAdmin"})
 	public String deleteUserAdmin(@ModelAttribute MemberDTO deleteUser, Long memberNo) {
 		
@@ -381,24 +390,100 @@ public class NoticeController {
 		return "redirect:/admin/userListAdmin";
 	}
 	
-//	@GetMapping(value = "/userDeleteAdmin")
-//	public String deleteUserAdmin(Model model, Long memberNo) {
-//		
-//		log.info("[UserController] memberNo : {}", memberNo);
-//		userService.removeUser(deleteUser);
-//		
-//		log.info("[UserController] deleteUser : {}", deleteUser);
-//		
-//		return "redirect:/admin/userListAdmin";
-//	}
 	
-
-
+	/* 회원 문의 조회 기능 구현 */
 	@GetMapping(value = {"/userQnaListAdmin"})
-	public String getUserQnaAdmin() {
+	public String getUserQnaAdmin(@RequestParam(defaultValue="1") int page, Long inquiryRefNo, Model model) {
+
+		Page<InquiryDTO> qnaMain = userService.selectQnaList(page, inquiryRefNo);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(qnaMain);
+		
+		model.addAttribute("qnaMain", qnaMain);
+		model.addAttribute("paging", paging);
+		
+		log.info("[QNAcontroller 테스트] ================================");
+		log.info("[QNAcontroller 테스트] qnaMain : {}", qnaMain);
+		log.info("[QNAcontroller 테스트] paging : {}", paging);		
+		log.info("[QNAcontroller 테스트] ================================");		
+		
 		return "/admin/userQnaListAdmin";
 	}
 	
 	
+	
+	/* 회원 문의 상세 조회 기능 구현 */
+	@GetMapping(value = {"/userQnaDetail"})
+	public String getUserQnaDetail(Model model, Long inquiryNo) {
+		
+		InquiryDTO inquiry = userService.selectQnaDetail(inquiryNo);
+		
+		model.addAttribute("inquiry", inquiry);
+		
+		return "/admin/userQnaDetail";
+	}
+	
+	
+	/* 회원 문의 답변 기능 구현 */
+	@PostMapping("/registComment")
+	public ResponseEntity<List<CommentDTO>> registInquiryComment(@RequestBody CommentDTO registComment,
+			@AuthenticationPrincipal MemberDTO member) {
+		
+		log.info("[코멘트 테스트] ================================");
+		log.info(" registComment : {}", registComment);
+		log.info("[코멘트 테스트] ================================");
+		
+		registComment.setCommentWriter(member);
+		
+		List<CommentDTO> commentList = userService.registComment(registComment);
+		log.info(" commentList : {}", commentList);
+		log.info("[코멘트 테스트] ================================");
+		
+		return ResponseEntity.ok(commentList);
+	}
+	
+	
+	/* 회원 문의 답변 불러오기 구현 */
+//	@GetMapping("/loadComment")
+//	public ResponseEntity<List<CommentDTO>> loadComment(CommentDTO loadComment) {
+//		
+//		log.info("[불러오기 코멘트 테스트] ================================");
+//		log.info(" refInquiry : {}", loadComment);
+//		
+//		List<CommentDTO> commentList = userService.loadComment(loadComment);
+//
+//		log.info(" commentList : {}", commentList);
+//		log.info("[불러오기 코멘트 테스트] ================================");
+//		
+//		return ResponseEntity.ok(commentList);
+//	}
+	
+	
+	@GetMapping("/loadComment")
+	public ResponseEntity<List<CommentDTO>> loadComment(Inquiry refInquiry) {
+		
+		log.info("[불러오기 코멘트 테스트] ================================");
+		log.info(" refInquiry : {}", refInquiry);
+		
+		List<CommentDTO> commentList = userService.loadComment(refInquiry);
+
+		log.info(" commentList : {}", commentList);
+		log.info("[불러오기 코멘트 테스트] ================================");
+		
+		return ResponseEntity.ok(commentList);
+	}
+	
+	
+	@PostMapping("/removeComment")
+	public ResponseEntity<String> removeComment(@RequestBody CommentDTO removeComment) {
+		log.info("[코멘트 삭제 테스트] ================================");
+		log.info(" loadComment : {}", removeComment);
+		
+		userService.removeComment(removeComment);
+		
+		return ResponseEntity.ok("답변이 삭제되었습니다.");
+	}
+
+	
+
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.semi.project.login.entity.Member;
+import com.semi.project.mypage.entity.Inquiry;
 
 public interface UserRepository extends JpaRepository<Member, Long>{
 
@@ -15,7 +16,13 @@ public interface UserRepository extends JpaRepository<Member, Long>{
 	
 	Member findByMemberNo(Long memberNo);
 
-//	Page<Member> findByAll(Pageable pageable);
+
+
+
+
+
+
+
 
 	
 

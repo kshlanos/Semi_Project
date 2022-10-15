@@ -16,15 +16,8 @@
     </div>
     <!-- 여기도 충돌수정 완료~~~~~~~~~~~~~~~~~! -->
 
-    <div id="searchUser" class="searchUser">
-        <select name="searchUserCategory" id="searchUserCategory">
-            <option value="user1">이름</option>
-            <option value="user2">아이디</option>
-            <option value="user3">닉네임</option>
-        </select>
-        <input id="searchUserBar" type="search" role="combobox" name="searchUserBar" class="searchUserBar"/>
-        <button id="searchUserButton" class="searchUserButton">검색</button>
-    </div>
+
+
 
     <table class="user_list_admin" align="center">
         <thead class="user_list_head">
@@ -38,7 +31,6 @@
                 <th>이메일</th>
                 <th>평점</th>
                 <th>주소</th>
-                <th>탈퇴여부</th>
                 <th>핸드폰번호</th>
             </tr>    
         </thead>
@@ -55,7 +47,7 @@
                 <td th:text="${ member.memberEmail }"></td>
                 <td th:text="${ member.memberRating }"></td>
                 <td th:text="${ member.memberAddress }"></td>
-                <td th:text="${ member.memberStatus }"></td>
+                <td th:text="'0' + ${ member.memberPhone }"></td>
             </tr>
 
         </tbody>

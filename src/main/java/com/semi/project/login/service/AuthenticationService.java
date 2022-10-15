@@ -42,6 +42,7 @@ public class AuthenticationService implements UserDetailsService {
 
         MemberDTO member = modelMapper.map(selectedMember, MemberDTO.class);
         
+
         log.info("[AuthenticationService] member : " + member); 
         
         return member;

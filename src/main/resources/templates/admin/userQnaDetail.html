@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+  <link href="../css/userQnaDetail.css" rel="stylesheet" type="text/css">
+  <link href="../css/header.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" th:srec="@{js/noticeEvent.js}"></script>
+</head>
+<body>
+<div th:replace="common/header.html"></div> 
+    <br><br><br><br><br><br>
+    <div class="content">
+        <div class="inqbox">
+            <p class="qu">질문></p>
+            <div class="writername">
+            <p th:text="${ inquiry.member.memberNickname }"></p>
+            </div>
+            <p th:text="${ inquiry.inquiryTitle }"></p> 
+            <p th:text="${ inquiry.inquiryRegDate }"></p>
+            <hr>
+            <p th:text="${ inquiry.inquiryContent }"></p>
+        </div>
+        	<!-- 댓글 출력용 table -->
+        	<table id="commentResult" style="margin:auto;"></table>
+
+     <!--  <form th:action="@{/admin/updateNoticeMain}" method="post" class="userinfo"> 답변 처리용 폼-->
+        <div class="inqbox1">
+            <p class="qu">답변></p> 
+            <hr>
+            			
+			<!-- 댓글 작성용 table -->
+			<table id="commentWrite" style="margin:auto;">
+				<input type="hidden" id="refInquiry" name="refInquiry" th:value="${inquiry.inquiryNo}"/>
+				<tr>
+					<td><textarea id="commentContent" name="commentContent" style="resize:none;"></textarea></td>
+					<td><button type="button" id="registComment">작성하기</button></td>
+				</tr>
+			</table>
+					
+			
+		</div>
+			
+			
+	</div>
+
+    <!-- </form> -->
+    
+    <script>
+    loadComment();
+    	
+    /* 댓글 불러오기*/
+    	function loadComment() {
+    	
+	    	if(document.getElementById("refInquiry")) {
+	    		fetch("/admin/loadComment?refInquiryNo=" + document.getElementById("refInquiry").value)
+	    		.then(result => result.json())
+	    		.then(data => {
+	    			makeCommentTable(data);
+	    		})
+	    		.catch(error => console.log(error))
+	    	}
+    	
+    	}
+    	
+    	
+    	
+    	/* 댓글 작성 */
+    	if(document.getElementById("registComment")) {
+    		
+    		const $registComment = document.getElementById("registComment");
+    		const $commentContent = document.getElementById("commentContent");
+    		
+    		/* 서버쪽으로 insert */
+    		$registComment.onclick = function() {
+    			if(!$commentContent.value.trim()) {
+    				alert("답변을 작성해주세요!");
+    				return;
+    			}
+    			
+    			/* what 게시글 what 내용 */
+    			const refInquiry = document.getElementById("refInquiry").value;
+    			const commentContent = $commentContent.value;
+    			console.log("refInquiryNo :", refInquiry);
+    			console.log("commentContent :", commentContent);
+    			
+    			/* 비동기 요청을 위한 fetch */
+    			fetch("/admin/registComment", {
+    				method: "POST",
+    				headers: {
+    					'Content-Type': 'application/json;charset=UTF-8'
+    				},
+    				body: JSON.stringify({
+    					refInquiry: {inquiryNo : refInquiry},
+    					commentContent: commentContent
+    				})
+    			})
+    			.then(result => result.json()) /* 반환 받은 결과값을 json으로 가공 */
+    			.then(data => {
+    				makeCommentTable(data);
+    				$commentContent.value = '';
+    			})
+    			.catch(error => console.log(error));
+    			
+    		}
+    	}
+    	
+    	/* 댓글 삭제 */
+    	function removeComment(commentNo) {
+    		fetch("/admin/removeComment", {
+    			method: "POST",
+    			headers : {
+    				'Content-Type': 'application/json; charset=UTF-8'
+    			},
+    			body: JSON.stringify({
+    				commentNo : commentNo
+    			})
+    		})
+    		.then(result => {
+    			console.log(result);
+    			loadComment();
+    		})
+    		.catch(error => console.log(error));
+    	}
+    	
+    	/* 댓글 데이터 테이블화 */
+	   	function makeCommentTable(commentList) {
+    		
+    		console.log(commentList);
+    		const $table = document.querySelector("#commentResult");
+    		$table.innerHTML = '';
+    	
+    		commentList.forEach(comment =>{
+    			const $tr = document.createElement('p');
+    			const $commentContentTd = document.createElement('p');
+    			const $commentWriterTd = document.createElement('p');
+    			const $commentRegDateTd = document.createElement('p');
+    			const $buttonTd = document.createElement('p');
+    			
+    			$commentContentTd.textContent = comment.commentContent;
+    			$commentWriterTd.textContent = comment.commentWriter.memberNickname;
+    			$commentRegDateTd.textContent = comment.commentRegDate;
+    			
+    			if('[[${#authentication.principal.memberNo}]]' == comment.commentWriter.memberNo) {
+    				$buttonTd.innerHTML = `<button type='button' onclick='removeComment(${comment.commentNo})'>댓글삭제</button>`;
+    			}
+    			
+    			$tr.append($commentContentTd, $commentWriterTd, $commentRegDateTd, $buttonTd);
+    			$table.append($tr);
+    			
+    		});
+    		
+    	
+    	}
+
+	</script>
+</body>
+</html>

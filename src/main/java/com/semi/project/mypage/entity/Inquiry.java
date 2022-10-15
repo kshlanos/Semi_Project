@@ -67,5 +67,8 @@ public class Inquiry {
 	
 	@Column(name = "INQUIRY_STATUS")
 	private String inquiryStatus;
+
+	@Column(name = "INQUIRY_STATUS_CONTENT")
+	private String inquiryStatusContent;
 	
 }

@@ -17,8 +17,8 @@ public class AppendDTO {
 	private String appendSort;
 //	private InquiryDTO refinquiryNo;
 //	private CertifiedDTO refcertified_Id;
-	private NoticeDTO refnoticeNo;
-	private MemberDTO memberNo;
+	private Long refnoticeNo;
+	private Long memberNo;
 	private String appendStatus;
 	private String appendPath;
 	private String appendThumbnailPath;

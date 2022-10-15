@@ -55,13 +55,11 @@ public class Append {
 	
 //	private CertifiedDTO refcertified_Id;
 	
-	@ManyToOne
-	@JoinColumn(name = "REF_NOTICE_NO")
-	private Notice refnoticeNo;
+	@Column(name = "REF_NOTICE_NO")
+	private Long refnoticeNo;
 	
-	@ManyToOne
-	@JoinColumn(name = "MEMBER_NO")
-	private Member memberNo;
+	@Column(name = "MEMBER_NO")
+	private Long memberNo;
 	
 	@Column(name = "APPEND_STATUS")
 	private String appendStatus;

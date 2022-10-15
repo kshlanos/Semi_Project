@@ -19,7 +19,6 @@
         <table class="detail_table">
             <tr>
                 <td class="detail_category"></td>
-                <td colspan="3" rowspan="3">프로필사진</td>
                 <td colspan="3" rowspan="3">관리자</td>
             </tr>
             <tr>
@@ -39,6 +38,8 @@
         </table>
         </form>
         <div class="con_write_btn">
+            <th:block sec:authorize="isAuthenticated()">
+            	<th:block sec:authorize="hasRole('ADMIN')">
             <input type="button" class="cw_update" value="수정하기" id="updateNoticeMain"
             	   th:onclick="|location.href='/admin/updateNoticeMain?noticeNo=${notice.noticeNo}'|">
         
@@ -46,7 +47,9 @@
         	<input type="hidden" name="noticeNo" th:value="${ notice.noticeNo }">
 	        <td><p type="hidden" name="noticeDelete" th:value="${ notice.noticeDelete }"></p></td>
             <input type="submit" class="cw_delete" value="삭제하기" id="removeNotice">   
-        </form>     
+        </form>
+        		</th:block>
+        	</th:block>   
             <button class="cw_list"
             		th:onclick="|location.href='/admin/noticeMain'|">글목록</button>
         </div>

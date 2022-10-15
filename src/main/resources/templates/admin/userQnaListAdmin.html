@@ -15,14 +15,6 @@
     <h1>문의조회</h1>
     </div>
     <!-- 여기로 헤더옴ㄱ기기ㅣㅣ~~~~~~~~~~~~~~~~~! -->
-    <form>
-        <div id="searchBar" class="searchBar">
-                <input id="input" type="search" role="combobox" name="search_title" class="search" placeholder="검색할 내용을 입력하세요."/>
-        </div> 
-        <div id="searchIcon" class="searchIcon">
-            <img class="searchIconTag" src="../image/MagnifyingGlass.png">
-        </div>
-    </form>
         <!-- 공지사항 게시판 -->
         <table class="admin_QnA_list" align="center">
             <thead class="admin_QnA_list_head">
@@ -34,41 +26,13 @@
                 </tr>    
             </thead>
             <tbody class="admin_QnA_list_body">
-                <tr>
-                    <td>10</td>
-                    <td>관리자님 질문좀요</td>
-                    <td>바보다바보</td>
-                    <td class="qnaProgressCompletion">답변완료</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>스터디 팀원 관리 문의드립니다</td>
-                    <td>JAVAJA</td>
-                    <td class="qnaProgress">미답변</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>스터디 팀원 관리 문의드립니다</td>
-                    <td>JAVAJA</td>
-                    <td class="qnaProgressCompletion">답변완료</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>스터디 팀원 관리 문의드립니다</td>
-                    <td>JAVAJA</td>
-                    <td class="qnaProgressCompletion">답변완료</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>스터디 팀원 관리 문의드립니다</td>
-                    <td>JAVAJA</td>
-                    <td class="qnaProgressCompletion">답변완료</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>스터디 팀원 관리 문의드립니다</td>
-                    <td>JAVAJA</td>
-                    <td class="qnaProgress">미답변</td>
+                <tr th:each="inquiry : ${ qnaMain }"
+                	th:onclick="|location.href='/admin/userQnaDetail?inquiryNo=${inquiry.inquiryNo}'|"
+                	style="cursor:pointer;">
+                    <td th:text="${ inquiry.inquiryNo }"></td>
+                    <td th:text="${ inquiry.inquiryTitle }"></td>
+                    <td th:text="${ inquiry.member.memberNickname }"></td>
+                    <td class="qnaProgressCompletion" th:text="${ inquiry.inquiryStatusContent }"></td>
                 </tr>
             </tbody>
             <tfoot>
