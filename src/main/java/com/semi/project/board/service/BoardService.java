@@ -13,8 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.semi.project.board.dto.AppliyDTO;
 import com.semi.project.board.dto.BoardDTO;
+import com.semi.project.board.entity.Appliy;
 import com.semi.project.board.entity.Board;
+import com.semi.project.board.repository.AppliyRepository;
 import com.semi.project.board.repository.BoardRepository;
 import com.semi.project.study.detail.dto.StudyMemberDTO;
 
@@ -28,12 +31,14 @@ public class BoardService {
 	public static final String STUDY_ID = "studyId";
 
 	private final BoardRepository boardRepository;
+	private final AppliyRepository appliyRepository;
 	private final ModelMapper modelMapper;
 
 	
 	/* 게시판 목록 조회 */
-	public BoardService(BoardRepository boardRepository, ModelMapper modelMapper) {
+	public BoardService(BoardRepository boardRepository, AppliyRepository appliyRepository, ModelMapper modelMapper) {
 		this.boardRepository = boardRepository;
+		this.appliyRepository = appliyRepository;
 		this.modelMapper = modelMapper;
 	}
 
@@ -98,6 +103,17 @@ public class BoardService {
 		
 		return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
 		
+	}
+
+	public List<AppliyDTO> reqbtn(AppliyDTO reqbtn) {
+		
+		appliyRepository.save(modelMapper.map(reqbtn, Appliy.class));
+		
+//		List<Appliy> reqList 
+//			= appliyRepository.findByRefStudyIdAndAppliyStatus(reqbtn.getRefStudyId(), ACTIVE_STATUS);
+		
+
+		return null;
 	}
 
 }

@@ -59,10 +59,13 @@ public class Board {
 	
 	@Column(name = "STUDY_CONTENT")
 	private String studyContent;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "STUDY_CATEGORY")
-	private Category category;
+
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "STUDY_CATEGORY")
+//	private Category category;
+
+	@Column(name = "STUDY_CATEGORY")
+	private String studyCategory;
 	
 	@Column(name = "STUDY_START_DATE")
 	private Date studyStartDate;
@@ -102,6 +105,9 @@ public class Board {
 	
 	@Column(name = "BOARD_COUNT")
 	private Long boardCount;
+	
+	@Column(name = "CATEGORY_NAME")
+	private String categoryName;
 	
 	
 }

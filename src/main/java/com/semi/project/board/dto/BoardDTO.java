@@ -17,7 +17,8 @@ public class BoardDTO {
 	private Long recruits;
 	private String studyPlace;
 	private String studyContent;
-	private CategoryDTO category;
+	private String studyCategory;
+	//private CategoryDTO category;
 	private Date studyStartDate;
 	private Date studyEndDate;
 	private Date studyRegDate;
@@ -30,7 +31,7 @@ public class BoardDTO {
 	private String studyTitle;
 	private String studyName;
 	private Long boardCount;
-	
+	private String categoryName;
 		
 	}
 	
