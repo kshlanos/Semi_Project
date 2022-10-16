@@ -11,25 +11,16 @@
 	<div th:replace="common/header.html"></div> 
     <br><br><br><br><br><br>
     <h2 class="inq">문의내용 수정하기</h2>
-    <hr>
+	<br>
     <div class="content">
-    <h3 id="write">회원정보</h3>
-    <hr>
-    <p id="name">이름</p>
-    <hr id="line">
-    <p id="name">이메일</p>
-    <hr id="line">
-    <br>
     <form id="textarea1" th:action="@{/mypage/inquirymodify}" method="post">
   		<input type="hidden" name="inquiryNo" th:value="${inquiry[0].inquiryNo}">
-        <input type="text" name="inquiryTitle" style="width:1200px; height: 30px;" th:value="${inquiry[0].inquiryTitle}">
-        <br><br>
-        <button class="filebtn">파일첨부</button>
+        <input type="text" name="inquiryTitle" style="width:1195px; height: 30px;" th:value="${inquiry[0].inquiryTitle}">
         <br><br>
        <textarea id="textarea1" name="inquiryContent" rows="20" cols="118" style="resize:none;"  th:text="${inquiry[0].inquiryContent}"></textarea>
     <br>
         <div class="inqmovebtn">
-            <button onclick="location.href='/mypage/inquirycheck';" class="inqbtn1">확인</button>
+            <button type=submit class="inqbtn1">확인</button>
             <button onclick="location.href='/mypage/inquirycheck';" class="inqbtn2">취소</button>
         </div>
     </form>
