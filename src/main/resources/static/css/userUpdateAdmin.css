@@ -6,6 +6,7 @@
 	width: 1200px;
 	margin-top:200px;
 	justify-content: center;
+	margin-left: 30%;
 }
 
 
@@ -19,7 +20,9 @@
     
 }
 
-
+.userinfotext {
+	color :  #E97486;
+}
 
 .teamscore{
 	position: relative;
@@ -29,6 +32,11 @@
     width: 1200px;
     margin: 0 auto;
     
+    
+}
+
+.userall {
+	margin-left: 12%;
 }
 
 .userinput{
@@ -44,7 +52,6 @@
 
 .usersavebtn{
     font-size: 20px;
-    margin:0 auto;
     color:white;
     background-color: #E97486; 
     width:150px;

@@ -18,4 +18,5 @@ public class CommentDTO {
 	private NoticeDTO refNotice;
 	private String commentStatus;
 	private MemberDTO commentWriter;
+	private String commentComplete;
 }
