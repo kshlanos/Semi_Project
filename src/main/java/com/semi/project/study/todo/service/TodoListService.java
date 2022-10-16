@@ -97,6 +97,8 @@ public class TodoListService {
 		TodoList todoList = todoListRepository.findBytodoListId(todoListId);
 		todoList.setTodoListSort("N");
 		
+		stopwatchCertifiedRepository.deleteAllByTodoListId(todoListId);
+		
 	}
 
 }

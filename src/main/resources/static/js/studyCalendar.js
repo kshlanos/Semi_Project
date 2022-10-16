@@ -157,37 +157,3 @@ const changeMonth = (operation) =>{
 // }
 
 // }
-
-	const urlParams = new URL(location.href).searchParams;
-	
-	const studyNo = urlParams.get('studyNo');
-
-	$('table').on("click", function(e){
-	
-		e.preventDefault();
-		
-	const showMonth = (String(e.view.month*1+1).padStart(2, "0"));
-    const showDay = (String(e.target.innerText*1).padStart(2, "0"));
-    const showYear = (e.currentTarget.innerText).slice(0, 4)*1;
-
-    let clickDate;
-
-    if(isNaN(e.target.innerText) || e.target.innerText == 0) {
-      clickDate = null;
-    } else {
-      clickDate = `${showYear}-${showMonth}-${showDay}`;
-    }
-
-	console.log(clickDate);
-	
-	if(clickDate == null) {
-		return null;
-	}
-
-		let popUrl = `todoList?todoListStartDate=${clickDate}&studyNo=${studyNo}`;
-		let popOption = "width = 800px, height=700px, top=500px, left=300px, scrollbars=yes";
-		
-		window.open(popUrl," TodoList ",popOption);
-
-	});
-	

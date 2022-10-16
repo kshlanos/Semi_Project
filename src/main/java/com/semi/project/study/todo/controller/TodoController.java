@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.semi.project.board.dto.BoardDTO;
+import com.semi.project.board.service.BoardService;
 import com.semi.project.login.dto.MemberDTO;
 import com.semi.project.study.detail.dto.StudyMemberDTO;
 import com.semi.project.study.detail.service.StudyMemberService;
@@ -36,15 +38,18 @@ public class TodoController {
 	private final StopwatchCertifiedService stopwatchCertifiedService;
 	private final StopwatchService stopwatchService;
 	private final CertifiedService certifiedService;
+	private final BoardService boardService;
 	
 	public TodoController(TodoListService todoListService, ModelMapper modelMapper, StudyMemberService studyMemberService, 
-			StopwatchCertifiedService stopwatchCertifiedService, StopwatchService stopwatchService, CertifiedService certifiedService) {
+			StopwatchCertifiedService stopwatchCertifiedService, StopwatchService stopwatchService, CertifiedService certifiedService,
+			BoardService boardService) {
 		this.todoListService = todoListService;
 		this.modelMapper = modelMapper;
 		this.studyMemberService = studyMemberService;
 		this.stopwatchCertifiedService = stopwatchCertifiedService;
 		this.stopwatchService = stopwatchService;
 		this.certifiedService = certifiedService;
+		this.boardService = boardService;
 	}
 
 //	@GetMapping("/todoList")
@@ -66,8 +71,11 @@ public class TodoController {
 		
 		StudyMemberDTO studyMember = studyMemberService.selectRole(user.getMemberNo(), todoList.getStudyId());
 		
+		BoardDTO study = boardService.selectStudy(todoList.getStudyId());
+		
 		model.addAttribute("todoList", todoList);
 		model.addAttribute("role", studyMember);
+		model.addAttribute("study", study);
 		
 		log.info("[TodoController] todoListDate : {}", todoList);
 		
@@ -162,6 +170,7 @@ public class TodoController {
 	public String todoDelete(String todoListId) {
 		
 		todoListService.deleteTodoList(todoListId);
+		
 		
 		return "/study/close";
 	}

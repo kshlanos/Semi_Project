@@ -26,24 +26,27 @@ buttonPause.onclick = function() {
 }
 
 function stopwatch() {
-		
-    seconds--;
+	
+	seconds--;
     changeSeconds.textContent = seconds > 9 ? seconds : '0' + seconds
 
     if(seconds < 0) {
         minute--;
         changeMinute.textContent = minute > 9 ? minute : '0' + minute
-        seconds = 60
-        changeSeconds.textContent = "00"
+        seconds = 59
+        changeSeconds.textContent = "59"
     }
     
     if(minute < 0) {
         hour--;
         changeHour.textContent = hour > 9 ? hour : '0' + hour
-        minute = 60
-        changeMinute.textContent = "00"
-        
+        minute = 59
+        changeMinute.textContent = "59"
     }
+    
+    if(hour < 0) {
+		
+	}
     
     if(hour == '00' && minute == '00' && seconds == '00') {
 		buttonPause.onclick();
