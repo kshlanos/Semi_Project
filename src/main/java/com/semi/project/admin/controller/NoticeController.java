@@ -58,8 +58,6 @@ public class NoticeController {
 	}
 	
 
-	@Value("${image.image-dir}")
-	private String IMAGE_DIR;
 	
 	
 	@GetMapping("/login/login")
@@ -168,164 +166,7 @@ public class NoticeController {
 	/* -------------------------------------------------------------------------------- */
 	
 
-	/* 이벤트 목록 조회 구현 */
-	@GetMapping(value = {"/noticeEvent"})
-	public String selectAllEventList(@RequestParam(defaultValue="1") int page, @RequestParam(required=false) String searchValue, Model model) {
-		
-		log.info("[이벤트 컨트롤러] ======================= ");
-		log.info("[이벤트 컨트롤러] parameter page : {}", page);
-		log.info("[BoardController] param searchValue : {}", searchValue);
-		
-		Page<NoticeDTO> eventList = noticeService.selectEventList(page, searchValue);
-		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(eventList);
-		
-		log.info("[이벤트 컨트롤러] EventList : {}", eventList);
-		eventList.get().forEach(event -> log.info(event.toString()));
-		log.info("[이벤트 컨트롤러] paging : {}", paging);
-		
-		model.addAttribute("eventList", eventList);
-		model.addAttribute("paging", paging);
-		
-		if(searchValue != null && !searchValue.isEmpty()) {
-			model.addAttribute("searchValue", searchValue);
-		}
-		
-		return "admin/noticeEvent";
-	}
 
-	
-	/* 이벤트 상세 조회 구현 */
-	@GetMapping(value = {"/noticeEventDetail"})
-	public String goNoticeEventDetail(Model model, Long noticeNo) {
-		
-		log.info("[이벤트게시글 확인] ===========================");
-		log.info("[이벤트게시글 확인] 게시글번호 : {}", noticeNo);		
-		NoticeDTO notice = noticeService.selectNoticeEventDetail(noticeNo);
-
-		log.info("[이벤트게시글 확인] 썸넬 : {}", notice);	
-		model.addAttribute("notice", notice);
-
-		return "/admin/noticeEventDetail";
-	}
-
-	
-	/* 이벤트 등록 기능 구현 */
-	@GetMapping(value = {"/registNoticeEvent"})
-	public String goRegistNoticeEvent() {
-		
-		
-		return "/admin/registNoticeEvent";
-	}
-
-
-	@PostMapping(value = {"/registNoticeEvent"})
-	public String RegistNoticEventThumbnail(NoticeDTO notice, List<MultipartFile> attachImage,
-				@AuthenticationPrincipal MemberDTO member) {
-
-		log.info("[EventThumbnail] ======== ");
-		
-		log.info("notice Request : {}", notice);
-		log.info("attachImage Request : {}", attachImage);
-		
-		String rootLocation = IMAGE_DIR;
-		
-		String fileUploadDirectory = rootLocation + "/upload/original";
-		String thumbnailDirectory = rootLocation + "/upload/thumbnail";
-		
-		File directory = new File(fileUploadDirectory);
-		File directory2 = new File(thumbnailDirectory);		
-		
-		log.info("directory : {}", directory);
-		log.info("directory2 : {}", directory2);
-		
-		/* 현재 아무 디렉토리를 가지고 있지 않을 경우, 생성하지 않는 경우를 가정 */
-		if (!directory.exists() || !directory2.exists()) {
-			log.info("폴더 생성 : {}", directory.mkdirs());
-			log.info("폴더 생성 : {}", directory2.mkdirs());
-		}
-		
-		/* 업로드 파일에 대한 정보 */
-		List<AppendDTO> noticeAppendFileList = new ArrayList<>();
-		try {
-			for (int i = 0; i < attachImage.size(); i++) {
-				/* 첨부파일이 실제로 있는 경우에만 로직 수행! */
-				if(attachImage.get(i).getSize() > 0) {
-					String originalFileName = attachImage.get(i).getOriginalFilename();
-					
-					log.info("originalFileName : " + originalFileName);
-					
-					/* 이름 자르기 */
-					/* UUID = 유니크한 아이디를 만들어 줌 */
-					String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
-					String savedFileName = UUID.randomUUID().toString().replace("-", "") + ext;
-					
-					log.info("savedFileName : " + savedFileName);
-					
-					/* 디렉토리에 저장 */
-	
-					attachImage.get(i).transferTo(new File(fileUploadDirectory + "/" + savedFileName));
-					
-					/* DB에 저장 과정 */
-					AppendDTO fileInfo = new AppendDTO();
-					fileInfo.setAppendName(originalFileName);
-					fileInfo.setAppendInhName(savedFileName);
-					fileInfo.setAppendPath("/upload/original/");
-					
-					if(i == 0) {
-						fileInfo.setAppendType("TITLE");
-						/* 대표 사진에 대한 썸네일을 가공하여, 저장해야 함 */
-						Thumbnails.of(fileUploadDirectory + "/" + savedFileName).size(380, 220)
-								.toFile(thumbnailDirectory + "/thumbnail_" + savedFileName);
-						fileInfo.setAppendThumbnailPath("/upload/thumbnail/thumbnail_" + savedFileName);
-					} else {
-						fileInfo.setAppendType("BODY");
-					}
-					noticeAppendFileList.add(fileInfo);	
-				}
-			}
-			
-			log.info("[EventThumbnail] noticeAppendFileList : ()", noticeAppendFileList);
-			
-			notice.setNoticeAppendFileList(noticeAppendFileList);
-			
-			log.info("[EventThumbnail] thumbnail : ()", notice);
-			
-			notice.setNoticeWriter(member);
-			noticeService.registThumbnail(notice);
-			
-		
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-			/* 실패 시 저장된 파일을 삭제하는 로직 */
-			for(AppendDTO append : noticeAppendFileList) {
-				
-				File deleteFile = new File(append.getAppendPath() + "/" + append.getAppendInhName());
-				deleteFile.delete();
-				
-				File deleteThumbnail = new File(thumbnailDirectory + "/thumbnail_" + append.getAppendInhName());
-				deleteThumbnail.delete();
-			}
-			
-		}
-		
-		log.info("[EventThumbnail] ======== ");
-		
-		return "redirect:/admin/noticeEvent";
-	}
-
-
-	/* 이벤트 삭제 기능 구현 */
-	@PostMapping(value = {"/deleteNotice"})
-	public String deleteEvent(@ModelAttribute NoticeDTO deleteNotice, Long noticeNo) {
-		
-		log.info("[noticeController] noticeNo : {}", noticeNo);
-		noticeService.removeNotice(deleteNotice);
-		
-		log.info("[UserController] deleteNotice : {}", deleteNotice);
-		
-		return "redirect:/admin/noticeEvent";
-	}
-	
 
 	
 	
@@ -404,12 +245,7 @@ public class NoticeController {
 		
 		
 		model.addAttribute("qnaMain", qnaMain);
-		model.addAttribute("paging", paging);
-		
-		log.info("[QNAcontroller 테스트] ================================");
-		log.info("[QNAcontroller 테스트] qnaMain : {}", qnaMain);
-		log.info("[QNAcontroller 테스트] paging : {}", paging);		
-		log.info("[QNAcontroller 테스트] ================================");		
+		model.addAttribute("paging", paging);		
 		
 		return "/admin/userQnaListAdmin";
 	}
@@ -433,46 +269,20 @@ public class NoticeController {
 	public ResponseEntity<List<CommentDTO>> registInquiryComment(@RequestBody CommentDTO registComment,
 			@AuthenticationPrincipal MemberDTO member) {
 		
-		log.info("[코멘트 테스트] ================================");
-		log.info(" registComment : {}", registComment);
-		log.info("[코멘트 테스트] ================================");
-		
 		registComment.setCommentWriter(member);
 		
 		List<CommentDTO> commentList = userService.registComment(registComment);
-		log.info(" commentList : {}", commentList);
-		log.info("[코멘트 테스트] ================================");
 		
 		return ResponseEntity.ok(commentList);
 	}
 	
 	
 	/* 회원 문의 답변 불러오기 구현 */
-//	@GetMapping("/loadComment")
-//	public ResponseEntity<List<CommentDTO>> loadComment(CommentDTO loadComment) {
-//		
-//		log.info("[불러오기 코멘트 테스트] ================================");
-//		log.info(" refInquiry : {}", loadComment);
-//		
-//		List<CommentDTO> commentList = userService.loadComment(loadComment);
-//
-//		log.info(" commentList : {}", commentList);
-//		log.info("[불러오기 코멘트 테스트] ================================");
-//		
-//		return ResponseEntity.ok(commentList);
-//	}
-	
 	
 	@GetMapping("/loadComment")
 	public ResponseEntity<List<CommentDTO>> loadComment(Inquiry refInquiry) {
 		
-		log.info("[불러오기 코멘트 테스트] ================================");
-		log.info(" refInquiry : {}", refInquiry);
-		
 		List<CommentDTO> commentList = userService.loadComment(refInquiry);
-
-		log.info(" commentList : {}", commentList);
-		log.info("[불러오기 코멘트 테스트] ================================");
 		
 		return ResponseEntity.ok(commentList);
 	}
@@ -480,8 +290,6 @@ public class NoticeController {
 	
 	@PostMapping("/removeComment")
 	public ResponseEntity<String> removeComment(@RequestBody CommentDTO removeComment) {
-		log.info("[코멘트 삭제 테스트] ================================");
-		log.info(" loadComment : {}", removeComment);
 		
 		userService.removeComment(removeComment);
 		

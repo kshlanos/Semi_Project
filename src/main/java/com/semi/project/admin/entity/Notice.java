@@ -89,9 +89,5 @@ public class Notice {
 	@Column(name = "NOTICE_EVENT_CONTENT")
 	private String noticeEventContent;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "REF_NOTICE_NO")
-	private List<Append> noticeAppendFileList;
-	
 	
 }

@@ -52,8 +52,6 @@ public class Append {
 	
 //	private CertifiedDTO refcertified_Id;
 	
-	@Column(name = "REF_NOTICE_NO")
-	private Long refnoticeNo;
 	
 	@OneToOne
 	@JoinColumn(name = "MEMBER_NO")

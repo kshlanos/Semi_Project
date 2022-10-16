@@ -13,17 +13,15 @@ import com.semi.project.admin.entity.NoticeType;
 
 public interface NoticeMainRepository extends JpaRepository<Notice, Long> {
 
-	@EntityGraph(attributePaths = {"noticeAppendFileList"})
+
 	Page<Notice> findByNoticeCodeAndNoticeDelete(NoticeType noticeCode, String noticeDelete, Pageable pageable);
 
-	@EntityGraph(attributePaths = {"noticeAppendFileList"})
+
 	Notice findByNoticeNoAndNoticeCodeAndNoticeDelete(Long noticeNo, NoticeType noticeCode, String noticeDelete);
 
 	Notice findByNoticeNo(Long noticeNo);
-//
 	Notice findByNoticeEventContent(Notice noticeEventContent);
 	
-	@EntityGraph(attributePaths = {"noticeAppendFileList"})
 	@Query("SELECT n " +
 	         "FROM Notice n " +
 			"WHERE n.noticeCode = :noticeCode " +
