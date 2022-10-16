@@ -62,4 +62,7 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
 	private Member commentWriter;
+	
+	@Column(name = "COMMENT_COMPLETE")
+	private String commentComplete;
 }

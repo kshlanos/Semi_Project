@@ -1,0 +1,40 @@
+@charset "EUC-KR";
+.intro {
+	margin-top : 15%;
+	margin-left: 20%;
+	color: #E97486;
+	height:700px;
+}
+
+.text{
+  display: inline; vertical-align: middle;
+  border-right: .05em solid black;
+  animation:  cursor 0.2s ease infinite;
+
+}
+
+
+.introtext{
+	margin-top: 5%;
+	margin-left: 10%;
+	color : black;
+}
+
+.introtext2{
+	margin-top: 10%;
+	width:1200px;
+	height:600px;
+	background-color : whitesmoke;
+
+	}
+	
+.text2 {
+	margin-left: 18%;
+	color: #E97486;
+}
+
+.img2 {
+	margin-left: 18%;
+}
+
+

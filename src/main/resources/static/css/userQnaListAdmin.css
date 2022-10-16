@@ -11,37 +11,7 @@
     color:#E97486
 }
 
-.qnaProgress {
-    border:1px solid #E97486;
-    display:inline-block;
-    color:#ffffff;
-    font-family:arial;
-    font-size:15px;
-    font-weight:bold;
-    font-style:normal;
-    line-height:30px;
-    width:80px;
-    text-decoration:none;
-    text-align:center;
-    padding: 0 10px;
-    background-color:#E97486;
-}
 
-.qnaProgressCompletion {
-    border:1px solid #D8D8D8;
-    display:inline-block;
-    color:#ffffff;
-    font-family:arial;
-    font-size:15px;
-    font-weight:bold;
-    font-style:normal;
-    line-height:30px;
-    width:80px;
-    text-decoration:none;
-    text-align:center;
-    padding: 0 10px;
-    background-color:#D8D8D8;
-}
 
 
 .admin_QnA_list {

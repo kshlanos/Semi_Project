@@ -17,33 +17,33 @@
         <form th:action="@{/admin/userUpdateAdmin}" method="post" class="userinfo">
         <input type="hidden" name="memberNo" th:value="${ user.memberNo }">
       
-	         	<p>아이디</p>
+	         	<p class="userinfotext">아이디</p>
 	            <td><p th:text="${ user.memberId }"></p></td>
 	 
   
-	          	<p>권한</p>
+	          	<p class="userinfotext">권한</p>
 	        	<td><p th:text="${ user.memberGrade }"></p></td>
 	
-	            <p>이름</p>
+	            <p class="userinfotext">이름</p>
 	            <input class="userinput" type="text" name="memberName" th:value="${ user.memberName }" required>
 	  
 	 
-	            <p>생년월일</p>
+	            <p class="userinfotext">생년월일</p>
 	            <input class="userinput" type="text" name="memberBirth" th:value="${ user.memberBirth }" required>
 	
 	    
-	            <p>닉네임</p>
+	            <p class="userinfotext">닉네임</p>
 	            <input class="userinput" type="text" name="memberNickname" th:value="${ user.memberNickname }" required>
 	   
-	            <p>주소</p>
-	            <input class="userinput" type="text" name="memberAddress" th:value="${ user.memberAddress }" required>
+	            <p class="userinfotext">주소</p>
+	            <input class="userinput" type="text" name="memberPhone" th:value="${ user.memberAddress }" required></p></td>
 	      
 	    
-	            <p>e-mail</p>
-	            <input class="userinput" type="text" name="memberEmail" th:value="${ user.memberEmail }" required>
+	            <p class="userinfotext">e-mail</p>
+	            <td><p th:text="${ user.memberEmail }"></p></td>
 	     
 	 
-	            <p>핸드폰 번호</p>
+	            <p class="userinfotext">핸드폰 번호</p>
 	            <input class="userinput" type="text" name="memberPhone" th:value="${ user.memberPhone }" required>
 
 			<div class="userbtn">
@@ -58,11 +58,9 @@
 
 	            <button class="userdeletebtn"
 	            		th:onclick="|location.href='/admin/userListAdmin'|">뒤로가기</button>
-        	
         </div>
         
-        <script>
-        </script>
+
 
 </body>
 </html>

@@ -29,6 +29,7 @@ import com.semi.project.admin.service.NoticeService;
 import com.semi.project.admin.service.UserService;
 import com.semi.project.board.dto.AppendDTO;
 import com.semi.project.board.dto.CommentDTO;
+import com.semi.project.board.entity.Comment;
 //import com.semi.project.admin.service.UserService;
 import com.semi.project.common.Pagenation;
 import com.semi.project.common.PagingButtonInfo;
@@ -391,12 +392,16 @@ public class NoticeController {
 	}
 	
 	
+	/* -------------------------------------------------------------------------------- */	
+	
+	
 	/* 회원 문의 조회 기능 구현 */
 	@GetMapping(value = {"/userQnaListAdmin"})
 	public String getUserQnaAdmin(@RequestParam(defaultValue="1") int page, Long inquiryRefNo, Model model) {
 
 		Page<InquiryDTO> qnaMain = userService.selectQnaList(page, inquiryRefNo);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(qnaMain);
+		
 		
 		model.addAttribute("qnaMain", qnaMain);
 		model.addAttribute("paging", paging);
