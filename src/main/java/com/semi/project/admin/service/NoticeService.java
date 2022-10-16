@@ -45,7 +45,6 @@ public class NoticeService {
 	
 	
 	public Page<NoticeDTO> selectNoticeList(int page, String searchValue) {
-		/* 페이지 타입의 NoticeDTO를 반환하기 위한 작업. */
 		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY).descending());
 		NoticeType noticeCode = new NoticeType();
 		noticeCode.setNoticeCode(1L);
@@ -110,52 +109,6 @@ public class NoticeService {
 		savedNotice.setNoticeDelete("Y");
 		
 	}
-
-
-
-
-	public void registThumbnail(NoticeDTO notice) {
-//		noticeCode.setNoticeCode(2L);
-//		noticeMainRepository.save(modelMapper.map(notice, Notice.class));
-		
-		noticeMainRepository.save(modelMapper.map(notice, Notice.class));
-//		
-		
-//		Member savedUser = userRepository.findByMemberNo(deleteUser.getMemberNo());
-//		savedUser.setMemberStatus("Y");
-		
-	}
-
-
-
-
-	public Page<NoticeDTO> selectEventList(int page, String searchValue) {
-		
-		Pageable pageable = PageRequest.of(page - 1, THUMBNAIL_PAGE_SIZE, Sort.by(SORT_BY).descending());
-		NoticeType noticeCode = new NoticeType();
-		noticeCode.setNoticeCode(2L);
-		Page<Notice> eventList = null;
-		
-		if(searchValue != null && !searchValue.isEmpty()) {
-			eventList = noticeMainRepository.findBySearchValue(noticeCode, ACTIVE_STATUS, searchValue, pageable);
-		} else {
-			eventList = noticeMainRepository.findByNoticeCodeAndNoticeDelete(noticeCode, ACTIVE_STATUS, pageable);
-		}
-		
-		return eventList.map(notice -> modelMapper.map(notice, NoticeDTO.class));
-	}
-
-
-
-
-	public NoticeDTO selectNoticeEventDetail(Long noticeNo) {
-		NoticeType noticeCode = new NoticeType();
-		noticeCode.setNoticeCode(2L);
-		Notice notice = noticeMainRepository.findByNoticeNoAndNoticeCodeAndNoticeDelete(noticeNo, noticeCode, ACTIVE_STATUS);
-		
-		return modelMapper.map(notice, NoticeDTO.class);
-	}
-
 
 
 

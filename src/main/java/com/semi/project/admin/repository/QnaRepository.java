@@ -11,8 +11,7 @@ import com.semi.project.mypage.entity.Inquiry;
 
 public interface QnaRepository extends JpaRepository<Inquiry, Long> {
 	
-//	Page<Inquiry> findByInquiryDelete(String inquiryStatus, Pageable pageable);
-//	@EntityGraph(attributePaths = {"qnaMain"})
+
 	Page<Inquiry> findByInquiryRefNoAndInquiryDelete(Long inquiryRefNo, String inquiryDelete, Pageable pageable);
 
 	Inquiry findByInquiryNo(Long inquiryNo);

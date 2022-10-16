@@ -30,7 +30,7 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
       
-      location: C:\Lecture\ShareFolder\9_spring\workspace\03_spring-boot\Semi_Project
+      location: E:\Coding_Lecture\WORKSPACE\study\Spring\03_spring_boot_workspace\Semi_Project
 
 
 image:

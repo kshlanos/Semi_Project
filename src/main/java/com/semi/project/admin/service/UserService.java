@@ -115,16 +115,6 @@ public class UserService {
 
 
 	
-	
-//	public List<CommentDTO> registComment(CommentDTO registComment) {
-//		
-//		commentRepository.save(modelMapper.map(registComment, Comment.class));
-//		
-//		List<Comment> commentList = commentRepository.findByRefInquiryAndCommentStatus(modelMapper.map(registComment.getRefInquiry(), Inquiry.class), ACTIVE_STATUS);
-//		
-//		return commentList.stream().map(comment -> modelMapper.map(comment, CommentDTO.class)).collect(Collectors.toList());
-//	}
-
 	public List<CommentDTO> registComment(CommentDTO registComment) {;
 		
 		registComment.setCommentComplete("Y");
@@ -134,12 +124,6 @@ public class UserService {
 		
 		return commentList.stream().map(comment -> modelMapper.map(comment, CommentDTO.class)).collect(Collectors.toList());
 	}
-	
-//	public List<CommentDTO> loadComment(CommentDTO loadComment) {
-//		
-//		List<Comment> commentList = commentRepository.findByRefInquiryAndCommentStatus(modelMapper.map(loadComment.getRefInquiry(), Inquiry.class), ACTIVE_STATUS);
-//		return commentList.stream().map(comment -> modelMapper.map(comment, CommentDTO.class)).collect(Collectors.toList());
-//	}
 	
 
 
