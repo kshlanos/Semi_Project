@@ -122,4 +122,11 @@ public class BoardService {
 		return null;
 	}
 
+	public BoardDTO selectStudy(Long studyId) {
+
+		Board study = boardRepository.findByStudyId(studyId);
+		
+		return modelMapper.map(study, BoardDTO.class);
+	}
+
 }

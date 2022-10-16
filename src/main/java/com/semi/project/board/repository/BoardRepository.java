@@ -34,6 +34,7 @@ public interface BoardRepository extends JpaRepository<Board, String>{
 
 	Board findByStudyIdAndStudyStatus(Long studyId, String activeStatus);
 
+
 	
 
 

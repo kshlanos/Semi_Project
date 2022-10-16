@@ -17,7 +17,7 @@ spring:
 
   jpa:
     generate-ddl: false
-    show-sql: true
+    show-sql: false
     database: oracle
     properties:
       hibernate:

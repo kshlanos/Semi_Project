@@ -14,6 +14,8 @@ public interface StopwatchCertifiedRepository extends JpaRepository<StopwatchCer
 
 	List<StopwatchCertified> findByTodoListId(String todoListId);
 
+	void deleteAllByTodoListId(String todoListId);
+
 
 
 }
