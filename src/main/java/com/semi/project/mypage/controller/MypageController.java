@@ -139,6 +139,7 @@ public class MypageController {
 	        return "redirect:/main";
 	   }
 	  
+	  /* 이미지등록 */
 	  @PostMapping("/infoimage")
 		public String infoImage(MultipartFile attachImage, @AuthenticationPrincipal MemberDTO member, 
 				RedirectAttributes rttr) {
@@ -294,7 +295,7 @@ public class MypageController {
 		return "mypage/inquirywrite";
 	}
 	
-	/* 작성한 문의글내용 DB에 전송. */
+	/* 작성한 문의글내용을 DB에 전송 */
 	@PostMapping("/inquirywrite")
 	public String inquiryBoard(InquiryDTO inquiry, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
 		
@@ -310,6 +311,7 @@ public class MypageController {
 		return "redirect:/mypage/inquirycheck";
 	}
 	
+	/* 문의글 수정 시 이전에 작성된 문의글 내용 조회하기*/
 	@GetMapping("/inquirymodify")
 	public String getinquiryModify(Model model, Long inquiryNo) {
 			

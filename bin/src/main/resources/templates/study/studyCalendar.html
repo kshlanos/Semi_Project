@@ -13,9 +13,9 @@
     <div class="studycalendar">
     <h1 th:text="${ studyList }"></h1>
     	<aside class="sidebar">
-  			<span onclick="location.href='/study/confirm'">인증 게시판</span><br>
-    		<span onclick="location.href='/study/studyCalendar'">스터디 일정</span><br>
-    		<span onclick="location.href='/study/myCalendar'">나의 출석체크</span>
+  			<span id="moveCertified">인증 게시판</span><br>
+    		<span id="SCalendar">스터디 일정</span><br>
+    		<span id="MCalendar">나의 출석체크</span>
 		</aside>
 	<div id="calendar">
         <table>
@@ -43,11 +43,70 @@
         </div>
    	</div>
    	</div>
+   	<p id="toDay"></p>
       	
       	
       	<div th:replace="common/footer.html"></div>
       	
-      <!-- <script src="../../static/js/studyCalendar.js"></script> -->
-      <script src="/js/studyCalendar.js"></script>
+    <script src="/js/studyCalendar.js"></script>
+    <script th:inline="javascript">
+	const toDayTime = new Date();
+	
+	const toDayYear = toDayTime.getFullYear();
+	const toDayMonth = ('0' + (toDayTime.getMonth() + 1)).slice(-2);
+	const toDayDay = ('0' + (toDayTime.getDate()-1)).slice(-2);
+	const toDayToDay = toDayYear + '-' + toDayMonth + '-' + toDayDay;
+	
+	const Edate = [[${ study.studyEndDate }]];
+
+	const urlParams = new URL(location.href).searchParams;
+	
+	const studyNo = urlParams.get('studyNo');
+	
+	$('table').on("click", function(e){
+	
+		e.preventDefault();
+		
+	const showMonth = (String(e.view.month*1+1).padStart(2, "0"));
+    const showDay = (String(e.target.innerText*1).padStart(2, "0"));
+    const showYear = (e.currentTarget.innerText).slice(0, 4)*1;
+
+    let clickDate;
+
+    if(isNaN(e.target.innerText) || e.target.innerText == 0) {
+      clickDate = null;
+    } else {
+      clickDate = `${showYear}-${showMonth}-${showDay}`;
+    }	
+	
+	if(clickDate == null || clickDate > Edate || clickDate <= toDayToDay) {
+		return null;
+	}
+	
+		let popUrl = `todoList?todoListStartDate=${clickDate}&studyNo=${studyNo}`;
+		let popOption = "width = 800px, height=700px, top=500px, left=300px, scrollbars=yes";
+		
+		window.open(popUrl," TodoList ",popOption);
+
+	});
+	
+	document.querySelector('#SCalendar').addEventListener('click', ()=> {
+		
+		location.href=`studyCalendar?studyNo=${studyNo}`;
+		
+	});
+	
+	document.querySelector('#MCalendar').addEventListener('click', ()=> {
+		
+		location.href=`myCalendar?studyNo=${studyNo}`;
+		
+	});
+	
+	document.querySelector('#moveCertified').addEventListener('click', ()=> {
+		
+		location.href=`confirm?studyNo=${studyNo}`;
+		
+	});
+      </script>
 </body>
 </html>

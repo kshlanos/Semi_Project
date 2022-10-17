@@ -10,52 +10,52 @@
 
     <!-- 팝업창으로 생성 -->
 
-    <h1 align="center">Todo List 조회</h1>
+	<th:block th:if="${ todoList.todoListSort != 'N' }">
+    <h1 align="center">오늘의 Todo List</h1>
 
-    <h th:text="${ todoList.todoListStartDate }"></h>
+    <h4 th:text="${ todoList.todoListStartDate }"></h4>
     
     <div class="todo-form">
 
 		<th:block th:if="${ todoList.todoListSort == 'C' || todoList.todoListSort == 'SC'}">
 		<div id="certified-form">
-			<p>인증 조건</p>
-			<p th:text="${ todoList.certified.certifiedExplain }"></p>
+			<h2 id="certifiedTitle">오늘의 인증 내용</h2>
+			<p id="certifiedExplain" th:text="${ todoList.certified.certifiedExplain }"></p>
 		</div>
 		</th:block>
 		
 		<th:block th:if="${ todoList.todoListSort == 'S' || todoList.todoListSort == 'SC'}">
 		<div id="stopwatch-form">
-		<p th:text="${ todoList.stopwatch.stopwatchTime }"></p>
+		<p id="totalTime" th:text="${ todoList.stopwatch.stopwatchTime }" style="display:none;"></p>
+		<span id="hour"></span>:<span id="minute"></span>
 		</div>
 		</th:block>		
 				
-
-		<button id="stopwatch">스톱워치</button>
-		<button id="todoModify-btn">수정 하기</button>
+		<th:block th:if="${ role.studyRole == 'MEMBER' }">
+				<button id="stopwatch">스톱워치</button>
+		</th:block>
+			<br>
+		<th:block th:if="${ role.studyRole != 'MEMBER' }">
+				<button id="todoModify-btn">수정 하기</button>
+				<button id="delete-btn">삭제하기</button>
+		</th:block>
+	
 		<p id="startDate" th:text="${ todoList.todoListStartDate }" style="display:none;"></p>
 		<p id="todoListId" th:text="${ todoList.todoListId }" style="display:none;"></p>		
 	</div>
-
-
-    <script th:inline="javascript">
-    
-    const urlParams = new URL(location.href).searchParams;
 	
-    const studyNo = urlParams.get('studyNo');
-    const date = urlParams.get('todoListStartDate');
-    const todoListId = document.querySelector('#todoListId').textContent;
-    
-    const todoListStartDate = document.querySelector('#todoModify-btn');
-
-    todoListStartDate.addEventListener('click', () => {
-      location.href = `todoModify?todoListId=${todoListId}&todoListStartDate=${date}&studyNo=${studyNo}`;	
-    });
-
-    const stopwatchPlay = document.querySelector('#stopwatch').addEventListener('click', ()=> {
-    	location.href = `stopwatch?todoListId=${todoListId}`
-    });
-    
-    </script>
+	<script src="/js/todoList.js"></script>
+	
+	</th:block>
+	
+		<th:block th:unless="${ todoList.todoListSort != 'N' }">
+	<p id="todoListId" th:text="${ todoList.todoListId }" style="display:none;"></p>
+	<h1>todoList를 생성해 주세요</h1>
+	<th:block th:if="${ role.studyRole == 'LEADER' }">
+		<button id="regist">생성하기</button>
+	</th:block>
+		<script src="/js/todoRegist.js"></script>
+		</th:block>
     
 </body>
 </html>

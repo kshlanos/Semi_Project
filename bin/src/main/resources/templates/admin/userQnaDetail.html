@@ -22,9 +22,13 @@
             <hr>
             <p th:text="${ inquiry.inquiryContent }"></p>
         </div>
+            <div class="inqbox2">
+            	<p class="qu">답변내역></p> 
+            <hr>
+           
         	<!-- 댓글 출력용 table -->
         	<table id="commentResult" style="margin:auto;"></table>
-
+		 <br><br><br><br> <br><br><br><br> <br><br>
      <!--  <form th:action="@{/admin/updateNoticeMain}" method="post" class="userinfo"> 답변 처리용 폼-->
         <div class="inqbox1">
             <p class="qu">답변></p> 
@@ -35,7 +39,7 @@
 				<input type="hidden" id="refInquiry" name="refInquiry" th:value="${inquiry.inquiryNo}"/>
 				<tr>
 					<td><textarea id="commentContent" name="commentContent" style="resize:none;"></textarea></td>
-					<td><button type="button" id="registComment">작성하기</button></td>
+					<td><button type="button" id="registComment" class="commentStyle">작성하기</button></td>
 				</tr>
 			</table>
 					
@@ -143,7 +147,7 @@
     			$commentRegDateTd.textContent = comment.commentRegDate;
     			
     			if('[[${#authentication.principal.memberNo}]]' == comment.commentWriter.memberNo) {
-    				$buttonTd.innerHTML = `<button type='button' onclick='removeComment(${comment.commentNo})'>댓글삭제</button>`;
+    				$buttonTd.innerHTML = `<button type='button' onclick='removeComment(${comment.commentNo})' class="commentStyle">댓글삭제</button>`;
     			}
     			
     			$tr.append($commentContentTd, $commentWriterTd, $commentRegDateTd, $buttonTd);
