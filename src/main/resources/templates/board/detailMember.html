@@ -22,7 +22,7 @@
         <table class="detail_table">
             <tr>
                 <td class="detail_category" th:text="${ board.studyCategory }"></td>
-                <td colspan="3" rowspan="3">프로필사진</td>
+                <td colspan="3" rowspan="3"></td>
                 <td colspan="3" rowspan="3" th:text="${ board.boardWriter.memberNickname }"></td>
             </tr>
             <tr>
@@ -78,20 +78,20 @@
             <h3>스터디 신청자</h3>
         </div>
 
-        <!-- 스터디 신청자 리스트-->
-        <table class="req_list" id="req_list"></table>
+        <!-- 스터디 신청자 리스트 
+        <table class="req_list" id="req_list"></table>-->
         
         <!-- 스터디 신청자 리스트-->
         <table class="req_list" id="req_list">
         	
             <tr>
-                <td class="profile_pt" colspan="3" rowspan="3"><img class="userImage" width="100px" src="../images/free-icon-user-149071.png">  </td>
+                <td class="profile_pt" colspan="3" rowspan="3"><img class="userImage" width="100px" src="../images/mm_profile.jpg">  </td>
             </tr>
             <tr>
-                <td class="profile_nick">바보다바보1</td>
-                <td class="profile_id">바보다바보2</td>
-                <td class="but_td"><button class="leader_ok">수락</button></td>
-                <td class="but_td"><button class="leader_no">거절</button></td>
+                <td class="profile_nick">이두분데요</td>
+                <td class="profile_id">dubudang</td>
+                <!-- <td class="but_td"><button class="leader_ok">수락</button></td>
+                <td class="but_td"><button class="leader_no">거절</button></td> -->
             </tr>
             <tr>
                 <td class="profile_grade">★★★★☆</td>
@@ -102,18 +102,13 @@
       
 		<!-- 버튼용 테이블 -->
 		<div class="detail_btn">
-		<table id="boardWrite">
 
-			<tr>
-            	<td><button class="invite_btn"> 스터디 초대하기 </button></td>
-			</tr>
-		</table>
 		
 		
 		<table id ="reqStudy" style="margin:auto;">
 			<input type="hidden" id="studyId" th:value="${board.studyId}"/>
 			<tr>
-		        <td><button type="button" id="reqbtn"> 스터디 신청하기 </button></td>
+		        <td><button type="button" id="reqbtn" class="reqbtn"> 스터디 신청하기 </button></td>
 		        <td><button class="list_btn"
 		        		style="cursor:pointer;"
 					    th:onclick="'location.href=\'/board/studyList\''"> 글목록 </button></td>
@@ -150,14 +145,7 @@
 		</script>
 		
 		
-		<table id="boardWrite">
-			<tr>
-	        	<td><button class="cw_update">수정하기</button></td>
-	            <td><button class="cw_delete">삭제하기</button></td> 
-			</tr>
-		</table>
-        </div>
-    </div>
+	
     
 
     
