@@ -77,7 +77,8 @@ public class MemberDTO implements UserDetails{
     public boolean isEnabled() {
         return true; // 활성화
     }
-
+    
+    /* 양방향 참조를 없애기 위한 memberProfile toString 제거 */
     @Override
     public String toString() {
         return "MemberDTO [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
@@ -85,7 +86,7 @@ public class MemberDTO implements UserDetails{
                 + ", memberBirth=" + memberBirth + ", memberAddress=" + memberAddress + ", memberEmail=" + memberEmail
                 + ", memberRating=" + memberRating + ", memberStatus=" + memberStatus + ", memberDeletedate="
                 + memberDeletedate + ", memberRole=" + memberRole + ", memberRatingCount=" + memberRatingCount
-                + ", memberPhone=" + memberPhone + ", memberGrade=" + memberGrade + ", memberProfile=" + memberProfile
+                + ", memberPhone=" + memberPhone + ", memberGrade=" + memberGrade 
                 + "]";
     }
 }

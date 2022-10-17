@@ -11,9 +11,9 @@
     
 	<div class="certifiedBody">
     	<aside class="sidebar">
-  			<span onclick="location.href='/study/confirm'">인증 게시판</span><br>
-    		<span onclick="location.href='/study/studyCalendar'">스터디 일정</span><br>
-    		<span onclick="location.href='/study/myCalendar'">나의 출석체크</span>
+  			<span id="moveCertified">인증 게시판</span><br>
+    		<span id="SCalendar">스터디 일정</span><br>
+    		<span id="MCalendar">나의 출석체크</span>
 		</aside>
 	<div id="certifiedBody">
         <div class="certified">
@@ -34,5 +34,30 @@
       <div th:replace="common/footer.html"></div>
 
     <script src="/js/certified.js"></script>
+    <script th:inline="javascript">
+    
+	const urlParams = new URL(location.href).searchParams;
+	
+	const studyNo = urlParams.get('studyNo');
+    
+	document.querySelector('#SCalendar').addEventListener('click', ()=> {
+		
+		location.href=`studyCalendar?studyNo=${studyNo}`;
+		
+	});
+	
+	document.querySelector('#MCalendar').addEventListener('click', ()=> {
+		
+		location.href=`myCalendar?studyNo=${studyNo}`;
+		
+	});
+	
+	document.querySelector('#moveCertified').addEventListener('click', ()=> {
+		
+		location.href=`confirm?studyNo=${studyNo}`;
+		
+	});
+    
+    </script>
 </body>
 </html>

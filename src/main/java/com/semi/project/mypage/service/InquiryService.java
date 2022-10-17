@@ -48,17 +48,17 @@ public class InquiryService {
 		inquiryRepository.save(modelMapper.map(inquiry, Inquiry.class));
 		
 	}
-
+	
+	/* 문의내역 페이징 처리 및 조회 서비스*/
 	public Page<InquiryDTO> selectInquiryList(int page, MemberDTO member) {
 		
 		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY).descending());
 		Page<Inquiry> inquiryList = inquiryRepository.findInquiryList(member.getMemberNo(), pageable);
 		
-		
-		
 		return inquiryList.map(inquiry -> modelMapper.map(inquiry, InquiryDTO.class));
 	}
-
+	
+	/* 문의글 수정 시 이전에 작성된 문의글 내용 조회 서비스 */
 	public List<InquiryDTO> inquiryconfirm(Long inquiryNo) {
 		
 		List<Inquiry> inquiryList = inquiryRepository.findInquiry(inquiryNo);
@@ -67,7 +67,8 @@ public class InquiryService {
 		
 		return inquiryList.stream().map(inquiry -> modelMapper.map(inquiry, InquiryDTO.class)).collect(Collectors.toList());
 	}
-
+	
+	/* 문의글 수정 서비스*/
 	public void inquiryChange(InquiryDTO inquiry) {
 		
 		Inquiry changeinquiry = inquiryRepository.findById(inquiry.getInquiryNo()).get();
@@ -76,7 +77,8 @@ public class InquiryService {
 		changeinquiry.setInquiryModDate(new Date(System.currentTimeMillis()));
 		
 	}
-
+	
+	/* 문의글 삭제 서비스*/
 	public void inquirydelete(Long inquiryNo) {
 		
 		Inquiry deleteInquiry = inquiryRepository.findById(inquiryNo).get();

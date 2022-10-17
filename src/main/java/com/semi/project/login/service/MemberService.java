@@ -91,7 +91,7 @@ public class MemberService {
 
 	}
 	
-	/* 이미지를 저장하기 위한 메소드*/
+	/* 이미지를 저장하기 위한 서비스메소드*/
 	public void registThumbnail(AppendDTO memberProfile) {
 		
 		appendRepository.save(modelMapper.map(memberProfile, Append.class));

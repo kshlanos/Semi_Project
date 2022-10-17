@@ -8,48 +8,30 @@
  <link href="../css/header.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <div th:replace="common/header.html"></div> 
-    <br><br>
-    <div class="content">
-        <nav class="sidebar">
-            <ul class="sidebar1">
-                <li class="liinfo"><a onclick="location.href='/mypage/infomodify'"><img class="userimg1" src="../images/free-icon-profile-3106773.png">회원정보</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/mystudy'"><img class="userimg1" src="../images/free-icon-book-2931424.png">진행중인 스터디</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/inquirycheck'"><img class="userimg1" src="../images/free-icon-envelope-4477862.png">1:1문의하기</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/myboard'"><img class="userimg1" src="../images/free-icon-billboard-4228907.png">내 게시글</a></li>
-                <li class="liinfo"><a onclick="location.href='/mypage/noticecheck'"><img class="userimg1" src="../images/free-icon-school-bell-3471582.png">알림</a></li>
-            </ul>
-        </nav>
-        <p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-school-bell-3471582.png">알림</p>
-        <table class="menutable">
+  <div th:replace="common/header.html"></div>
+    <div class="infomove">
+        <aside class="sidebar">
+    		<span onclick="location.href='/mypage/infomodify'">회원정보</span><br>
+    		<span onclick="location.href='/mypage/mystudy'">진행중인 스터디</span><br>
+    		<span onclick="location.href='/mypage/inquirycheck'">1:1 문의하기</span><br>
+    		<span onclick="location.href='/mypage/myboard'">내 게시글</span><br>
+    		<span onclick="location.href='/mypage/noticecheck'">알림</span><br>
+		</aside>
+	<div id="calendar">
+			<div class="noticeiconmove">
+			<p class="infoname" style="font-size: 30px;"><img class="usericon1" src="../images/free-icon-school-bell-3471582.png">알림</p>
+			</div>
+   		        <table class="menutable">
             <tr>
                 <th>번호</th>
                 <th>제목</th>
                 <th>등록일</th>
                 <th>작성자</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>html, css 너무어려워요 도와주세요 ㅠㅠ</td>
-                <td>2022-10-01</td>
-                <td>홍길동</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>html, css 꿀팁</td>
-                <td>2022-10-01</td>
-                <td>유관순</td>
-            </tr>
         </table>
-        <div class="page-wrap">
-            <ul class="page-nation">
-                <li><a href="/board/list?p=1">1</a></li>
-                <li><a href="/board/list?p=2">2</a></li>
-                <li><a href="/board/list?p=3">3</a></li>
-                <li><a href="/board/list?p=4">4</a></li>
-                <li><a href="/board/list?p=5">5</a></li>
-            </ul>
+
+                
         </div>
-    </div>
+   	</div>
 </body>
 </html>

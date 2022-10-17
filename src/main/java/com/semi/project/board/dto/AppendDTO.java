@@ -19,7 +19,8 @@ public class AppendDTO {
 //	private CertifiedDTO refcertified_Id;
 	private Long refnoticeNo;
 	private MemberDTO member;
-	private Long memberNo;
+	/* 이미지 등록시 필요없어서 일단은 주석*/
+//	private Long memberNo;
 	private String appendStatus;
 	private String appendPath;
 	private String appendThumbnailPath;
