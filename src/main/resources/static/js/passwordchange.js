@@ -47,7 +47,7 @@
 						swal('warning', '현재 비밀번호가 일치하지 않습니다.');
 					}
 				}, error: function() {
-					swal('error', 'error! ㅈ같네!');
+					swal('error', 'error! 다시 시도해주세요!');
 				}
 			});
 
