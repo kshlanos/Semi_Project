@@ -12,12 +12,12 @@
 	
     <h1 align="center">Todo List 수정</h1>
 
-    <h th:text="${ todoList.todoListStartDate }"></h>
+    <h4 th:text="${ todoList.todoListStartDate }"></h4>
     
     <form class="todo-form" action="/study/todoModify" method="POST" th:action>
 
 		<div id="certified-form">
-			<p>인증 조건</p>
+			<h2>오늘의 인증 내용</h2>
 			<input id="certified-input" type="text" th:value="${ todoList.certified.certifiedExplain }" name="certifiedExplain">
 		</div>
 		

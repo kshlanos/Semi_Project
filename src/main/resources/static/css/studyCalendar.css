@@ -2,11 +2,13 @@ th,td{
     border: 2px solid black;
     width: 120px;
     height: 60px;
+    
   }
-  td,th{
+ td,th{
     text-align:center;
+
   }
-  .actions{
+ .actions{
     display : flex;
     justify-content : space-around;
     text-align : center;
@@ -15,7 +17,7 @@ th,td{
     font-weight: 300;
     cursor:pointer;
   }
-  .upload {
+ .upload {
     background-color: #E97486;
     margin-bottom: 30px;
     margin-top:10px;
@@ -26,46 +28,50 @@ th,td{
     font-size: medium;
 	float: right;
 }
-  .next-button{
+ .next-button{
      height: 20px;
      width: 70px;
      padding: 5px 30px;
      border-radius : 5px;
      background-color : #E97486;
+     margin-top: 30px;
   }
-  .prev-button{
+ .prev-button{
      height: 20px;
      width: 70px;
      padding: 5px 30px;
      border-radius : 5px;
      background-color : #E97486;
+     margin-top: 30px;
   }
   
-  tr:first-child th {
+ tr:first-child th {
     border-top-right-radius : 20px;
     border-top-left-radius : 20px;
     background-color : #E97486;
     border-color : transparent;
     color : white;
   }
-  td:hover{
+ td:hover{
     background-color: offwhite;
      box-shadow: 0px 2px 3px 2px rgba(0,0,0,0.5); 
   }
-  td[colspan]{
+ td[colspan]{
      box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2); 
   }
-  tr th {
+tr th {
      box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2); 
     cursor: pointer; 
     border:transparent;
     background-color :lightgrey;
     color:#3d3d3d;
+    
   }
-  tr td{
+tr td{
     box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2); 
     cursor: pointer;
     border:transparent;
+    
   }
   
 .studycalendar{
