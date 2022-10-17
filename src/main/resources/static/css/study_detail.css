@@ -147,6 +147,68 @@
 
 }
 
+
+.detail_btn .reqbtn{
+    border:1px solid #E97486;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    height:40px;
+    line-height:30px;
+    width:130px;
+    text-decoration:none;
+    text-align:center;
+    margin: 5px 5px 5px 5px;
+    background-color:#E97486;
+    border-radius: 5px;
+
+}
+
+
+.detail_btn .cw_update{
+    border:1px solid #E97486;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    height:40px;
+    line-height:30px;
+    width:80px;
+    text-decoration:none;
+    text-align:center;
+    margin: 5px 5px 5px 5px;
+    background-color:#E97486;
+    border-radius: 5px;
+
+}
+
+
+
+.detail_btn .cw_delete{
+    border:1px solid #666666;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    height:40px;
+    line-height:30px;
+    width:80px;
+    text-decoration:none;
+    text-align:center;
+    margin: 5px 5px 5px 5px;
+    background-color:#666666;
+    border-radius: 5px;
+}
+
+
+
 .con_write_btn .cw_delete{
     border:1px solid #666666;
     display:inline-block;
