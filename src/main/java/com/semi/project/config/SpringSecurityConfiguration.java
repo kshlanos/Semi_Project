@@ -63,7 +63,7 @@ public class SpringSecurityConfiguration {
                     .invalidateHttpSession(true)
                     .logoutSuccessUrl("/")
     			.and()
-    				.build();
+    				.build();  
     }
 
 	/* 4. 사용자 인증을 위해서 사용할 Service bean 등록, 사용할 비밀번호 인코딩 방식 설정 */
