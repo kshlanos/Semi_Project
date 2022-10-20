@@ -5,7 +5,11 @@ function findPwd() {
 	let memberEmail = document.getElementById('memberEmail').value;
 
 	if (memberName == '' || memberId == ''|| memberEmail == '') {
-		swal('error','가입된 정보를 입력하세요.');
+		swal({
+					text: "가입된 정보를 입력해주세요.",
+					icon: "warning",
+  					button: "확인",
+				})
 		return false;
 	}
 		
@@ -35,7 +39,11 @@ function findPwd() {
 						$findOk.show();	
 					}
 				}, error: function() {
-			swal("error",'다시 시도해주세요.');
+			swal({
+					text: "다시 시도해주세요.",
+					icon: "error",
+  					button: "확인",
+				})
 		}
 			})
 		}

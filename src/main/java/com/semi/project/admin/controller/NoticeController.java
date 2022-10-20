@@ -208,7 +208,7 @@ public class NoticeController {
 	}
 	
 	
-	/* 회원수정 */
+	/* 회원 수정 */
 	@PostMapping(value = "/userUpdateAdmin")
 	public String modifyUserAdmin(@ModelAttribute MemberDTO updateUser) {
 		

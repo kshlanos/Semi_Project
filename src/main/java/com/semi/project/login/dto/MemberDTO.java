@@ -85,7 +85,7 @@ public class MemberDTO implements UserDetails{
                 + ", memberBirth=" + memberBirth + ", memberAddress=" + memberAddress + ", memberEmail=" + memberEmail
                 + ", memberRating=" + memberRating + ", memberStatus=" + memberStatus + ", memberDeletedate="
                 + memberDeletedate + ", memberRole=" + memberRole + ", memberRatingCount=" + memberRatingCount
-                + ", memberPhone=" + memberPhone + ", memberGrade=" + memberGrade + ", memberProfile=" + memberProfile
-                + "]";
+                + ", memberPhone=" + memberPhone + ", memberGrade=" + memberGrade +  
+                "]";
     }
 }

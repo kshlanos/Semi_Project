@@ -25,37 +25,30 @@
 	        	<td><p th:text="${ user.memberGrade }"></p></td>
 	
 	            <p class="userinfotext">이름</p>
-	            <input class="userinput" type="text" name="memberName" th:value="${ user.memberName }" required>
-	  
+	        	<td><p th:text="${ user.memberName }"></p></td>
 	 
 	            <p class="userinfotext">생년월일</p>
-	            <input class="userinput" type="text" name="memberBirth" th:value="${ user.memberBirth }" required>
-	
+	        	<td><p th:text="${ user.memberBirth }"></p></td>
 	    
 	            <p class="userinfotext">닉네임</p>
-	            <input class="userinput" type="text" name="memberNickname" th:value="${ user.memberNickname }" required>
+	            <p class="userinput" type="text" name="memberNickname" th:text="${ user.memberNickname }" required>
 	   
 	            <p class="userinfotext">주소</p>
-	            <input class="userinput" type="text" name="memberPhone" th:value="${ user.memberAddress }" required></p></td>
-	      
+	        	<td><p th:text="${ user.memberAddress }"></p></td>
 	    
 	            <p class="userinfotext">e-mail</p>
 	            <td><p th:text="${ user.memberEmail }"></p></td>
-	     
 	 
 	            <p class="userinfotext">핸드폰 번호</p>
-	            <input class="userinput" type="text" name="memberPhone" th:value="${ user.memberPhone }" required>
+	        	<td><p th:text="${ user.memberPhone }"></p></td><br>
 
-			<div class="userbtn">
-	            <input type="submit" value="회원수정" class="usersavebtn">
-            </div>
         </form>
         <form th:action="@{/admin/userDeleteAdmin}" method="post" class="userinfo">
 	        <input type="hidden" name="memberNo" th:value="${ user.memberNo }">
 	        <td><p type="hidden" name="memberStatus" th:value="${ user.memberStatus }"></p></td>
         	<input type="submit" value="회원비활성" class="userdeletebtn">
         </form>
-
+				<br>
 	            <button class="userdeletebtn"
 	            		th:onclick="|location.href='/admin/userListAdmin'|">뒤로가기</button>
         </div>
