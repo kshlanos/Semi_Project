@@ -19,8 +19,6 @@ public class MailConfiguration {
         //javaMailSender.setUsername(MailProperties.getUsername()); // 메일 유저 이름
         //javaMailSender.setPassword(MailProperties.getUserpwd()); // 메일 패스워드
         
-        javaMailSender.setUsername("dong5398"); // 메일 유저 이름
-        javaMailSender.setPassword("dong5394@"); // 메일 패스워드
 
         javaMailSender.setPort(465); // 메일 인증서버 포트
 
